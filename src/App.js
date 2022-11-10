@@ -99,7 +99,7 @@ function App() {
     setPageNum(1)
   },[easySearchSort])
 
-  if(!carInfo[0]){
+  if(carInfo === undefined){
     console.log('로딩중')
     return (
       <div>Loading..</div>
