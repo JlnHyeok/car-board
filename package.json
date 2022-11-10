@@ -24,8 +24,8 @@
   ,
   "proxy": "https://car-board-practice.herokuapp.com/",
   "scripts": {
-    "start": "node server.js",
-    "backend": "nodemon server.js",
+    "start": "node src/server/server.js",
+    "backend": "nodemon src/server/server.js",
     "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
