@@ -22,7 +22,7 @@
     "node": "16.17.1",
     "npm": "8.15.0"
   },
-  
+  "proxy": "https://localhost:5000",
   "scripts": {
     "start": "node server.js",
     "build": "react-scripts build",
