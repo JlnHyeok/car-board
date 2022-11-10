@@ -28,14 +28,11 @@ app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다
 
 // 배포상태면~
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  const path = require("path");
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
+  app.use(express.static(path.join(__dirname, "client/build")));
 }
-
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
 
 app.get('/selectAll',(req,res) => {
   console.log('요청')
@@ -97,7 +94,7 @@ app.delete('/delete',(req,res) => {
 
 app.listen(PORT , ()=>{
   let folder = dir + '/upload'
-  if(!fs.existsSync(folder)) fs.mkdirSync('upload')
+  if(!fs.existsSync('upload')) fs.mkdirSync('upload')
   // dir폴더가 존재하지 확인하고, 없으면 폴더를 생성
   console.log(`server on! : ${PORT}`)
 })
