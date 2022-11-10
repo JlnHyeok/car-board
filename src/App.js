@@ -56,7 +56,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false)  
   
   // 홈화면 추천 인덱스 생성
-  const randInt = [Math.floor(Math.random()*1000),Math.floor(Math.random()*1000),Math.floor(Math.random()*1000)]
+  const randInt = [Math.floor(Math.random()*100),Math.floor(Math.random()*100),Math.floor(Math.random()*100)]
   
   useEffect(() => {
     axios.get('/selectAll').then((result)=>{setCarInfo(result.data)})
