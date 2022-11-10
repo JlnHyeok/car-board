@@ -23,7 +23,7 @@ let fs = require('fs')
 // 서버의 파일/폴더에 접근할 수 있는 함수들이 들어있다.
 // 파일업로드와 직접적인 연관이 있는것은 아니고, 저장할 폴더를 생성하기 위해 사용
 
-const db = require('./config/db.js')
+const db = require('./db.js')
 app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다.
 
 // 배포상태면~
