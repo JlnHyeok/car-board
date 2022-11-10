@@ -24,7 +24,6 @@
   ,
   "proxy": "https://car-board-practice.herokuapp.com/",
   "scripts": {
-    "heroku-postbuild": "cd client && yarn install && yarn build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
