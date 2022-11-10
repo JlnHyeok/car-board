@@ -98,6 +98,13 @@ function App() {
   useEffect(() => {
     setPageNum(1)
   },[easySearchSort])
+
+  if(!carInfo[0]){
+    console.log('로딩중')
+    return (
+      <div>Loading..</div>
+    )
+  }
   
   return ( 
     <BrowserRouter>
