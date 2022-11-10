@@ -26,6 +26,17 @@ let fs = require('fs')
 const db = require('./config/db.js')
 app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다.
 
+// 배포상태면~
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  const path = require("path");
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
+
 app.get('/selectAll',(req,res) => {
   console.log('요청')
   db.query('select * from cars order by id desc',(err,data) => {
