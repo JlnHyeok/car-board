@@ -6,16 +6,30 @@ const PORT = process.env.PORT || 5000;
 const cors = require('cors')
 app.use(cors())
 const multer = require('multer')  
-const dir = 'F:/FrontEnd/React_practice/car-board/public'
-let storage = multer.diskStorage({
-  destination(req,file,cb){
-    cb(null,`${dir}/upload`)
-  },
-  filename(req,file,cb){
-    cb(null, `${Date.now()}__${file.originalname}`)
-  },
+const multerS3 = require('multer-s3')
+const aws = require('aws-sdk')
+
+
+require('dotenv').config()
+
+const s3 = new aws.S3({
+  accessKeyId: process.env.REACT_APP_AWS_ACCES_KEY,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
+  region : process.env.REACRT_APP_AWS_S3_REGION,
 })
-let upload = multer({storage:storage})
+
+const dir = 'F:/FrontEnd/React_practice/car-board/public'
+
+const storage = multerS3({
+  s3 : s3,
+  acl: 'public-read-write',
+  bucket : 'my-jin-practice',
+  key:(req,file,cb)=>{
+    cb(null, Date.now()+'__'+file.originalname)
+  }
+})
+const upload = multer({storage:storage})
+
 // 사진 업로드를 위해서 multer를 가져오고, 경로를 설정해준다.
 // 입력한 파일이 uploads/폴더 내에 저장된다
 
@@ -24,7 +38,8 @@ let fs = require('fs')
 // 서버의 파일/폴더에 접근할 수 있는 함수들이 들어있다.
 // 파일업로드와 직접적인 연관이 있는것은 아니고, 저장할 폴더를 생성하기 위해 사용
 
-const db = require('./config/db.js')
+const db = require('./config/db.js');
+const { S3 } = require('aws-sdk');
 app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다.
 
 // 배포상태면~
@@ -35,7 +50,7 @@ app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다
   //   res.sendFile(path.resolve(__dirname,"app/Client/build","index.html"));
   // });
 // }
-console.log(process.env.NODE_ENV)
+
 app.get('/selectAll',(req,res) => {
   console.log('요청')
   db.query('select * from cars order by id desc',(err,data) => {
@@ -62,11 +77,11 @@ app.get('/selectWhere/:id',(req,res) => {
   })
 })
 
-app.post('/insertCar',upload.single('file'),(req,res) => {
+app.post('/insertCar',upload.single('file'), (req,res) => {
   console.log(req.body)
   console.log(req.file)
   const [maker,model,year,distance,price] = [...req.body.text]
-  const imgUrl = '/upload/'+req.file.filename
+  const imgUrl =  req.file.location
   const sql = 'insert into cars (car_maker,car_name,car_model_year,distance,car_price,car_image) values (?,?,?,?,?,?)'
   db.query(sql,[maker,model,year,distance,price,imgUrl], (err,data) => {
     if(!err){
