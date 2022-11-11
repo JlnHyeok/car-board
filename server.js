@@ -3,7 +3,8 @@ const express = require('express')
 const app = express()
 
 const PORT = process.env.PORT || 5000;
-
+const cors = require('cors')
+app.use(cors())
 const multer = require('multer')  
 const dir = 'F:/FrontEnd/React_practice/car-board/public'
 let storage = multer.diskStorage({
@@ -27,11 +28,12 @@ const db = require('./config/db.js')
 app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다.
 
 // 배포상태면~
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "Client/build")));
-}
+// if (process.env.NODE_ENV === "production")
+// {
+  app.use(express.static(__dirname+"/Client/build"));
+// }
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "Client/build", "index.html"));
+  res.sendFile(__dirname+"/Client/build/"+"index.html");
 });
 
 app.get('/selectAll',(req,res) => {

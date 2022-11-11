@@ -20,7 +20,7 @@ export default function Home({randInt,carInfo}) {
   if(carInfo.length>0){
     todayCarList = carInfo.filter((cars)=>cars.id === randInt[0] || cars.id === randInt[1] || cars.id === randInt[2])
   }
-  console.log(todayCarList)
+  // console.log(todayCarList)
   
   const prevSlide = () => {
     setIsFirstOrLast(false)

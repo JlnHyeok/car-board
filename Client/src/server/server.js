@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const PORT = process.env.PORT || 5000;
-const cors = require('cors')
+
 app.use(cors())
 const multer = require('multer')  
 const dir = 'F:/FrontEnd/React_practice/car-board/public'

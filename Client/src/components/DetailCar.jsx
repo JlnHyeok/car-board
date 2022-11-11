@@ -72,7 +72,7 @@ export default function DetailCar() {
     console.log(e)
   }
   
-  console.log(isClick)
+  // console.log(isClick)
   return  (
     <div className='detail-car-wrap'>
       <div className='detail-title-wrap'>
