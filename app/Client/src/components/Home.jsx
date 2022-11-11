@@ -17,7 +17,7 @@ export default function Home({randInt,carInfo}) {
   // 새로고침시 제일 위로
   window.history.scrollRestoration = "manual";
   
-  console.log(carInfo,"homejsx")
+  // console.log(carInfo,"homejsx")
   let todayCarList = carInfo.filter((cars)=>cars.id === randInt[0] || cars.id === randInt[1] || cars.id === randInt[2])
   
   // console.log(todayCarList)
