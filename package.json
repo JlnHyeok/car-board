@@ -1,0 +1,20 @@
+{
+  "name": "car-board",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "heroku-postbuild" : "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/96jin/car-board.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/96jin/car-board/issues"
+  },
+  "homepage": "https://github.com/96jin/car-board#readme"
+}
