@@ -36,8 +36,8 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname+"/Client/build/"+"index.html");
 });
 
-app.get(process.env.REACT_APP_API_URL+'/selectAll',(req,res) => {
-  console.log(process.env.REACT_APP_API_URL+'요청')
+app.get('/selectAll',(req,res) => {
+  console.log('요청')
   db.query('select * from cars order by id desc',(err,data) => {
     if(!err){
       // console.log(data)
@@ -49,7 +49,7 @@ app.get(process.env.REACT_APP_API_URL+'/selectAll',(req,res) => {
   })
 })
 
-app.get(process.env.REACT_APP_API_URL+'/selectWhere/:id',(req,res) => {
+app.get('/selectWhere/:id',(req,res) => {
   console.log('선택요청')
   const {id} = req.params
   sql='select * from cars where id = ?'
@@ -63,7 +63,7 @@ app.get(process.env.REACT_APP_API_URL+'/selectWhere/:id',(req,res) => {
   })
 })
 
-app.post(process.env.REACT_APP_API_URL+'/insertCar',upload.single('file'),(req,res) => {
+app.post('/insertCar',upload.single('file'),(req,res) => {
   console.log(req.body)
   console.log(req.file)
   const [maker,model,year,distance,price] = [...req.body.text]
@@ -81,7 +81,7 @@ app.post(process.env.REACT_APP_API_URL+'/insertCar',upload.single('file'),(req,r
   })
 })
 
-app.delete(process.env.REACT_APP_API_URL+'/delete',(req,res) => {
+app.delete('/delete',(req,res) => {
   console.log(req.body)
   db.query(`delete from cars where id=${req.body.id}`,(err,data) => {
     if(!err){
