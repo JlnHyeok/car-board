@@ -71,8 +71,9 @@ export default function Home({randInt,carInfo}) {
     }
   },[nextSlide])
 
-  // console.log(slideRef.current)
-  // console.log(slideNum)
+  if(carInfo === undefined){
+    return (<div>Loading..</div>)
+  }
   return (
     <div className="home-wrap">
       <div className="banner-for-hide">
