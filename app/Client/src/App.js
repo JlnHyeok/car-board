@@ -59,7 +59,7 @@ function App() {
   const randInt = [Math.floor(Math.random()*100),Math.floor(Math.random()*100),Math.floor(Math.random()*100)]
   console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
-    axios.get('http://localhost:5000/selectAll').then((result)=>{setCarInfo(result.data)})
+    axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{console.log(result.data)})
   },[])
   
   // 한 페이지에 띄울 인덱스 추출
@@ -91,19 +91,21 @@ function App() {
   let disList = carMinMaxInfo('distance',10000)
   let priceList = carMinMaxInfo('car_price', 1000)
   
+  useEffect(() => {
+    setPageNum(1)
+  },[easySearchSort])
   // postList : 한 페이지에 나타낼 정보들 추출
   // newPostList : 전체 정보중에서 선택한 조건들을 골라서 추출 후 postList 에 전달
   let [postList, newPostList] = searchSort(easySearchSort,carInfo,firstIndex,lastIndex,isSearch,searchValue)
   
-  useEffect(() => {
-    setPageNum(1)
-  },[easySearchSort])
 
   if(carInfo === undefined){
     console.log('로딩중')
     return (
       <div>Loading..</div>
     )
+  }else{
+    console.log(carInfo)
   }
   
   return ( 

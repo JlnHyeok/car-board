@@ -28,19 +28,18 @@ const db = require('./config/db.js')
 app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다.
 
 // 배포상태면~
-if (process.env.NODE_ENV === "production")
-{
-  app.use(express.static("app/Client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname,"app/Client/build","index.html"));
-  });
-}
-console.log(path.resolve(__dirname,"app/Client/build","index.html"))
+// if (process.env.NODE_ENV === "production")
+// {
+  app.use(express.static(path.join(__dirname,"app/Client/build")));
+  // app.get("/", (req, res) => {
+  //   res.sendFile(path.resolve(__dirname,"app/Client/build","index.html"));
+  // });
+// }
+console.log(process.env.NODE_ENV)
 app.get('/selectAll',(req,res) => {
   console.log('요청')
   db.query('select * from cars order by id desc',(err,data) => {
     if(!err){
-      // console.log(data)
       res.send(data)
     }
     else{
@@ -94,9 +93,9 @@ app.delete('/delete',(req,res) => {
   })
 })
 
-app.get('*',(req,res) => {
-  res.sendFile(path.join(__dirname,'app/Client/build/index.html'))
-})
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname,"app/Client/build","index.html"));
+});
 
 app.listen(PORT , ()=>{
   let folder = dir + '/upload'

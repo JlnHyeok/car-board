@@ -183,8 +183,8 @@ export default function Board({
     console.log(target)
     let confirmDelete = window.confirm('삭제하시겠습니까?')
     if(confirmDelete){
-      await axios.delete('http://localhost:5000/delete', {data:{id:target.id}})
-      await axios.get('http://localhost:5000/selectAll').then((result)=>{setCarInfo(result.data)})
+      await axios.delete(process.env.REACT_APP_API_URL+'/delete', {data:{id:target.id}})
+      await axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
       return
     }
   }

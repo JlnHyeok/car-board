@@ -48,7 +48,7 @@ export default function Header({
     setEasySearchSort({
       maker:[],dis:[null,null],price:[null,null],year:[null,null]})
     setIsSearch('')
-    axios.get('http://localhost:5000/selectAll').then((result)=>{setCarInfo(result.data)})
+    axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
   }
   
   // 모바일 버전 nav 숨기기
