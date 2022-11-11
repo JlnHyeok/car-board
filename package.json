@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "server": "node server.js",
-    "client": "npm start --prefix client",
+    "client": "cd app && cd Client &&  npm start",
     "dev": "concurrently \"npm run server \" \"npm run client\"",
     "heroku-postbuild": "cd app && cd Client && npm install --only==dev && npm run build"
   }, 

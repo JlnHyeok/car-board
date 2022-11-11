@@ -27,7 +27,10 @@ export default function Footer({buttonLen,pageNum,setPageNum}) {
   const handleMoreNext = () => {
     if(buttonLen - pageNum < 9){
       setPageNum(buttonLen)
-      
+      return
+    }
+    if(Math.ceil(pageNum/pageNumLength)*pageNumLength===pageNumLength){
+      setPageNum(pageNumLength)
       return
     }
     setPageNum(Math.floor(pageNum/pageNumLength)*pageNumLength+(pageNumLength+1))
