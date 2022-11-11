@@ -56,7 +56,6 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false)  
   
   // 홈화면 추천 인덱스 생성
-  const randInt = [Math.floor(Math.random()*100),Math.floor(Math.random()*100),Math.floor(Math.random()*100)]
   console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
@@ -65,6 +64,17 @@ function App() {
   // 한 페이지에 띄울 인덱스 추출
   const firstIndex = (pageNum-1)*postPerPage
   const lastIndex = firstIndex + postPerPage
+  let random = Math.floor(Math.random()*carInfo.length)
+  let randInt = []
+  if(random>0 && random < carInfo.length-1){
+    randInt = [random-1, random, random+1]
+  }
+  else if(random===0){
+    randInt = [random, random+3, random+22]
+  }
+  else{
+    randInt = [random-22, random-65, random]
+  }
   
   // 차 주행거리, 가격 최대 최소 값 구하기
   const carMinMaxInfo = (whatYouWantOnlyNum,unit) => {
