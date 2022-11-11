@@ -8,22 +8,17 @@ app.use(cors())
 const multer = require('multer')  
 const multerS3 = require('multer-s3')
 const aws = require('aws-sdk')
-
-
+aws.config.loadFromPath(__dirname+'/awsconfig.json')
 require('dotenv').config()
 
-const s3 = new aws.S3({
-  accessKeyId: process.env.REACT_APP_AWS_ACCES_KEY,
-  secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
-  region : process.env.REACRT_APP_AWS_S3_REGION,
-})
+const s3 = new aws.S3()
 
 const dir = 'F:/FrontEnd/React_practice/car-board/public'
 
 const storage = multerS3({
   s3 : s3,
-  acl: 'public-read-write',
   bucket : 'my-jin-practice',
+  acl: 'public-read-write',
   key:(req,file,cb)=>{
     cb(null, Date.now()+'__'+file.originalname)
   }
@@ -39,7 +34,7 @@ let fs = require('fs')
 // 파일업로드와 직접적인 연관이 있는것은 아니고, 저장할 폴더를 생성하기 위해 사용
 
 const db = require('./config/db.js');
-const { S3 } = require('aws-sdk');
+// const { S3 } = require('aws-sdk');
 app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다.
 
 // 배포상태면~
@@ -108,7 +103,7 @@ app.delete('/delete',(req,res) => {
   })
 })
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname,"app/Client/build","index.html"));
 });
 
