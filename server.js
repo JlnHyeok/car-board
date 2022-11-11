@@ -17,7 +17,7 @@ let storage = multer.diskStorage({
 })
 let upload = multer({storage:storage})
 // 사진 업로드를 위해서 multer를 가져오고, 경로를 설정해준다.
-// 입력한 파일이 uploads/폴더 내에 저장된다.
+// 입력한 파일이 uploads/폴더 내에 저장된다
 
 let fs = require('fs')
 // fs는 node.js에 들어있는 module로, file system의 약자이다.
