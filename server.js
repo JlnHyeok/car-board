@@ -30,10 +30,10 @@ app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다
 // 배포상태면~
 // if (process.env.NODE_ENV === "production")
 // {
-  app.use(express.static(__dirname+"/Client/build"));
+  app.use(express.static("app/Client/build"));
 // }
 app.get("/", (req, res) => {
-  res.sendFile(__dirname+"/Client/build/"+"index.html");
+  res.sendFile.resolve(__dirname,"app/Client/build","index.html");
 });
 
 app.get('/selectAll',(req,res) => {
