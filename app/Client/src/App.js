@@ -59,7 +59,7 @@ function App() {
   const randInt = [Math.floor(Math.random()*100),Math.floor(Math.random()*100),Math.floor(Math.random()*100)]
   console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
-    axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{console.log(result.data)})
+    axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
   },[])
   
   // 한 페이지에 띄울 인덱스 추출
@@ -99,13 +99,11 @@ function App() {
   let [postList, newPostList] = searchSort(easySearchSort,carInfo,firstIndex,lastIndex,isSearch,searchValue)
   
 
-  if(carInfo === undefined){
+  if(carInfo[0] === undefined){
     console.log('로딩중')
     return (
       <div>Loading..</div>
     )
-  }else{
-    console.log(carInfo)
   }
   
   return ( 
