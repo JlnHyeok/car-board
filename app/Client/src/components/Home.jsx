@@ -71,7 +71,7 @@ export default function Home({randInt,carInfo}) {
     }
   },[nextSlide])
 
-  if(carInfo === undefined){
+  if(todayCarList === undefined){
     return (<div>Loading..</div>)
   }
   return (
