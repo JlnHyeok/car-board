@@ -183,12 +183,14 @@ export default function Board({
     console.log(target)
     let confirmDelete = window.confirm('삭제하시겠습니까?')
     if(confirmDelete){
-      await axios.delete('/delete', {data:{id:target.id}})
-      await axios.get('/selectAll').then((result)=>{setCarInfo(result.data)})
+      await axios.delete('http://localhost:5000/delete', {data:{id:target.id}})
+      await axios.get('http://localhost:5000/selectAll').then((result)=>{setCarInfo(result.data)})
       return
     }
   }
-
+  if(postList === undefined){
+    return (<div>Loading..</div>)
+  }
   return ( 
     <>
       <main className='board'>
