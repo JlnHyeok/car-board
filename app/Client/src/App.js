@@ -56,7 +56,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false)  
   
   // 홈화면 추천 인덱스 생성
-  console.log(process.env.REACT_APP_API_URL)
+  // console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
   },[])

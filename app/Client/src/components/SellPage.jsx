@@ -38,7 +38,10 @@ export default function SellPage() {
   const handleSubmitCarInfo = async(e) => {
     e.preventDefault()
     try{
-      inputInfo.current.forEach((current)=>(current.value==='' && new Error()))
+      if(inputInfo.current[0].value === '' || inputInfo.current[1].value === '' || inputInfo.current[2].value === '' || inputInfo.current[3].value === '' || inputInfo.current[4].value === '' ){
+        let err = new Error('필수 항목을 입력해주세요')
+        throw err
+      }
       const formData = new FormData()
       formData.append('file', img)
       console.log(formData)
