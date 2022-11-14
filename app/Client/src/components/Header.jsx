@@ -136,6 +136,11 @@ export default function Header({
               </button>
             </form>
           </div>
+          <Link to='/'>
+            <div className="mobile-home">
+              Home
+            </div>
+          </Link>
         </div>
       </div>
     </>

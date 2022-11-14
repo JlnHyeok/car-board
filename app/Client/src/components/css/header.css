@@ -88,7 +88,7 @@ a{
   height:40px;
   overflow: hidden;
   border-radius: 40px;
-  border:1.2px solid black;
+  border:1px solid black;
 }
 .search-area input{
   padding-left: 18px;
@@ -118,31 +118,35 @@ a{
 
 .search>.hambergur{
   visibility: visible;
-  height:50px;
-  width:40px;
+  height:70px;
+  width:60px;
   position: absolute;
   display:flex;
-  background-color: brown;
+  /* align-items: center; */
+  background-color: transparent;
   visibility: hidden;
 }
 
 .hamb-icon{
   font-weight: bold;
-  font-size: xx-large;
-  width:100%;
-  background-color: transparent;
+  font-size: 50px;
+  width:60px;
+  height: 60px;
+  padding-bottom: 10px;
+  /* background-color: aqua; */
   cursor: pointer;
   color:white;
+  margin-top: -3px;
 }
 
 .mobile-menu{
   display:grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 2px;
+  padding: 8px 2px;
   box-sizing: border-box;
   position: absolute;
-  top:50px;
-  height:35px;
+  top:80px;
+  height:40px;
   width:100vw;
   background-color: #7f0000;
   z-index: 999;
@@ -178,7 +182,7 @@ a{
 @media screen and (max-width:540px){
   .header{
     padding:0;
-    height:50px;
+    height:82px;
     min-width: 330px;
     grid-template-columns: 0 0 1fr ;
   }
@@ -188,9 +192,10 @@ a{
   .header>.search{
     background-color: brown;
     margin-top: 0px;
-    height:50px;
+    height:82px;
     width:100%;
     position: relative;
+    justify-content: space-between;
   }
 
   .search>.hambergur{
@@ -198,17 +203,27 @@ a{
   }
   
   .search-area{
-    height:30px;
-    border-radius: 16px;
-    width:200px;
-    margin: 0 auto;
+    border-radius: 32px;
+    height:35px;
+    width:220px;
+    margin-top: 3px;
+    margin-left: 84px;
+    background-color: beige;
   }
   .search-area input{
     font-size: 1rem;
-    height:30px;
-    width:160px;
+    height:35px;
+    width:180px;
   }
   .search-btn>img{
-    width:15px;
+    width:16px;
+  }
+  .mobile-home{
+    width:80px;
+    padding-top: 10px;
+    height:33px;
+    /* background-color: aqua; */
+    color:white;
+    font-size: 18px;
   }
 }

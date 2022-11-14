@@ -6,7 +6,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "cd app && cd Client &&  npm start",
-    "dev": "concurrently \"npm run server \" \"npm run client\""
+    "dev": "concurrently \"npm run server \" \"npm run client\"",
+    "heroku-postbuild": "cd app && cd Client && npm install --only==dev && npm run build"
   },
   "engines": {
     "node": "16.17.1",

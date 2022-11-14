@@ -122,13 +122,15 @@ export default function Home({randInt,carInfo}) {
           ))}
         </div>
       </div>
-      <div className='icon-list'>
-        <img src="/img/icon-sns-facebook.svg" alt="" />
-        <img src="/img/icon-sns-instagram.svg" alt="" />
-        <img src="/img/icon-sns-cafe.svg" alt="" />
-        <img src="/img/icon-sns-blog.svg" alt="" />
+      <div className='etc-box'>
+        <div className='icon-list'>
+          <img src="/img/icon-sns-facebook.svg" alt="" />
+          <img src="/img/icon-sns-instagram.svg" alt="" />
+          <img src="/img/icon-sns-cafe.svg" alt="" />
+          <img src="/img/icon-sns-blog.svg" alt="" />
+        </div>
+        <div className='copy'>Copyright © 내가만든 사이트 All Rights Reserved</div>
       </div>
-      <div className='copy'>Copyright © 내가만든 사이트 All Rights Reserved</div>
     </div>
   )
 }
