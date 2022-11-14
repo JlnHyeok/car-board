@@ -313,7 +313,7 @@
   position: absolute;
   top:9px;
   left:145px;
-  width:18px;
+  width:17px;
   cursor:pointer;
 }
 
@@ -629,6 +629,7 @@
   }
   .firstpay-etc-img{
     top:3px;
+    left:52px;
   }
   .etc-info-wrap .etc-info{
     display: none;
@@ -637,7 +638,7 @@
     flex-direction: column;
   }
   .tax-etc-img{
-    left:66%;
+    left:68%;
     top:7px;
   }
   .car-second input:checked + label::before{
