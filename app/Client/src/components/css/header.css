@@ -129,14 +129,13 @@ a{
 
 .hamb-icon{
   font-weight: bold;
-  font-size: 50px;
+  font-size: 45px;
   width:60px;
   height: 60px;
-  padding-bottom: 10px;
   /* background-color: aqua; */
   cursor: pointer;
   color:white;
-  margin-top: -3px;
+  margin-top: 0px;
 }
 
 .mobile-menu{
@@ -147,7 +146,7 @@ a{
   position: absolute;
   top:80px;
   height:40px;
-  width:100vw;
+  width:100%;
   background-color: #7f0000;
   z-index: 999;
   transition: 0.2s;
@@ -193,7 +192,7 @@ a{
     background-color: brown;
     margin-top: 0px;
     height:82px;
-    width:100%;
+    width:100vw;
     position: relative;
     justify-content: space-between;
   }
@@ -213,7 +212,7 @@ a{
   .search-area input{
     font-size: 1rem;
     height:35px;
-    width:180px;
+    width:90%;
   }
   .search-btn>img{
     width:16px;
