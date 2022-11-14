@@ -624,9 +624,11 @@
   .cal-first>.expected-price{
     width:70%;
   }
-  
   .first-pay .etc-info{
     left:-180px;
+  }
+  .firstpay-etc-img{
+    top:3px;
   }
   .etc-info-wrap .etc-info{
     display: none;
@@ -635,8 +637,8 @@
     flex-direction: column;
   }
   .tax-etc-img{
-    left:71%;
-    top:8px;
+    left:66%;
+    top:7px;
   }
   .car-second input:checked + label::before{
     transform:rotateY(0deg);
