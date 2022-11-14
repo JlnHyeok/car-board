@@ -58,7 +58,7 @@ export default function Board({
     // console.log(e.target.value)
     if(easySearchSort.dis[1]){
       setEasySearchSort({...easySearchSort,
-      dis:[e.target.value, easySearchSort.dis[1]].sort((a,b)=>(a-b))})
+      dis:[parseInt(e.target.value), parseInt(easySearchSort.dis[1])].sort((a,b)=>(a-b))})
       if(parseInt(e.target.value) > parseInt(disInputRef.current[1].value)){
         [disInputRef.current[0].value , disInputRef.current[1].value] =
         [disInputRef.current[1].value , disInputRef.current[0].value]
@@ -80,7 +80,7 @@ export default function Board({
         setEasySearchSort({...easySearchSort,
         dis:[parseInt(easySearchSort.dis[0]), parseInt(e.target.value)].sort((a,b)=>(a-b))})
       )
-      if((e.target.value) < disInputRef.current[0].value){
+      if(parseInt(e.target.value) < parseInt(disInputRef.current[0].value)){
         [disInputRef.current[0].value , disInputRef.current[1].value] =
         [disInputRef.current[1].value , disInputRef.current[0].value]
       }
@@ -157,7 +157,7 @@ export default function Board({
 
   // 년도 최댓값 구하기
   const setMaxYear = (e) => {
-    // console.log('최댓값 : '+e.target.value)
+    console.log('최댓값 : '+e.target.value)
     // console.log(parseInt(e.target.value) < parseInt(yearInputRef.current[0].value))
     if(easySearchSort.year[0]){
       (
@@ -174,7 +174,7 @@ export default function Board({
     }
     else{
       setEasySearchSort({...easySearchSort,
-      price:[-1, e.target.value]})
+      year:[-1, e.target.value]})
     }
     // console.log('최댓값 떄의 배열 '+easySearchSort.price)
   }

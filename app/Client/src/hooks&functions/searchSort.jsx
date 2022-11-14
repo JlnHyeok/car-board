@@ -22,11 +22,11 @@ export default function searchSort(easySearchMaker,carInfo,firstIndex,lastIndex,
       ))
     }
 
-    if(easySearchMaker.year[0] && (easySearchMaker.year[1])){
-      newPostList = newPostList.filter((cars)=>(
-        (parseInt(cars.car_model_year.slice(0,4))-parseInt(easySearchMaker.year[0]) >= 0) && (parseInt(cars.car_model_year.slice(0,4)) <= parseInt(easySearchMaker.year[1]))
-        ))
-      }
+  if(easySearchMaker.year[0] && (easySearchMaker.year[1])){
+    newPostList = newPostList.filter((cars)=>(
+      (parseInt(cars.car_model_year.slice(0,4))-parseInt(easySearchMaker.year[0]) >= 0) && (parseInt(cars.car_model_year.slice(0,4)) <= parseInt(easySearchMaker.year[1]))
+      ))
+    }
   
 
 
