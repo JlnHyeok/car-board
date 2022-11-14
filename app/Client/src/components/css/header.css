@@ -159,6 +159,9 @@ a{
   color:white;
   /* background-color: antiquewhite; */
 }
+.mobile-home{
+  display: none;
+}
 
 .mobile-menu span:hover{
   background-color: gray;
@@ -187,12 +190,14 @@ a{
   }
   .nav , .logo{
     visibility: hidden;
+    display: none;
   }
   .header>.search{
     background-color: brown;
     margin-top: 0px;
     height:82px;
     width:100vw;
+    min-width: 330px;
     position: relative;
     justify-content: space-between;
   }
@@ -224,5 +229,6 @@ a{
     /* background-color: aqua; */
     color:white;
     font-size: 18px;
+    display: block;
   }
 }

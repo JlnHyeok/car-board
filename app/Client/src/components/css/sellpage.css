@@ -39,13 +39,12 @@
 .submit-box label{
   display:inline-block;
   width:100px;
-  /* background-color: blue; */
+  position: relative;
   height:40px;
   vertical-align: middle;
   background-color: rgba(169, 169, 169, 0.308);
   cursor: pointer;
   padding-top: 5px;
-  /* padding-left: 7px; */
   box-sizing: border-box;
   border-radius: 9px;
   margin-right: 5px;
@@ -56,7 +55,14 @@
   outline:2px solid rgba(169, 169, 169, 0.514);
   background-color: rgba(169, 169, 169, 0.514);
 }
-
+.submit-box:nth-child(4)::before{
+  background-color: #e61332;
+  content:'';
+  width:50px;
+  height:50px;
+  position: absolute;
+  z-index: 33;
+}
 .input-empty{
   color : #e61332;
 }
@@ -73,10 +79,41 @@
 .submit-box input:not(.car-img):focus{
   border:0.2px solid rgba(169, 169, 169, 0.514);
 }
+.car-input:nth-child(3):after{
+  position: absolute;
+  content:'';
+  top:300px;
+  left:150px;
+  width:10px;
+  height: 10px;
+  background-color: #e61332;
+}
+
 .submit-box div{
   margin-bottom: 5px;
   /* border-bottom: 1px solid black; */
   font-size: 1.2rem;
+  position: relative;
+}
+.submit-box div:nth-child(5)::after{
+  position: absolute;
+  height:30px;
+  width:100px;
+  content:'km';
+  top:8px;
+  right:-54px;
+  font-size: 1rem;
+  color:gray;
+}
+.submit-box div:nth-child(6)::after{
+  position: absolute;
+  height:30px;
+  width:100px;
+  content:'만원';
+  top:9px;
+  right:-50px;
+  font-size: 1rem;
+  color:gray;
 }
 
 .submit-button{
@@ -129,4 +166,36 @@
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
   -webkit-appearance: none;
   margin:0;
+}
+
+@media screen and (max-width:540px){
+  .sellpage-wrap{
+    min-width: 330px;
+  }
+  .car-img-thumbnail{
+    width:330px;
+    height:260px;
+  }
+  .submit-box{
+    padding:0 10px;
+    width:100%;
+    /* background-color: antiquewhite; */
+  }
+  .submit-box label{
+    font-size: 1rem;
+    width:80px;
+    height:30px;
+  }
+  .submit-box .car-input{
+    width:70%;
+    font-size: 1rem;
+    padding:0 50px;
+  }
+  .submit-button{
+    width:80%;
+    margin:50px auto 0;
+  }
+  .input-emp{
+    width:70%;
+  }
 }

@@ -14,7 +14,7 @@
   /* padding-left: 30px; */
   box-sizing: border-box;
   /* background-color: rgb(176, 176, 218); */
-  height:100px;
+  height:120px;
   display:flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -542,6 +542,13 @@
 } */
 
 @media screen and (max-width:1000px){
+  .detail-car-wrap{
+    min-width: 330px;
+  }
+  .detail-car-image{
+    height:400px;
+    /* margin-top: 50px; */
+  }
   .summary-in-1000px{
     display: flex;
   }
@@ -561,5 +568,52 @@
   }
   .detail-right-wrap{
     margin:20px auto 0;
+  }
+}
+
+@media screen and (max-width:540px){
+  .detail-title-wrap{
+    margin-top: 0px;
+  }
+  .detail-title-wrap strong{
+    font-size: 1.4rem;
+  }
+  .detail-title{
+    font-size: 1.4rem;
+  }
+  .detail-title-info{
+    font-size: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .monthly-price-wrap{
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+  .etc-img{
+    display: none;
+  }
+  .detail-car-image{
+    height:230px;
+  }
+  .left-car-title{
+    display: none;
+  }
+  .detail-car-info-right{
+    visibility: hidden;
+    display: none;
+  }
+  .detail-car-info-wrap{
+    margin-top: 10px;
+  }
+  .left-car-options{
+    margin-top: 20px;
+  }
+  .left-car-basic-info,.left-car-distance{
+    font-size: 0.8rem;
+    height:90px;
+  }
+  .left-car-basic-info div, .left-car-distance div{
+    font-size: 1rem;
   }
 }

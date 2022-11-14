@@ -89,13 +89,11 @@ export default function SellPage() {
           </div>
           <div>
             <label htmlFor="car-distance-input">주행 거리</label>
-            <input type="number" step='none' id='car-distance-input' placeholder='*필수항목입니다.' className="car-input" ref={el=>inputInfo.current[3]=el} onChange={(e)=>onChangeInput(e)}/>
-            <span> km</span>
+            <input type="number" min='0' max='1000000' step='none' id='car-distance-input' placeholder='*필수항목입니다.' className="car-input" ref={el=>inputInfo.current[3]=el} onChange={(e)=>onChangeInput(e)}/>
           </div>
           <div>
             <label htmlFor="car-price-input">가격</label>
-            <input type="number" id='car-price-input' placeholder='*필수항목입니다.' className="car-input" ref={el=>inputInfo.current[4]=el} onChange={(e)=>onChangeInput(e)}/>
-            <span> 만원</span>
+            <input type="number" min='0' max='1000000' id='car-price-input' placeholder='*필수항목입니다.' className="car-input" ref={el=>inputInfo.current[4]=el} onChange={(e)=>onChangeInput(e)}/>
           </div>
           <button className='submit-button'>등록</button>
         </form>
