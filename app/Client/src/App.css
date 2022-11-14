@@ -7,9 +7,9 @@
   /* background-color: black; */
 }
 body{
-  /* background-color: #2f3542; */
-  /* height:100vh; */
+  margin:0;
 }
+
 
 html::-webkit-scrollbar{
   width:3px;

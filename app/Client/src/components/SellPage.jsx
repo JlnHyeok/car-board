@@ -65,6 +65,7 @@ export default function SellPage() {
   }
 
   return (
+    <div className='total-wrap'>
       <div className='sellpage-wrap'>
         <div className="car-img-thumbnail">
           {imgSrc ? <img className='thumbnail-img' src={imgSrc} alt="" /> : <span className='thmb-span'>차량 사진을 등록해주세요</span>}
@@ -98,5 +99,6 @@ export default function SellPage() {
           <button className='submit-button'>등록</button>
         </form>
       </div>
+    </div>
   )
 }

@@ -1,3 +1,7 @@
+.total-wrap{
+  
+  /* background-color: aquamarine; */
+}
 .sellpage-wrap{
   height:800px;
   width: 90%;
@@ -171,6 +175,7 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
 @media screen and (max-width:540px){
   .sellpage-wrap{
     min-width: 330px;
+
   }
   .car-img-thumbnail{
     width:330px;
@@ -178,18 +183,20 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
   }
   .submit-box{
     padding:0 10px;
-    width:100%;
-    /* background-color: antiquewhite; */
+    width:85%;
+    box-sizing: border-box;
+    /* background-color: blue; */
   }
   .submit-box label{
-    font-size: 1rem;
-    width:80px;
+    font-size: 0.9rem;
+    width:70px;
     height:30px;
   }
   .submit-box .car-input{
     width:70%;
     font-size: 1rem;
     padding:0 50px;
+    margin-left: 5px;
   }
   .submit-button{
     width:80%;
