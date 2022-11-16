@@ -8,10 +8,15 @@ app.use(cors())
 const multer = require('multer')  
 const multerS3 = require('multer-s3')
 const aws = require('aws-sdk')
-aws.config.loadFromPath(__dirname+'/awsconfig.json')
+// aws.config.loadFromPath(__dirname+'/awsconfig.json')
+// json 파일을 만들어서 .gitingore에 추가하는 방법도 좋지만, .env파일로 관리하는것도 좋다.
 require('dotenv').config()
 
-const s3 = new aws.S3()
+const s3 = new aws.S3({
+  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_KEY,
+  region: process.env.REACT_APP_AWS_S3_REGION
+})
 
 const dir = 'F:/FrontEnd/React_practice/car-board/public'
 
