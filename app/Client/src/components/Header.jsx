@@ -123,6 +123,10 @@ export default function Header({
           </Link>
         </div>
         <div className="search">
+          <div className='login-box'>
+            <Link><span>로그인</span></Link>
+            <Link><span>회원가입</span></Link>
+          </div>
           <div className="hambergur">
             <span className='hamb-icon' onClick={()=>setIsMenuHide(!isMenuHide)}
             >≡

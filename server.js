@@ -11,6 +11,7 @@ const aws = require('aws-sdk')
 // aws.config.loadFromPath(__dirname+'/awsconfig.json')
 // json 파일을 만들어서 .gitingore에 추가하는 방법도 좋지만, .env파일로 관리하는것도 좋다.
 require('dotenv').config()
+// 같은 경로에 있는 .env 파일을 읽을 수 있게 해준다.
 
 const s3 = new aws.S3({
   accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
