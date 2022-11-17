@@ -224,6 +224,7 @@ a{
   .search>.hambergur{
     visibility: visible;
     display: flex;
+    align-items: flex-end;
   }
   
   .search-area{

@@ -283,7 +283,7 @@ li:hover{
   display:grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 5px;
+  grid-column-gap: 0px;
   max-height : 6000px;
   /* height:140vh; */
   min-width: 800px;
@@ -306,7 +306,7 @@ li:hover{
   height:310px;
   /* background-color: blueviolet; */
   text-align: center;
-  margin:0 auto;
+  margin:0 auto 5px;
 }
 
 .post>.img:hover{
