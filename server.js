@@ -98,10 +98,6 @@ app.post('/login',(req,res) => {
   try{
     db.query(sql , id , (err,row) => {
       if(err) throw(err)
-      if(req.cookies.userid){
-        console.log(req.cookies.userid)
-        return res.json({success:false, msg:`${req.cookies.userid}회원님 로그인상태입니다.`})
-      }
       if(row.length === 0){
         return res.json({success:false, msg:'등록되지 않은 아이디입니다.'})
       }
@@ -124,6 +120,12 @@ app.post('/login',(req,res) => {
     console.log(err)
     res.json({success:false, msg: '올바른 정보를 입력해주세요.'})
   }
+})
+
+app.get('/logout',(req,res) => {
+  delete req.session.user
+  res.clearCookie('userid')
+  res.json({success:true})
 })
 
 app.post('/register', (req,res) => {

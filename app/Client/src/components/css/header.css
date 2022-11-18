@@ -88,6 +88,24 @@ a{
   display: flex;
   justify-content: space-around;
 }
+.loggedin-box{
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  top:15px;
+  right:30px;
+  min-width: 300px;
+  font-size: .9rem;
+  /* background-color: #54555a; */
+}
+.welcome-span,.mypage-span{
+  margin-right: 30px;
+  /* background-color: #7f0000; */
+}
+.mypage-span,.logout-span{
+  cursor:pointer;
+  /* background-color: #7f0000; */
+}
 .login-box span{
   color: #54555a;
 }
@@ -243,6 +261,9 @@ a{
   }
   .search-btn>img{
     width:16px;
+  }
+  .loggedin-box{
+    display: none;
   }
   .mobile-home{
     width:80px;

@@ -98,6 +98,7 @@ function App() {
         setCarInfo={setCarInfo}
         setIsAdmin={setIsAdmin}
         isAdmin={isAdmin}
+        id={id}
         />
         <Routes>
           <Route path='/' element={<Home randInt={randInt} carInfo={carInfo}/>}/>

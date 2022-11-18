@@ -3,7 +3,6 @@ import React from 'react'
 import './css/login.css'
 import { Link, useNavigate } from 'react-router-dom';
 
-
 export default function Login({id,setId,pw,setPw}) {
   const nav = useNavigate()
   const handleLoginSubmit = async(e) => {
@@ -13,7 +12,10 @@ export default function Login({id,setId,pw,setPw}) {
     const response = await axios.post('/login',{id : id, pw : pw})
     console.log(response.data)
     if(!response.data.success) return alert(response.data.msg)
-    if(response.data.success) return nav('/')
+    if(response.data.success){ 
+      sessionStorage.setItem("userId",id)
+      return nav('/')
+    }
   }
 
   return (

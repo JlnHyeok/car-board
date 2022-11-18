@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate} from 'react-router-dom'
 import './css/header.css'
 
 export default function Header({
-  setSearchValue,setIsSearch,setPageNum,setEasySearchSort,setCarInfo,setIsAdmin,isAdmin}) {
+  setSearchValue,setIsSearch,setPageNum,setEasySearchSort,setCarInfo,setIsAdmin,isAdmin,id}) {
   const divBarRef = useRef([])
   const navListRef = useRef()
   let nav = useNavigate()
@@ -68,6 +68,12 @@ export default function Header({
     setIsAdmin(prev=>!prev)
   }
 
+  const clickLogOut = async() => {
+    sessionStorage.clear()
+    const response = await axios.get('/logout')
+    if(response.data.success) return window.location.reload()
+  }
+
   useEffect(() => {
     firstPageSlideBar()
   })
@@ -125,10 +131,18 @@ export default function Header({
           </Link>
         </div>
         <div className="search">
+          {
+          sessionStorage.getItem('userId') ? 
+          <div className='loggedin-box'>
+            <span className='welcome-span'>{sessionStorage.getItem('userId')}님</span>
+            <span className='mypage-span'>마이페이지</span>
+            <span className='logout-span'onClick={clickLogOut}>로그아웃</span>
+          </div> : 
           <div className='login-box'>
             <Link to='login'><span>로그인</span></Link>
             <Link to='register'><span>회원가입</span></Link>
           </div>
+          }
           <div className="hambergur">
             <span className='hamb-icon' onClick={()=>setIsMenuHide(!isMenuHide)}
             >≡
