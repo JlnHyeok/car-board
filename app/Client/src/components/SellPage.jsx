@@ -42,6 +42,7 @@ export default function SellPage() {
         let err = new Error('필수 항목을 입력해주세요')
         throw err
       }
+      console.log(process.env.REACT_APP_API_URL)
       const formData = new FormData()
       formData.append('file', img)
       console.log(formData)
