@@ -55,6 +55,7 @@ export default function SellPage() {
       await axios.post(process.env.REACT_APP_API_URL+'/insertCar', formData)
       alert('등록 완료!')
     }catch(err){
+      console.log(err)
       alert('제대로 입력해주세요.')
     }
   }

@@ -1,9 +1,11 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import './css/login.css'
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login({id,setId,pw,setPw}) {
+  const [isShowPw , setIsShowPw] = useState(false)
+
   const nav = useNavigate()
   const handleLoginSubmit = async(e) => {
     e.preventDefault()
@@ -23,7 +25,11 @@ export default function Login({id,setId,pw,setPw}) {
       <div className='login-input-box'>
         <form className='login-info' onSubmit={handleLoginSubmit}>
           <input type="text" placeholder='아이디를 입력해주세요.' onChange={e=>setId(e.target.value)}/><br />
-          <input type="password" placeholder='비밀번호 입력해주세요.' onChange={e=>setPw(e.target.value)}/><br />
+          <span className='pw-input-box'>
+            <input type={isShowPw? "text" : "password"} placeholder='비밀번호 입력해주세요.' onChange={e=>setPw(e.target.value)}/>
+            <span className='pw-isvisible'><img src={isShowPw ? "./img/visible.png" :"./img/unvisible.png"} alt="visible" onClick={()=>setIsShowPw(!isShowPw)}/></span>
+            <br />
+          </span>
           <button>SIGN IN</button>
         </form>
         <span>아직 회원이 아니신가요? <Link to='/register'>회원가입</Link> </span>
