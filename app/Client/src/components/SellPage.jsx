@@ -52,7 +52,7 @@ export default function SellPage() {
       formData.append('text',inputInfo.current[4].value)
       inputInfo.current.forEach((cur)=>cur.value='')
       setImgSrc('')
-      await axios.post('/insertCar', formData)
+      await axios.post(process.env.REACT_APP_API_URL+'/insertCar', formData)
       alert('등록 완료!')
     }catch(err){
       console.log(err)
