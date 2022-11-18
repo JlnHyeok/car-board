@@ -129,6 +129,25 @@ app.post('/login',(req,res) => {
 
 })
 
+app.post('/insertCar',upload.single('file'), (req,res) => {
+  console.log('입력요청')
+  console.log(req.body)
+  console.log(req.file)
+  const [maker,model,year,distance,price] = [...req.body.text]
+  const imgUrl =  req.file.location
+  const sql = 'insert into cars (car_maker,car_name,car_model_year,distance,car_price,car_image) values (?,?,?,?,?,?)'
+  db.query(sql,[maker,model,year,distance,price,imgUrl], (err,data) => {
+    if(!err){
+      console.log('입력 완료')
+      res.send(req.file.filename)
+    }
+    else{
+      console.log(err)
+      res.end()
+    }
+  })
+})
+
 app.post('/register', (req,res) => {
   let {id, pw, name} = req.body
   pw = bcrypt.hashSync(pw,saltRounds)
@@ -148,25 +167,6 @@ app.post('/register', (req,res) => {
     }
     else{
       res.json({success:false, msg:'아이디가 이미 존재합니다.'})
-    }
-  })
-})
-
-app.post('/insertCar',upload.single('file'), (req,res) => {
-  console.log('입력요청')
-  console.log(req.body)
-  console.log(req.file)
-  const [maker,model,year,distance,price] = [...req.body.text]
-  const imgUrl =  req.file.location
-  const sql = 'insert into cars (car_maker,car_name,car_model_year,distance,car_price,car_image) values (?,?,?,?,?,?)'
-  db.query(sql,[maker,model,year,distance,price,imgUrl], (err,data) => {
-    if(!err){
-      console.log('입력 완료')
-      res.send(req.file.filename)
-    }
-    else{
-      console.log(err)
-      res.end()
     }
   })
 })
