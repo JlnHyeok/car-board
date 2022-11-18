@@ -7,6 +7,7 @@ const saltRounds = 10
 const app = express()
 const path = require('path')
 const PORT = process.env.PORT || 5000;
+
 const cors = require('cors')
 app.use(cors())
 const multer = require('multer')  
