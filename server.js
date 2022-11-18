@@ -93,6 +93,10 @@ app.get('/selectWhere/:id',(err,req,res,next) => {
     }
   })
 })
+app.get('/logout',(req,res) => {
+  delete req.session.user
+  res.clearCookie('userid')
+  res.json({success:true})
 app.post('/login',(req,res) => {
   let {id, pw} = req.body
   const sql = 'select id,pw from member where id = ?'
@@ -123,10 +127,6 @@ app.post('/login',(req,res) => {
   }
 })
 
-app.get('/logout',(req,res) => {
-  delete req.session.user
-  res.clearCookie('userid')
-  res.json({success:true})
 })
 
 app.post('/register', (req,res) => {
