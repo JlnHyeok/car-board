@@ -80,8 +80,8 @@ app.get('/selectAll',(req,res) => {
   })
 })
 
-app.get('/selectWhere/:id',(req,res) => {
-  console.log('선택요청')
+app.get('/selectWhere/:id',(err,req,res,next) => {
+  console.log(err)
   const {id} = req.params
   sql='select * from cars where id = ?'
   db.query(sql,[id],(err,data) => {
@@ -150,10 +150,10 @@ app.post('/register', (req,res) => {
       res.json({success:false, msg:'아이디가 이미 존재합니다.'})
     }
   })
-
 })
 
 app.post('/insertCar',upload.single('file'), (req,res) => {
+  console.log('입력요청')
   console.log(req.body)
   console.log(req.file)
   const [maker,model,year,distance,price] = [...req.body.text]
@@ -166,7 +166,7 @@ app.post('/insertCar',upload.single('file'), (req,res) => {
     }
     else{
       console.log(err)
-      res.send()
+      res.end()
     }
   })
 })
