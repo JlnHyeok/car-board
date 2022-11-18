@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate} from 'react-router-dom'
 import './css/header.css'
 
@@ -22,7 +22,7 @@ export default function Header({
         break;
       case '/review' : handleSlideBar(2)
         break;
-      default: handleSlideBar(1)
+      default:
     }
   }
    // 메뉴 언더바
@@ -39,7 +39,6 @@ export default function Header({
       }
     })
   }
-  firstPageSlideBar()
 
   // 다른 페이지 이동했다가 다시 buy 페이지 올 때 초기화
   const handleResetBuyPage = () => {
@@ -69,6 +68,9 @@ export default function Header({
     setIsAdmin(prev=>!prev)
   }
 
+  useEffect(() => {
+    firstPageSlideBar()
+  })
 
   return (
     <>
@@ -124,8 +126,8 @@ export default function Header({
         </div>
         <div className="search">
           <div className='login-box'>
-            <Link><span>로그인</span></Link>
-            <Link><span>회원가입</span></Link>
+            <Link to='login'><span>로그인</span></Link>
+            <Link to='register'><span>회원가입</span></Link>
           </div>
           <div className="hambergur">
             <span className='hamb-icon' onClick={()=>setIsMenuHide(!isMenuHide)}
