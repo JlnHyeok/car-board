@@ -11,7 +11,7 @@ export default function Login({id,setId,pw,setPw}) {
     e.preventDefault()
     if(!id) return alert('아이디를 입력해주세요.')
     if(!pw) return alert('비밀번호를 입력해주세요.')
-    const response = await axios.post('/login',{id : id, pw : pw})
+    const response = await axios.post(process.env.REACT_APP_API_URL+'/login',{id : id, pw : pw})
     console.log(response.data)
     if(!response.data.success) return alert(response.data.msg)
     if(response.data.success){ 

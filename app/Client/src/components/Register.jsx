@@ -16,7 +16,7 @@ export default function Register() {
     if(!registerId) return alert('아이디를 입력해주세요.')
     if(!registerPw) return alert('비밀번호를 입력해주세요')
     if(registerPw !== registerPwConfirm) return alert('비밀번호가 일치하지 않습니다.')
-    const response = await axios.post('/register', {id:registerId, pw:registerPw, name:registerName})
+    const response = await axios.post(process.env.REACT_APP_API_URL+'/register', {id:registerId, pw:registerPw, name:registerName})
     console.log(response.data)
     if(!response.data.success) return alert(response.data.msg)
     if(response.data.success){
