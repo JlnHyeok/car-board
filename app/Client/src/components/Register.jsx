@@ -55,7 +55,7 @@ export default function Register({isShowModal,setIsShowModal}) {
           </div>
           <button>SIGN UP</button>
         </form>
-        <span>이미 회원이신가요? <Link to='/login'>로그인</Link></span>
+        <span>이미 회원이신가요? <span><Link to='/login'>로그인</Link></span></span>
       </div>
     </div>
   )
