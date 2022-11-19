@@ -11,6 +11,7 @@
   /* background-color: aquamarine; */
   margin:0 auto;
   border:1px solid rgba(0, 0, 0, 0.281);
+  border-radius: 10px;
   box-shadow: 1px 1px black;
 }
 .login-info{

@@ -7,15 +7,17 @@
 }
 .register-input-box{
   width:400px;
-  height:420px;
+  height:450px;
   /* background-color: aquamarine; */
   margin:0 auto;
   border:1px solid rgba(0, 0, 0, 0.281);
+  border-radius: 10px;
   box-shadow: 1px 1px black;
 }
 .register-info{
-  padding-top: 60px;
+  padding-top: 50px;
   box-sizing: border-box;
+  position:relative;
 }
 .register-info input{
   width:300px;
@@ -41,11 +43,34 @@
   font-size: 1.1rem;
   color:white;
   background-color: #b70f28;
+  margin-top: 20px;
 }
-
 .register-input-box>span{
   /* background-color: #b70f28; */
   display: block;
   margin-top: 20px;
   font-size: 0.9rem;
+}
+.register-pw-input-box{
+  position: relative;
+  display: block;
+  /* background-color: aquamarine; */
+}
+.register-pw-isvisible{
+  width:30px;
+  height:30px;
+  position: absolute;
+  top:10px;
+  right:50px;
+  background-color: transparent;
+  cursor:pointer;
+  transition:.2s;
+  opacity: 0;
+  /* background-color: #b70f28; */
+}
+.register-pw-isvisible:hover{
+  opacity: .6;
+}
+.register-pw-isvisible>img{
+  width:100%;
 }

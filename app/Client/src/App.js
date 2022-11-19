@@ -80,7 +80,7 @@ function App() {
   let [postList, newPostList] = searchSort(easySearchSort,carInfo,firstIndex,lastIndex,isSearch,searchValue)
   
 
-  if(carInfo[0] === undefined){
+  if(carInfo.length === 0){
     console.log('로딩중')
     return (
       <div>Loading..</div>
