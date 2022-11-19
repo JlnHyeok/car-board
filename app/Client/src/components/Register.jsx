@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import './css/register.css'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Portal from './modal/Portal';
+import Modal from './modal/Modal';
 
-export default function Register() {
+export default function Register({isShowModal,setIsShowModal}) {
   const nav = useNavigate()
   const [registerName, setRegisterName] = useState('')
   const [registerId, setRegisterId] = useState('')
@@ -21,8 +23,9 @@ export default function Register() {
     if(!registerId) return alert('아이디를 입력해주세요.')
     if(!registerPw) return alert('비밀번호를 입력해주세요')
     if(registerPw !== registerPwConfirm) return alert('비밀번호가 일치하지 않습니다.')
+    setIsShowModal(true)
     const response = await axios.post(process.env.REACT_APP_API_URL+'/register', {id:registerId, pw:registerPw, name:registerName})
-    console.log(response.data)
+    setIsShowModal(false)
     if(!response.data.success) return alert(response.data.msg)
     if(response.data.success){
       alert('회원가입 완료!')
@@ -33,6 +36,9 @@ export default function Register() {
 
   return (
     <div className='register-wrap'>
+      {isShowModal && <Portal>
+        <Modal/>
+      </Portal>}
       <div className='register-input-box'>
         <form className='register-info' onSubmit={handleSignUpSubmit}>
           <input type="text" placeholder='성함을 입력해주세요.' onChange={e=>setRegisterName(e.target.value)}/><br />
