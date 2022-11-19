@@ -37,6 +37,21 @@ const db = require('./config/db.js');
 // const { S3 } = require('aws-sdk');
 app.use(express.json()) // body-parser 대신 express.json() 사용해도 된다.
 
+// 쿠키 설정 모듈
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
+
+const session = require('express-session')
+app.use(session({
+  secret:'node-session',
+  resave:false,
+  saveUninitialized:false
+}))
+
+// 암호화 모듈
+const bcrypt = require('bcrypt')
+const saltRounds = 10
+
 // 배포상태면~
 // if (process.env.NODE_ENV === "production")
 // {
@@ -68,6 +83,65 @@ app.get('/selectWhere/:id',(req,res) => {
     }
     else{
       console.log(err)
+    }
+  })
+})
+app.post('/login',(req,res) => {
+  let {id, pw} = req.body
+  console.log(req.body)
+  const sql = 'select id,pw from member where id = ?'
+  try{
+    db.query(sql , id , (err,row) => {
+      if(err) throw(err)
+      if(row.length === 0){
+        return res.json({success:false, msg:'등록되지 않은 아이디입니다.'})
+      }
+      else{
+        if(bcrypt.compareSync(pw, row[0].pw)){
+          res.cookie('userid',id,{
+            maxAge:3600*1000,
+            path:'/'
+          })
+          req.session.user = {id:id, pw:pw}
+          console.log(req.session.user)
+          return res.json({success:true})
+        }
+        else{
+          return res.json({success:false, msg:'비밀번호가 일치하지 않습니다.'})
+        }
+      }
+    })
+  }catch(err){
+    console.log(err)
+    res.json({success:false, msg: '올바른 정보를 입력해주세요.'})
+  }
+})
+
+app.get('/logout',(req,res) => {
+  delete req.session.user
+  res.clearCookie('userid')
+  res.json({success:true})
+})
+
+app.post('/register', (req,res) => {
+  let {id, pw, name} = req.body
+  pw = bcrypt.hashSync(pw,saltRounds)
+  const selectSql = 'select * from member where id = ?'
+  const registerSql = 'insert into member (id,pw,name) values (?,?,?)'
+  const registerInfo = [id , pw , name]
+  db.query(selectSql,id, (err,row) => {
+    if(row.length === 0){
+      db.query(registerSql, registerInfo, (err, data) => {
+        if(!err){
+          res.json({success:true})
+        }
+        else{
+          res.json({success:false, msg:'올바른 정보를 입력해주세요.'})
+        }
+      })
+    }
+    else{
+      res.json({success:false, msg:'아이디가 이미 존재합니다.'})
     }
   })
 })
