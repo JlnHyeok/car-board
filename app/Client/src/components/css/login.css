@@ -62,7 +62,12 @@
   right:50px;
   background-color: transparent;
   cursor:pointer;
+  transition:.2s;
+  opacity: 0;
   /* background-color: #b70f28; */
+}
+.pw-isvisible:hover{
+  opacity: .6;
 }
 .pw-isvisible>img{
   width:100%;
