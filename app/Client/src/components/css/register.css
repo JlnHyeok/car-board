@@ -15,7 +15,7 @@
   box-shadow: 1px 1px black;
 }
 .register-info{
-  padding-top: 50px;
+  padding-top: 60px;
   box-sizing: border-box;
   position:relative;
 }
@@ -55,6 +55,14 @@
   position: relative;
   display: block;
   /* background-color: aquamarine; */
+}
+.register-warn-pw{
+  height:10px;
+  font-size: 0.8rem;
+  color:red;
+  width:100%;
+  position: absolute;
+  top:296px;
 }
 .register-pw-isvisible{
   width:30px;
