@@ -1,13 +1,16 @@
 .login-wrap{
   /* background-color: aqua; */
-  width:100%;
+  width:90%;
   height:600px;
   padding-top: 100px;
+  margin:0 auto;
   box-sizing: border-box;
 }
 .login-input-box{
-  width:400px;
-  height:300px;
+  width:100%;
+  max-width:400px;
+  min-width: 330px;
+  height:350px;
   /* background-color: aquamarine; */
   margin:0 auto;
   border:1px solid rgba(0, 0, 0, 0.281);
@@ -72,4 +75,15 @@
 }
 .pw-isvisible>img{
   width:100%;
+}
+.login-help-info{
+  font-size: .8rem;
+  margin: 20px auto 0;
+  width:60%;
+  /* background-color: #b70f28; */
+  display: flex;
+  justify-content: space-evenly;
+}
+.login-help-info span{
+  cursor: pointer;
 }

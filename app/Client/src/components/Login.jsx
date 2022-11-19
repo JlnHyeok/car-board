@@ -33,6 +33,10 @@ export default function Login({id,setId,pw,setPw}) {
           <button>SIGN IN</button>
         </form>
         <span>아직 회원이 아니신가요? <Link to='/register'>회원가입</Link> </span>
+        <div className="login-help-info">
+          <span onClick={()=>alert('아직 개발중입니다.')}>아이디 찾기</span>
+          <span onClick={()=>alert('아직 개발중입니다.')}>비밀번호 찾기</span>
+        </div>
       </div>
     </div>
   )
