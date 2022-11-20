@@ -188,9 +188,11 @@ app.put('/changePw',(req,res) => {
   bcrypt.hash(pw,saltRounds,(err,hashedPw) => {
     db.query(sql,[hashedPw,name,id],(err,data) => {
       if(!err){
+        res.clearCookie('user-info')
         res.json({success:true,msg:'비밀번호가 성공적으로 변경되었습니다.'})
       }
       else{
+        res.clearCookie('user-info')
         res.json({success:false, msg:'오류가 발생했습니다.'})
       }
     })
