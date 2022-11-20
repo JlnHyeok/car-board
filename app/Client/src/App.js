@@ -25,7 +25,8 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false)  
   const [id, setId] = useState('')
   const [pw, setPw] = useState('')
-  
+  // 모달 보여주기
+  const [isShowModal, setIsShowModal] = useState(false)
   // 홈화면 추천 인덱스 생성
   // console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
@@ -113,8 +114,8 @@ function App() {
             <Route path='/buy/:id' element={<DetailCar/>}/>
             <Route path='/sell' element={<SellPage/>}/>
             <Route path='/review' element={<Review/>}/>
-            <Route path='/login' element={<Login id={id} setId={setId} pw={pw} setPw={setPw}/>}/>
-            <Route path='/register' element={<Register/>}/>
+            <Route path='/login' element={<Login id={id} setId={setId} pw={pw} setPw={setPw} isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
+            <Route path='/register' element={<Register isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
         </Routes>
       </div>
     </BrowserRouter>
