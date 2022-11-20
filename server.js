@@ -146,6 +146,57 @@ app.post('/register', (req,res) => {
   })
 })
 
+app.post('/findId', (req,res) => {
+  const {name} = req.body
+  console.log(name)
+  const sql = 'select * from member where name = ?'
+  db.query(sql,name,(err,row) => {
+    if(!err){
+      if(row.length!==0){
+        res.json({success:true, data:row})
+      }
+      else{
+        res.json({success:false, msg:'입력하신 정보로 가입된 아이디가 없습니다.'})
+      }
+    }
+    else{
+      res.json({success:false, msg:'오류가 발생했습니다. 다시 시도해주세요.'})
+    }
+  })
+})
+app.post('/findPw', (req,res) => {
+  const {name,id} = req.body
+  const sql = 'select * from member where name = ? and id = ?'
+  db.query(sql,[name,id], (err,row) => {
+    if(!err){
+      if(row.length===1){
+        res.cookie('user-info',{name:name, id:id},{
+          maxAge:600*1000
+        })
+        res.json({success:true})
+      }
+      else{
+        res.json({success:false,msg:'가입된 정보가 없습니다.'})
+      }
+    }
+  })
+})
+app.put('/changePw',(req,res) => {
+  const {pw} = req.body
+  const {name,id} = req.cookies['user-info']
+  const sql = 'update member set pw = ? where name = ? and id = ?'
+  bcrypt.hash(pw,saltRounds,(err,hashedPw) => {
+    db.query(sql,[hashedPw,name,id],(err,data) => {
+      if(!err){
+        res.json({success:true,msg:'비밀번호가 성공적으로 변경되었습니다.'})
+      }
+      else{
+        res.json({success:false, msg:'오류가 발생했습니다.'})
+      }
+    })
+  })
+})
+
 app.post('/insertCar',upload.single('file'), (req,res) => {
   console.log(req.body)
   console.log(req.file)
@@ -155,11 +206,11 @@ app.post('/insertCar',upload.single('file'), (req,res) => {
   db.query(sql,[maker,model,year,distance,price,imgUrl], (err,data) => {
     if(!err){
       console.log('입력 완료')
-      res.send(req.file.filename)
+      res.json({success:true})
     }
     else{
       console.log(err)
-      res.send()
+      res.json({success:false, msg:'에러가 발생했습니다.'})
     }
   })
 })

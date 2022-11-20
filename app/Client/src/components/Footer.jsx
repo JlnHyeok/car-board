@@ -17,7 +17,10 @@ export default function Footer({buttonLen,pageNum,setPageNum}) {
   }
 
   const handleMorePrev = () => {
-    setPageNum(Math.floor(pageNum/pageNumLength)*pageNumLength-(pageNumLength-1))
+    if(pageNum <= pageNumLength){
+      return setPageNum(1)
+    }
+    setPageNum(Math.ceil((pageNum/pageNumLength)-1)*pageNumLength)
   }
 
   const handleNext = () => {
@@ -41,9 +44,9 @@ export default function Footer({buttonLen,pageNum,setPageNum}) {
   return (
     <div className='footer'>
       <div className='btn-total-box'>
-        <button className='btn-list' onClick={handleMorePrev} disabled={pageNum<=pageNumLength} 
+        <button className='btn-list' onClick={handleMorePrev} disabled={pageNum === 1} 
         style={{
-          cursor:(pageNum<=pageNumLength) ? 'default' : undefined
+          cursor:(pageNum === 1) ? 'default' : undefined
         }}
         >
           {'<<'}
@@ -55,7 +58,7 @@ export default function Footer({buttonLen,pageNum,setPageNum}) {
         >
           {'<'}
         </button>
-        <div className='btn-list-box'>
+        <div className='btn-list-box' style={{width:30*pageNumLength}}>
         {btnArr.map((num) => {
           return (
             <button key={num}  style={{

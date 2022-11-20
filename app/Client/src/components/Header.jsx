@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate} from 'react-router-dom'
 import './css/header.css'
 
 export default function Header({
-  setSearchValue,setIsSearch,setPageNum,setEasySearchSort,setCarInfo,setIsAdmin,isAdmin,id}) {
+  setSearchValue,setIsSearch,setPageNum,setEasySearchSort,setCarInfo,setIsAdmin,isAdmin}) {
   const divBarRef = useRef([])
   const navListRef = useRef()
   let nav = useNavigate()
@@ -12,17 +12,17 @@ export default function Header({
 
   // 슬라이드 바 이동
   const firstPageSlideBar = () => {
-    // console.log(location.pathname)
-    switch(location.pathname){
-      case '/' : handleSlideBar()
-        break;
-      case '/sell' : handleSlideBar(0)
-        break;
-      case '/buy' : handleSlideBar(1)
-        break;
-      case '/review' : handleSlideBar(2)
-        break;
-      default:
+    if(location.pathname === '/'){
+      return handleSlideBar()
+    }
+    if(location.pathname === '/sell'){
+      return handleSlideBar(0)
+    }
+    if(location.pathname.includes('buy')){
+      return handleSlideBar(1)
+    }
+    if(location.pathname.includes('review')){
+      return handleSlideBar(2)
     }
   }
    // 메뉴 언더바
