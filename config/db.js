@@ -1,11 +1,12 @@
 const mysql = require('mysql')
+require('dotenv').config()
 
 const db = mysql.createPool({
-  host : 'us-cdbr-east-06.cleardb.net',
-  user : 'bbe7074ef2b0d9',
-  password : 'da8bf022',
+  host : process.env.HOST,
+  user : process.env.USER,
+  password : process.env.PW,
   port : 3306,
-  database: 'heroku_325d18752ac57cd',  
+  database: process.env.DATABASE,  
 })
 
 module.exports = db
