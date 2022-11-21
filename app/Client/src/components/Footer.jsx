@@ -55,7 +55,7 @@ export default function Footer({buttonLen,pageNum,setPageNum}) {
         >
           {'<'}
         </button>
-        <div className='btn-list-box'>
+        <div className='btn-list-box' style={{width:30*pageNumLength}}>
         {btnArr.map((num) => {
           return (
             <button key={num}  style={{

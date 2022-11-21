@@ -139,28 +139,7 @@ app.post('/register', (req,res) => {
           res.json({success:true})
         }
         else{
-          res.json({success:false, msg:'올바른 정보를 입력해주세요.'})
-        }
-      })
-    }
-    else{
-      res.json({success:false, msg:'아이디가 이미 존재합니다.'})
-    }
-  })
-})
-app.post('/register', (req,res) => {
-  let {id, pw, name} = req.body
-  pw = bcrypt.hashSync(pw,saltRounds)
-  const selectSql = 'select * from member where id = ?'
-  const registerSql = 'insert into member (id,pw,name) values (?,?,?)'
-  const registerInfo = [id , pw , name]
-  db.query(selectSql,id, (err,row) => {
-    if(row.length === 0){
-      db.query(registerSql, registerInfo, (err, data) => {
-        if(!err){
-          res.json({success:true})
-        }
-        else{
+          console.log(err)
           res.json({success:false, msg:'올바른 정보를 입력해주세요.'})
         }
       })
@@ -178,6 +157,7 @@ app.post('/findId', (req,res) => {
   db.query(sql,name,(err,row) => {
     if(!err){
       if(row.length!==0){
+        console.log(row)
         res.json({success:true, data:row})
       }
       else{

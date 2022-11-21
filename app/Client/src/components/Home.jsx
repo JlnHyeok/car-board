@@ -16,11 +16,8 @@ export default function Home({randInt,carInfo}) {
   
   // 새로고침시 제일 위로
   window.history.scrollRestoration = "manual";
-  console.log(randInt)
-  // console.log(carInfo,"homejsx")
-  let todayCarList = carInfo.filter((cars,i)=> randInt.includes(i) )
   
-  // console.log(todayCarList)
+  let todayCarList = carInfo.filter((cars,i)=> randInt.includes(i) )
   
   const prevSlide = () => {
     setIsFirstOrLast(false)

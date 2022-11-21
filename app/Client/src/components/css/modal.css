@@ -5,9 +5,9 @@
   left:50%;
   transform:translate(-50%,-50%);
   width:100%;
-  height:100%;
+  height:100vh;
 }
-.register-loading{
+.register-loading,.sell-loading{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -15,7 +15,6 @@
   background-color: white;
   width:200px;
   height:100px;
-  opacity: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,4 +22,181 @@
 .register-loading>span{
   /* background-color: aqua; */
   height:30px;
+}
+.find-id,.find-pw{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: white;
+  width:360px;
+  height:430px;
+  border-radius: 8px;
+  /* background-color: aquamarine; */
+}
+.close-find-modal{
+  width:30px;
+  height:30px;
+  background-color: white;
+  position: absolute;
+  top:8px;
+  right:8px;
+  text-align: center;
+  cursor:pointer;
+  font-size: 1.3rem;
+}
+.find-id-input-form{
+  /* background-color: blueviolet; */
+  width:100%;
+  height:150px;
+  text-align: center;
+  position: absolute;
+  top:55px;
+  display:flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+.find-id-input-form>.find-id-input{
+  height:50px;
+  width:250px;
+  padding:0 10px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border-radius: 8px;
+  border:1.4px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.find-id-result-wrap{
+  /* background-color: brown; */
+  width:100%;
+  height: 280px;
+}
+.find-id-input-result-title{
+  /* background-color: #b70f28; */
+  width:100%;
+  margin:0 auto;
+  display: flex;
+  justify-content: space-around;
+  /* border-bottom: 1px solid gray; */
+  box-sizing: border-box;
+}
+.find-id-input-result-title span{
+  /* background-color: aliceblue; */
+  width:40%;
+  border-bottom: 1px solid gray;
+}
+.find-id-input-result{
+  display:flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  width:100%;
+  margin-top: 10px;
+  /* background-color: aquamarine; */
+}
+.find-id-input-result span{
+  /* background-color: aliceblue; */
+  width:50%;
+  height:30px;
+}
+.find-id-input-result-box{
+  width:100%;
+  height: 30px;
+  /* background-color: aqua; */
+  display:flex;
+}
+.find-id-input-form>input:focus{
+  outline:2px solid gray;
+}
+.find-id-input-form>button{
+  /* display: block; */
+  width:250px;
+  height:50px;
+  background-color: #b70f28;
+  color:white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor:pointer;
+  border:none;
+  border-radius: 8px;
+}
+.find-id-input-btn{
+  margin-top: 30px;
+}
+
+.find-pw{
+  height: 330px;
+}.find-pw-input-form{
+  /* background-color: blueviolet; */
+  width:100%;
+  height:250px;
+  text-align: center;
+  position: absolute;
+  top:50px;
+  display:flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.find-pw-input-form>input{
+  height:50px;
+  width:250px;
+  padding:0 10px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border-radius: 8px;
+  border:1.4px solid black;
+  display: block;
+}
+.find-pw-input-form>input:focus{
+  outline:2px solid gray;
+}
+.find-pw-input-form>button{
+  /* display: block; */
+  width:250px;
+  height:50px;
+  margin-top: 30px;
+  background-color: #b70f28;
+  color:white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor:pointer;
+  border:none;
+  border-radius: 8px;
+}
+
+.find-pw-change-form{
+  margin-top: 65px;
+  /* background-color: aqua; */
+  width:100%;
+  height:250px;
+}
+.find-pw-change-form input{
+  display: block;
+  margin:10px auto 0;
+  height:50px;
+  width:250px;
+  padding:0 10px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border-radius: 8px;
+  border:1.4px solid black;
+}
+.find-pw-change-form button{
+  width:250px;
+  height:50px;
+  margin:35px auto 0;
+  display: block;
+  background-color: #b70f28;
+  color:white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor:pointer;
+  border:none;
+  border-radius: 8px;
 }
