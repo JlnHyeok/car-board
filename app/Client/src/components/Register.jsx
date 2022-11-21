@@ -5,14 +5,13 @@ import axios from 'axios';
 import Portal from './modal/Portal';
 import Modal from './modal/Modal';
 
-export default function Register() {
+export default function Register({isShowModal,setIsShowModal}) {
   const nav = useNavigate()
   const [registerName, setRegisterName] = useState('')
   const [registerId, setRegisterId] = useState('')
   const [registerPw, setRegisterPw] = useState('')
   const [registerPwConfirm, setRegisterPwConfirm] = useState('')
   const [regPwVisible, setRegPwVisible] = useState(false)
-  const [isShowModal, setIsShowModal] = useState(false)
 
   const registerPwIsVisible = () => {
     setRegPwVisible(!regPwVisible)
@@ -37,9 +36,8 @@ export default function Register() {
 
   return (
     <div className='register-wrap'>
-      {isShowModal && 
-      <Portal>
-        <Modal isShowModal={isShowModal}/>
+      {isShowModal && <Portal>
+        <Modal/>
       </Portal>}
       <div className='register-input-box'>
         <form className='register-info' onSubmit={handleSignUpSubmit}>
@@ -57,7 +55,7 @@ export default function Register() {
           </div>
           <button>SIGN UP</button>
         </form>
-        <span>이미 회원이신가요? <span><Link to='/login'>로그인</Link></span></span>
+        <span>이미 회원이신가요? <Link to='/login'>로그인</Link></span>
       </div>
     </div>
   )
