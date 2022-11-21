@@ -1,0 +1,26 @@
+.modal-wrap{
+  background-color: rgba(128, 128, 128, 0.448);
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;
+  height:100%;
+}
+.register-loading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: white;
+  width:200px;
+  height:100px;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register-loading>span{
+  /* background-color: aqua; */
+  height:30px;
+}

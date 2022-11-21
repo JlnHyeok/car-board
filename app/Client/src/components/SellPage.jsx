@@ -1,14 +1,12 @@
 import axios from 'axios'
 import React, { useRef, useState } from 'react'
 import './css/sellpage.css'
-import Portal from './modal/Portal'
-import Modal from './modal/Modal';
 
 export default function SellPage() {
+
   const inputInfo = useRef([])
   const [img, setImg] = useState('')
   const [imgSrc, setImgSrc] = useState()
-  const [isSellModal,setIsSellModal] = useState(false)
 
   // 이미지 미리보기
   const handleChangeImgInput = async(fileBlob) => {
@@ -26,7 +24,7 @@ export default function SellPage() {
     let reader = new FileReader()
     inputInfo.current[5].value = fileBlob.name
     setImg(fileBlob)
-    // console.log(fileBlob)
+    console.log(fileBlob)
     reader.readAsDataURL(fileBlob)
     return new Promise((resolve)=>{
       reader.onload = () => {
@@ -39,37 +37,26 @@ export default function SellPage() {
   // 등록버튼 누를 때
   const handleSubmitCarInfo = async(e) => {
     e.preventDefault()
-      if(inputInfo.current[0].value === '') return alert('제조사를 입력해주세요')
-      if(inputInfo.current[1].value === '') return alert('모델명을 입력해주세요')
-      if(inputInfo.current[2].value === '') return alert('년식을 입력해주세요')
-      if(inputInfo.current[3].value === '') return alert('주행거리를 입력해주세요')
-      if(inputInfo.current[4].value === '') return alert('가격을 입력해주세요')
-      if(inputInfo.current[5].value === '') return alert('사진을 입력해주세요')
-      try{
-        const formData = new FormData()
-        formData.append('file', img)
-        formData.append('text',inputInfo.current[0].value)
-        formData.append('text',inputInfo.current[1].value)
-        formData.append('text',inputInfo.current[2].value)
-        formData.append('text',inputInfo.current[3].value)
-        formData.append('text',inputInfo.current[4].value)
-        inputInfo.current.forEach((cur)=>cur.value='')
-        setImgSrc('')
-        setIsSellModal(true)
-        const response = await axios.post(process.env.REACT_APP_API_URL+'/insertCar', formData)
-        if(response.data.success){
-          setIsSellModal(false)
-          alert('등록 완료!')
-        }
-        else{
-          const err = new Error(response.data.msg)
-          err.name = '서버 500'
-          throw err
-        }
-      }catch(err){
-        window.location.reload()
-        alert(err)
+    try{
+      if(inputInfo.current[0].value === '' || inputInfo.current[1].value === '' || inputInfo.current[2].value === '' || inputInfo.current[3].value === '' || inputInfo.current[4].value === '' ){
+        let err = new Error('필수 항목을 입력해주세요')
+        throw err
       }
+      const formData = new FormData()
+      formData.append('file', img)
+      console.log(formData)
+      formData.append('text',inputInfo.current[0].value)
+      formData.append('text',inputInfo.current[1].value)
+      formData.append('text',inputInfo.current[2].value)
+      formData.append('text',inputInfo.current[3].value)
+      formData.append('text',inputInfo.current[4].value)
+      inputInfo.current.forEach((cur)=>cur.value='')
+      setImgSrc('')
+      await axios.post(process.env.REACT_APP_API_URL+'/insertCar', formData)
+      alert('등록 완료!')
+    }catch(err){
+      alert('제대로 입력해주세요.')
+    }
   }
 
   // 빈 칸 입력시 
@@ -79,10 +66,6 @@ export default function SellPage() {
 
   return (
     <div className='total-wrap'>
-      {isSellModal &&
-      <Portal>
-        <Modal isSellModal={isSellModal}/>
-      </Portal>}
       <div className='sellpage-wrap'>
         <div className="car-img-thumbnail">
           {imgSrc ? <img className='thumbnail-img' src={imgSrc} alt="" /> : <span className='thmb-span'>차량 사진을 등록해주세요</span>}

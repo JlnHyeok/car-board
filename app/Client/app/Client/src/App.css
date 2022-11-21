@@ -1,0 +1,33 @@
+
+.App{
+  max-width:1400px;
+  margin:0 auto;
+  text-align: center;
+  position: relative;
+  /* background-color: black; */
+}
+body{
+  margin:0;
+}
+
+
+html::-webkit-scrollbar{
+  width:3px;
+  height:1px;
+  /* 전체 두께 */
+  /* background-color: black; */
+}
+html::-webkit-scrollbar-thumb{
+  /* 현재 부분 색 */
+  background-color: #2f3542;
+}
+html::-webkit-scrollbar-track{
+  /* 나머지 부분 색 */
+  background-color: grey;
+}
+
+@media screen and (max-width:1000px){
+  html::-webkit-scrollbar{
+    width:0;
+  }
+}

@@ -1,0 +1,278 @@
+.header{
+  /* min-width: 1100px; */
+  max-width: 1400px;
+  height:150px;
+  /* background-color: #7f0000; */
+  display:grid;
+  padding:5px;
+  box-sizing: border-box;
+  grid-template-columns: 1fr 2fr 1fr;
+  text-align: center;
+  position: relative;
+}
+
+a{
+  text-decoration: none;
+  color:black;
+}
+.admin-controll{
+  font-size: 8px;
+  cursor: pointer;
+  position:absolute;
+  left:0;
+  transition:.2s;
+}
+
+.header>.logo{
+  /* background-color: bisque; */
+  width:230px;
+  height:95%;
+  position: relative;
+}
+.logo img{
+  left:63%;
+  transform: translateX(-50%);
+  bottom:0;
+  position: absolute;
+  width:70%;
+  min-width: 150px;
+}
+
+.header>.nav{
+  /* background-color: blue; */
+  width:95%;
+  display:flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height:95%;
+  margin-left: -5%;
+}
+
+.nav-list{
+  width: 100%;
+  /* background-color: beige; */
+  font-size: 1.2rem;
+  font-weight: 700;
+  color:black;
+  margin-bottom: 20px;
+  position:relative;
+}
+.nav-list:hover{
+  color:#b70f28;
+}
+.nav-list div{
+  /* background-color: white; */
+  height:2px;
+  width: 0%;
+  box-shadow: 0 3px 1px #b70f28;
+  transition:.2s;
+}
+
+.header>.search{
+  /* background-color: brown; */
+  width:90%;
+  height:95%;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  /* align-items: flex-end; */
+  /* margin-top: 73px; */
+}
+.login-box{
+  /* background-color: aliceblue; */
+  position: absolute;
+  top:15px;
+  right:20px;
+  width:150px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-around;
+}
+.loggedin-box{
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  top:15px;
+  right:30px;
+  min-width: 300px;
+  font-size: .9rem;
+  /* background-color: #54555a; */
+}
+.welcome-span,.mypage-span{
+  margin-right: 30px;
+  /* background-color: #7f0000; */
+}
+.mypage-span,.logout-span{
+  cursor:pointer;
+  /* background-color: #7f0000; */
+}
+.login-box span{
+  color: #54555a;
+}
+
+.hambergur{
+  visibility: hidden;
+}
+.search-area{
+  margin: 80px auto 10px;
+  background-color: beige;
+  width:260px;
+  height:40px;
+  overflow: hidden;
+  border-radius: 40px;
+  border:1px solid black;
+}
+.search-area input{
+  padding-left: 18px;
+  padding-right: 13px;
+  box-sizing: border-box;
+  width:calc(100% - 45px);
+  height: 40px;
+  border:none;
+  font-size: 1.1rem;
+}
+.search-area>form{
+  display:flex;
+}
+.search-area input:focus{
+  outline: none;
+}
+.search-area .search-btn{
+  width:45px;
+  padding:0;
+  /* background-color: black; */
+  border:none;
+  cursor: pointer;
+}
+.search-btn>img{
+  width:20px;
+}
+
+.search>.hambergur{
+  visibility: visible;
+  height:70px;
+  width:60px;
+  /* position: absolute; */
+  display:none;
+  align-items: center;
+  background-color: transparent;
+  visibility: hidden;
+}
+
+.hamb-icon{
+  font-weight: bold;
+  font-size: 45px;
+  width:60px;
+  height: 60px;
+  /* background-color: aqua; */
+  cursor: pointer;
+  color:white;
+  /* margin-top: 2px; */
+}
+
+.mobile-menu{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 8px 2px;
+  box-sizing: border-box;
+  position: absolute;
+  top:80px;
+  height:40px;
+  width:100%;
+  min-width: 330px;
+  background-color: #7f0000;
+  z-index: 999;
+  transition: 0.2s;
+  opacity: 1;
+}
+.mobile-menu span{
+  display: block;
+  width:95%;
+  height: 30px;
+  color:white;
+  /* background-color: antiquewhite; */
+}
+.mobile-home{
+  display: none;
+}
+
+.mobile-menu span:hover{
+  background-color: gray;
+}
+.menu-hide{
+  visibility: hidden;
+  opacity: 0;
+  height:0px;
+}
+
+@media screen and (max-width:1000px){
+  .header{
+    min-width: 780px;
+  }
+  .logo img{
+    left:50%;
+  }
+}
+
+@media screen and (max-width:540px){
+  .header{
+    padding:0;
+    height:82px;
+    min-width: 330px;
+    grid-template-columns: 0 0 1fr ;
+  }
+  .nav , .logo{
+    visibility: hidden;
+    display: none;
+  }
+  .header>.search{
+    flex-wrap: nowrap;
+    background-color: brown;
+    /* background-color: #54555a; */
+    margin-top: 0px;
+    height:82px;
+    width:100vw;
+    min-width: 330px;
+    position: relative;
+    justify-content: space-between;
+  }
+  .login-box{
+    display: none;
+  }
+  .search>.hambergur{
+    visibility: visible;
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .search-area{
+    border-radius: 32px;
+    height:35px;
+    width:220px;
+    /* margin-top: 24px;
+    margin-left: 84px; */
+    margin:24px auto 0;
+    background-color: beige;
+  }
+  .search-area input{
+    font-size: 1rem;
+    height:35px;
+    width:90%;
+  }
+  .search-btn>img{
+    width:16px;
+  }
+  .loggedin-box{
+    display: none;
+  }
+  .mobile-home{
+    width:80px;
+    padding-top: 10px;
+    height:33px;
+    margin-top: 20px;
+    /* background-color: aqua; */
+    color:white;
+    font-size: 18px;
+    display: block;
+  }
+}
