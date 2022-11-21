@@ -6,8 +6,10 @@ import Modal from './modal/Modal';
 import Portal from './modal/Portal';
 
 
-export default function Login({id,setId,pw,setPw,isShowModal,setIsShowModal}) {
+export default function Login({id,setId,pw,setPw}) {
   const [isShowPw , setIsShowPw] = useState(false)
+  const [isShowFindId, setIsShowFindId] = useState(false)
+  const [isShowFindPw, setIsShowFindPw] = useState(false)
 
   const nav = useNavigate()
   const handleLoginSubmit = async(e) => {
@@ -26,9 +28,9 @@ export default function Login({id,setId,pw,setPw,isShowModal,setIsShowModal}) {
 
   return (
     <div className='login-wrap'>
-      {isShowModal && 
+      {(isShowFindId || isShowFindPw) && 
       <Portal>
-        <Modal/>
+        <Modal isShowFindId={isShowFindId} isShowFindPw={isShowFindPw} setIsShowFindId={setIsShowFindId} setIsShowFindPw={setIsShowFindPw}/>
       </Portal>}
       <div className='login-input-box'>
         <form className='login-info' onSubmit={handleLoginSubmit}>
@@ -42,8 +44,8 @@ export default function Login({id,setId,pw,setPw,isShowModal,setIsShowModal}) {
         </form>
         <span>아직 회원이 아니신가요? <Link to='/register'>회원가입</Link> </span>
         <div className="login-help-info">
-          <span>아이디 찾기</span>
-          <span>비밀번호 찾기</span>
+          <span onClick={()=>setIsShowFindId(true)}>아이디 찾기</span>
+          <span onClick={()=>setIsShowFindPw(true)}>비밀번호 찾기</span>
         </div>
       </div>
     </div>
