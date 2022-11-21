@@ -45,7 +45,7 @@ export default function Modal({isShowModal,isSellModal,isShowFindId,isShowFindPw
   const clickChangePw = async(e) => {
     e.preventDefault()
     if(!changePw) return alert('비밀번호를 입력해주세요')
-    if(changePw !== changePwConfirm) return console.log('비밀번호가 다릅니다.')
+    if(changePw !== changePwConfirm) return alert('비밀번호가 다릅니다.')
     const body = {pw:changePw}
     const response = await axios.put('/changePw',body)
     if(response.data.success){
