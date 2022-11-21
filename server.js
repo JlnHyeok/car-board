@@ -13,7 +13,7 @@ require('dotenv').config()
 
 const s3 = new aws.S3()
 
-// const dir = 'F:/FrontEnd/React_practice/car-board/public'
+const dir = 'F:/FrontEnd/React_practice/car-board/public'
 
 const storage = multerS3({
   s3 : s3,
@@ -28,7 +28,7 @@ const upload = multer({storage:storage})
 // 사진 업로드를 위해서 multer를 가져오고, 경로를 설정해준다.
 // 입력한 파일이 uploads/폴더 내에 저장된다
 
-// let fs = require('fs')
+let fs = require('fs')
 // fs는 node.js에 들어있는 module로, file system의 약자이다.
 // 서버의 파일/폴더에 접근할 수 있는 함수들이 들어있다.
 // 파일업로드와 직접적인 연관이 있는것은 아니고, 저장할 폴더를 생성하기 위해 사용
@@ -256,8 +256,8 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT , ()=>{
-  // let folder = dir + '/upload'
-  // if(!fs.existsSync('upload')) fs.mkdirSync('upload')
+  let folder = dir + '/upload'
+  if(!fs.existsSync('upload')) fs.mkdirSync('upload')
   // dir폴더가 존재하지 확인하고, 없으면 폴더를 생성
   console.log(`server on! : ${PORT}`)
 })
