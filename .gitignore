@@ -6,4 +6,4 @@ node_modules/
 
 .env
 
-./config/s3.json
+/config/s3.json
