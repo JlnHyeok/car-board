@@ -3,7 +3,7 @@ import './css/footer.css'
 
 export default function Footer({buttonLen,pageNum,setPageNum}) {
   const btnArr = []
-  const [pageNumLength, setPageNumLength] = useState(5)
+  const [pageNumLength, setPageNumLength] = useState(10)
   let i = 1;
   while(i<=buttonLen){
     btnArr.push(i)
@@ -17,7 +17,8 @@ export default function Footer({buttonLen,pageNum,setPageNum}) {
   }
 
   const handleMorePrev = () => {
-    setPageNum(Math.floor(pageNum/pageNumLength)*pageNumLength-(pageNumLength-1))
+    if(pageNum<=pageNumLength) return setPageNum(1)
+    setPageNum(Math.ceil(pageNum/pageNumLength)*pageNumLength-(pageNumLength))
   }
 
   const handleNext = () => {
@@ -35,15 +36,15 @@ export default function Footer({buttonLen,pageNum,setPageNum}) {
   useEffect(() => {
     window.scrollTo({top:0,left: 0,behavior:'smooth'})
     // window 의 너비값 변경 감지
-    window.innerWidth < 540 ? setPageNumLength(3) : setPageNumLength(5)
+    window.innerWidth < 540 ? setPageNumLength(3) : setPageNumLength(10)
   },[pageNum])
 
   return (
     <div className='footer'>
       <div className='btn-total-box'>
-        <button className='btn-list' onClick={handleMorePrev} disabled={pageNum<=pageNumLength} 
+        <button className='btn-list' onClick={handleMorePrev} disabled={pageNum === 1} 
         style={{
-          cursor:(pageNum<=pageNumLength) ? 'default' : undefined
+          cursor: pageNum === 1 ? 'default' : undefined 
         }}
         >
           {'<<'}

@@ -103,7 +103,6 @@ app.post('/login',(req,res) => {
         if(bcrypt.compareSync(pw, row[0].pw)){
           res.cookie('userid',id,{
             maxAge:3600*1000,
-            path:'/'
           })
           req.session.user = {id:id, pw:pw}
           console.log(req.session.user)
@@ -177,7 +176,8 @@ app.post('/findPw', (req,res) => {
     if(!err){
       if(row.length===1){
         res.cookie('user-info',{name:name, id:id},{
-          maxAge:600*1000
+          maxAge:600*1000,
+          sameSite:"Lax"
         })
         res.json({success:true})
       }

@@ -82,7 +82,6 @@ function App() {
   
 
   if(carInfo.length === 0){
-    console.log('로딩중')
     return (
       <div style={{margin:'0 auto',fontSize:'1.3rem',width:'100%',textAlign:'center'}}>Loading..</div>
     )
