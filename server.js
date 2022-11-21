@@ -207,11 +207,11 @@ app.post('/insertCar',upload.single('file'), (req,res) => {
   db.query(sql,[maker,model,year,distance,price,imgUrl], (err,data) => {
     if(!err){
       console.log('입력 완료')
-      res.send(req.file.filename)
+      res.json({success:true})
     }
     else{
       console.log(err)
-      res.send()
+      res.json({success:false, msg: '오류가 발생했습니다.'})
     }
   })
 })
