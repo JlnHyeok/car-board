@@ -145,6 +145,28 @@ app.post('/register', (req,res) => {
     }
   })
 })
+app.post('/register', (req,res) => {
+  let {id, pw, name} = req.body
+  pw = bcrypt.hashSync(pw,saltRounds)
+  const selectSql = 'select * from member where id = ?'
+  const registerSql = 'insert into member (id,pw,name) values (?,?,?)'
+  const registerInfo = [id , pw , name]
+  db.query(selectSql,id, (err,row) => {
+    if(row.length === 0){
+      db.query(registerSql, registerInfo, (err, data) => {
+        if(!err){
+          res.json({success:true})
+        }
+        else{
+          res.json({success:false, msg:'올바른 정보를 입력해주세요.'})
+        }
+      })
+    }
+    else{
+      res.json({success:false, msg:'아이디가 이미 존재합니다.'})
+    }
+  })
+})
 
 app.post('/findId', (req,res) => {
   const {name} = req.body
@@ -207,11 +229,11 @@ app.post('/insertCar',upload.single('file'), (req,res) => {
   db.query(sql,[maker,model,year,distance,price,imgUrl], (err,data) => {
     if(!err){
       console.log('입력 완료')
-      res.json({success:true})
+      res.send(req.file.filename)
     }
     else{
       console.log(err)
-      res.json({success:false, msg: '오류가 발생했습니다.'})
+      res.send()
     }
   })
 })
