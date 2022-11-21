@@ -1,5 +1,5 @@
 .header{
-  min-width: 1100px;
+  /* min-width: 1100px; */
   max-width: 1400px;
   height:150px;
   /* background-color: #7f0000; */
@@ -68,21 +68,53 @@ a{
   transition:.2s;
 }
 
-
 .header>.search{
   /* background-color: brown; */
   width:90%;
-  height:60px;
+  height:95%;
   display: flex;
-  align-items: center;
-  margin-top: 73px;
+  position: relative;
+  flex-wrap: wrap;
+  /* align-items: flex-end; */
+  /* margin-top: 73px; */
+}
+.login-box{
+  /* background-color: aliceblue; */
+  position: absolute;
+  top:15px;
+  right:20px;
+  width:150px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-around;
+}
+.loggedin-box{
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  top:15px;
+  right:30px;
+  min-width: 300px;
+  font-size: .9rem;
+  /* background-color: #54555a; */
+}
+.welcome-span,.mypage-span{
+  margin-right: 30px;
+  /* background-color: #7f0000; */
+}
+.mypage-span,.logout-span{
+  cursor:pointer;
+  /* background-color: #7f0000; */
+}
+.login-box span{
+  color: #54555a;
 }
 
 .hambergur{
   visibility: hidden;
 }
 .search-area{
-  margin: 0 auto;
+  margin: 80px auto 10px;
   background-color: beige;
   width:260px;
   height:40px;
@@ -120,8 +152,8 @@ a{
   visibility: visible;
   height:70px;
   width:60px;
-  position: absolute;
-  display:flex;
+  /* position: absolute; */
+  display:none;
   align-items: center;
   background-color: transparent;
   visibility: hidden;
@@ -147,6 +179,7 @@ a{
   top:80px;
   height:40px;
   width:100%;
+  min-width: 330px;
   background-color: #7f0000;
   z-index: 999;
   transition: 0.2s;
@@ -193,7 +226,9 @@ a{
     display: none;
   }
   .header>.search{
+    flex-wrap: nowrap;
     background-color: brown;
+    /* background-color: #54555a; */
     margin-top: 0px;
     height:82px;
     width:100vw;
@@ -201,17 +236,22 @@ a{
     position: relative;
     justify-content: space-between;
   }
-
+  .login-box{
+    display: none;
+  }
   .search>.hambergur{
     visibility: visible;
+    display: flex;
+    align-items: flex-end;
   }
   
   .search-area{
     border-radius: 32px;
     height:35px;
     width:220px;
-    margin-top: 3px;
-    margin-left: 84px;
+    /* margin-top: 24px;
+    margin-left: 84px; */
+    margin:24px auto 0;
     background-color: beige;
   }
   .search-area input{
@@ -222,10 +262,14 @@ a{
   .search-btn>img{
     width:16px;
   }
+  .loggedin-box{
+    display: none;
+  }
   .mobile-home{
     width:80px;
     padding-top: 10px;
     height:33px;
+    margin-top: 20px;
     /* background-color: aqua; */
     color:white;
     font-size: 18px;

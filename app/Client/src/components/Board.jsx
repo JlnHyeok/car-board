@@ -24,8 +24,8 @@ export default function Board({
   // const [minDistance, setMinDistance] = useState(minDis)
   // const [maxDistance, setMaxDistance] = useState(maxDis)
 
+  // 모바일 화면때 페이지 전환시 스크롤 위로 초기화
   useEffect(() => {
-    // 모바일 화면때 페이지 전환시 스크롤 위로 초기화
     rightDownRef.current.scrollTop=0
   },[pageNum])
 
@@ -180,7 +180,7 @@ export default function Board({
   }
 
   const clickDeleteBtn = async(target) => {
-    console.log(target)
+    // console.log(target)
     let confirmDelete = window.confirm('삭제하시겠습니까?')
     if(confirmDelete){
       await axios.delete(process.env.REACT_APP_API_URL+'/delete', {data:{id:target.id}})
@@ -188,7 +188,7 @@ export default function Board({
       return
     }
   }
-  if(postList === undefined){
+  if(postList.length === 0){
     return (<div>Loading..</div>)
   }
   return ( 

@@ -9,44 +9,13 @@ import SellPage from './components/SellPage';
 import Review from './components/Review';
 import searchSort from './hooks&functions/searchSort';
 import DetailCar from './components/DetailCar';
-
+import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
-  // const [users, setUsers] = useState(null)
-  // const [loading, setLoading] = useState(false)
-  // const [error, setError] = useState(null)
-
-  // const fetchUsers = async() => {
-  //   try{
-  //     setError(null)
-  //     setUsers(null)
-  //     setLoading(true)
-  //     const response = await axios.get('/selectAll')
-  //     setUsers(response.data)
-  //   }
-  //   catch(e){
-  //     setError(e)
-  //   }
-  //   setLoading(false)
-  // }
-
-  // useEffect(() => {
-  //   fetchUsers()
-  // },[])
-
-  // if(loading){
-  //   return <div>로딩중..</div>
-  // }
-  // if(error){
-  //   return <div>에러 발생</div>
-  // }
-  // if(!users){
-  //   return null
-  // } 로딩, 에러하는동안 화면 표시 방지
 
   const postPerPage = 12
   const currentPageNum = 1
-
   const [carInfo, setCarInfo] = useState([])
   const [pageNum , setPageNum] = useState(currentPageNum)
   const [isSearch, setIsSearch] = useState(false)
@@ -54,13 +23,16 @@ function App() {
   const [easySearchSort, setEasySearchSort] = useState({
     maker:[],dis:[null,null],price:[null,null],year:[null,null]})
   const [isAdmin, setIsAdmin] = useState(false)  
-  
+  const [id, setId] = useState('')
+  const [pw, setPw] = useState('')
+  // 모달 보여주기
+  const [isShowModal, setIsShowModal] = useState(false)
   // 홈화면 추천 인덱스 생성
   // console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
   },[])
-  
+  console.log(process.env.REACT_APP_API_URL)
   // 한 페이지에 띄울 인덱스 추출
   const firstIndex = (pageNum-1)*postPerPage
   const lastIndex = firstIndex + postPerPage
@@ -109,10 +81,10 @@ function App() {
   let [postList, newPostList] = searchSort(easySearchSort,carInfo,firstIndex,lastIndex,isSearch,searchValue)
   
 
-  if(carInfo[0] === undefined){
+  if(carInfo.length === 0){
     console.log('로딩중')
     return (
-      <div>Loading..</div>
+      <div style={{margin:'0 auto',fontSize:'1.3rem',width:'100%',textAlign:'center'}}>Loading..</div>
     )
   }
   
@@ -127,6 +99,7 @@ function App() {
         setCarInfo={setCarInfo}
         setIsAdmin={setIsAdmin}
         isAdmin={isAdmin}
+        id={id}
         />
         <Routes>
           <Route path='/' element={<Home randInt={randInt} carInfo={carInfo}/>}/>
@@ -141,6 +114,8 @@ function App() {
             <Route path='/buy/:id' element={<DetailCar/>}/>
             <Route path='/sell' element={<SellPage/>}/>
             <Route path='/review' element={<Review/>}/>
+            <Route path='/login' element={<Login id={id} setId={setId} pw={pw} setPw={setPw} isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
+            <Route path='/register' element={<Register isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
         </Routes>
       </div>
     </BrowserRouter>
