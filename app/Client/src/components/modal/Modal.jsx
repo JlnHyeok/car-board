@@ -21,7 +21,6 @@ export default function Modal({isShowModal,isSellModal,isShowFindId,isShowFindPw
     e.preventDefault()
     const body = {name : findId}
     const response = await axios.post('/findId', body)
-    console.log(response.data)
     if(response.data.success){
       setIsFindId(true)
       setFindedId(response.data.data.map((data)=>({id:data.id,date:data.date})))
@@ -46,7 +45,7 @@ export default function Modal({isShowModal,isSellModal,isShowFindId,isShowFindPw
   const clickChangePw = async(e) => {
     e.preventDefault()
     if(!changePw) return alert('비밀번호를 입력해주세요')
-    if(changePw !== changePwConfirm) return alert('비밀번호가 다릅니다.')
+    if(changePw !== changePwConfirm) return console.log('비밀번호가 다릅니다.')
     const body = {pw:changePw}
     const response = await axios.put('/changePw',body)
     if(response.data.success){

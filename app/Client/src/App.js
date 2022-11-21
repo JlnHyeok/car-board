@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
   },[])
-  console.log(process.env.REACT_APP_API_URL)
+  
   // 한 페이지에 띄울 인덱스 추출
   const firstIndex = (pageNum-1)*postPerPage
   const lastIndex = firstIndex + postPerPage

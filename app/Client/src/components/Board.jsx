@@ -180,7 +180,7 @@ export default function Board({
   }
 
   const clickDeleteBtn = async(target) => {
-    // console.log(target)
+    console.log(target)
     let confirmDelete = window.confirm('삭제하시겠습니까?')
     if(confirmDelete){
       await axios.delete(process.env.REACT_APP_API_URL+'/delete', {data:{id:target.id}})

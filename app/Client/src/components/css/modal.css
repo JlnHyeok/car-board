@@ -72,22 +72,19 @@
 }
 .find-id-result-wrap{
   /* background-color: brown; */
-  width:100%;
   height: 280px;
 }
 .find-id-input-result-title{
   /* background-color: #b70f28; */
   width:100%;
-  margin:0 auto;
   display: flex;
   justify-content: space-around;
-  /* border-bottom: 1px solid gray; */
+  border-bottom: 1px solid gray;
   box-sizing: border-box;
 }
 .find-id-input-result-title span{
   /* background-color: aliceblue; */
   width:40%;
-  border-bottom: 1px solid gray;
 }
 .find-id-input-result{
   display:flex;
@@ -105,8 +102,7 @@
 }
 .find-id-input-result-box{
   width:100%;
-  height: 30px;
-  /* background-color: aqua; */
+  height: 100%;
   display:flex;
 }
 .find-id-input-form>input:focus{
