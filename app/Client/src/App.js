@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
   },[])
-  
+
   // 한 페이지에 띄울 인덱스 추출
   const firstIndex = (pageNum-1)*postPerPage
   const lastIndex = firstIndex + postPerPage
@@ -112,7 +112,7 @@ function App() {
             />}
             />
             <Route path='/buy/:id' element={<DetailCar/>}/>
-            <Route path='/sell' element={<SellPage/>}/>
+            <Route path='/sell' element={<SellPage setCarInfo={setCarInfo}/>}/>
             <Route path='/review' element={<Review/>}/>
             <Route path='/login' element={<Login id={id} setId={setId} pw={pw} setPw={setPw} isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
             <Route path='/register' element={<Register isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>

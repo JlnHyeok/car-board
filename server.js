@@ -130,8 +130,9 @@ app.post('/register', (req,res) => {
   let {id, pw, name} = req.body
   pw = bcrypt.hashSync(pw,saltRounds)
   const selectSql = 'select * from member where id = ?'
-  const registerSql = 'insert into member (id,pw,name) values (?,?,?)'
-  const registerInfo = [id , pw , name]
+  const registerSql = 'insert into member (id,pw,name,date) values (?,?,?,?)'
+  const today = new Date(new Date().setHours(new Date().getDate()+9)) // 현재시간
+  const registerInfo = [id , pw , name, today]
   db.query(selectSql,id, (err,row) => {
     if(row.length === 0){
       db.query(registerSql, registerInfo, (err, data) => {
@@ -212,11 +213,11 @@ app.post('/insertCar',upload.single('file'), (req,res) => {
   db.query(sql,[maker,model,year,distance,price,imgUrl], (err,data) => {
     if(!err){
       console.log('입력 완료')
-      res.send(req.file.filename)
+      res.json({success:true})
     }
     else{
       console.log(err)
-      res.send()
+      res.json({success:false,msg:'서버에 오류가 생겼습니다.'})
     }
   })
 })

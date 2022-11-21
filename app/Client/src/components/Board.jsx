@@ -188,7 +188,7 @@ export default function Board({
       return
     }
   }
-  if(postList.length === 0){
+  if(postList.length === undefined){
     return (<div>Loading..</div>)
   }
   return ( 

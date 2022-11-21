@@ -4,7 +4,7 @@ import './css/sellpage.css'
 import Portal from './modal/Portal'
 import Modal from './modal/Modal';
 
-export default function SellPage() {
+export default function SellPage({setCarInfo}) {
   const inputInfo = useRef([])
   const [img, setImg] = useState('')
   const [imgSrc, setImgSrc] = useState()
@@ -57,6 +57,7 @@ export default function SellPage() {
         setImgSrc('')
         setIsSellModal(true)
         const response = await axios.post(process.env.REACT_APP_API_URL+'/insertCar', formData)
+        axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
         if(response.data.success){
           setIsSellModal(false)
           alert('등록 완료!')

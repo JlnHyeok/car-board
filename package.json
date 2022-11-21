@@ -7,8 +7,12 @@
     "server": "nodemon server.js",
     "client": "cd app && cd Client &&  npm start",
     "dev": "concurrently \"npm run server \" \"npm run client\"",
-    "heroku-postbuild": "cd app && cd Client && npm install --only==dev && npm run build"
+    "heroku-postbuild": "cd app && cd Client && npm install --only==dev && npm run build",
+    "preinstall": "npx npm-force-resolutions"
   },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+  },  
   "engines": {
     "node": "16.17.1",
     "npm": "8.15.0"

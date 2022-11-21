@@ -22,6 +22,7 @@ export default function Modal({isShowModal,isSellModal,isShowFindId,isShowFindPw
     const body = {name : findId}
     const response = await axios.post('/findId', body)
     console.log(response.data)
+    
     if(response.data.success){
       setIsFindId(true)
       setFindedId(response.data.data.map((data)=>({id:data.id,date:data.date})))

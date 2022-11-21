@@ -12,18 +12,10 @@ export default function Header({
 
   // 슬라이드 바 이동
   const firstPageSlideBar = () => {
-    // console.log(location.pathname)
-    switch(location.pathname){
-      case '/' : handleSlideBar()
-        break;
-      case '/sell' : handleSlideBar(0)
-        break;
-      case '/buy' : handleSlideBar(1)
-        break;
-      case '/review' : handleSlideBar(2)
-        break;
-      default:
-    }
+    if(location.pathname === '/') return handleSlideBar()
+    if(location.pathname === '/sell') return handleSlideBar(0)
+    if(location.pathname.includes('buy')) return handleSlideBar(1)
+    if(location.pathname.includes('review')) return handleSlideBar(2)
   }
    // 메뉴 언더바
   const handleSlideBar = (i) => {
@@ -47,7 +39,6 @@ export default function Header({
     setEasySearchSort({
       maker:[],dis:[null,null],price:[null,null],year:[null,null]})
     setIsSearch('')
-    axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
   }
   
   // 모바일 버전 nav 숨기기

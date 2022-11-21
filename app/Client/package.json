@@ -25,12 +25,16 @@
     "node": "16.17.1",
     "npm": "8.15.0"
   },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+  },
   "proxy": "http://localhost:5000",
   "scripts": {
     "start": "react-scripts start",
     "start:dev": "nodemon --watch src/server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "preinstall": "npx npm-force-resolutions",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

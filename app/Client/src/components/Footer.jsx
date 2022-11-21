@@ -3,7 +3,7 @@ import './css/footer.css'
 
 export default function Footer({buttonLen,pageNum,setPageNum}) {
   const btnArr = []
-  const [pageNumLength, setPageNumLength] = useState(10)
+  const [pageNumLength, setPageNumLength] = useState(5)
   let i = 1;
   while(i<=buttonLen){
     btnArr.push(i)
@@ -35,7 +35,7 @@ export default function Footer({buttonLen,pageNum,setPageNum}) {
   useEffect(() => {
     window.scrollTo({top:0,left: 0,behavior:'smooth'})
     // window 의 너비값 변경 감지
-    window.innerWidth < 540 ? setPageNumLength(3) : setPageNumLength(10)
+    window.innerWidth < 540 ? setPageNumLength(3) : setPageNumLength(5)
   },[pageNum])
 
   return (
