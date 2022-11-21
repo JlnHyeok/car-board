@@ -91,7 +91,6 @@ app.get('/selectWhere/:id',(req,res) => {
 })
 app.post('/login',(req,res) => {
   let {id, pw} = req.body
-  console.log(req.body)
   const sql = 'select id,pw from member where id = ?'
   try{
     db.query(sql , id , (err,row) => {
@@ -105,7 +104,6 @@ app.post('/login',(req,res) => {
             maxAge:3600*1000,
           })
           req.session.user = {id:id, pw:pw}
-          console.log(req.session.user)
           return res.json({success:true})
         }
         else{
@@ -133,19 +131,24 @@ app.post('/register', (req,res) => {
   const today = new Date(new Date().setHours(new Date().getDate()+9)) // 현재시간
   const registerInfo = [id , pw , name, today]
   db.query(selectSql,id, (err,row) => {
-    if(row.length === 0){
-      db.query(registerSql, registerInfo, (err, data) => {
-        if(!err){
-          res.json({success:true})
-        }
-        else{
-          console.log(err)
-          res.json({success:false, msg:'올바른 정보를 입력해주세요.'})
-        }
-      })
+    if(!err){
+      if(row.length === 0){
+        db.query(registerSql, registerInfo, (err, data) => {
+          if(!err){
+            res.json({success:true})
+          }
+          else{
+            console.log(err)
+            res.json({success:false, msg:'올바른 정보를 입력해주세요.'})
+          }
+        })
+      }
+      else{
+        res.json({success:false, msg:'아이디가 이미 존재합니다.'})
+      }
     }
     else{
-      res.json({success:false, msg:'아이디가 이미 존재합니다.'})
+      res.json({success:false, msg:'서버 오류가 발생하였습니다.'})
     }
   })
 })
