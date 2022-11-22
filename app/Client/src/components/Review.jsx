@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import './css/review.css'
 import { Link, useNavigate } from 'react-router-dom';
-import Footer from './Footer';
+import FooterReview from './FooterReview';
 
 export default function Review() {
   const nav = useNavigate()
@@ -15,10 +15,19 @@ export default function Review() {
   if(!reviewList){
     return <div>lodaing</div>
   }
-  
+  const clickReviewTitle = async(idx) => {
+    const response = await axios.get(`/reviewClick/${idx}`)
+    if(!response.data.success) return alert(response.data.msg)
+  }
+
   const clickWriteBtn = async() => {
     const response = await axios.get('/check-auth')
     if(response.data.success) return nav('/review/write')
+    else if(sessionStorage.getItem('userId') && !response.data.success){
+      sessionStorage.clear()
+      alert('세션이 만료되었습니다.')
+      window.location.reload()
+    }
     else{
       alert(response.data.msg)
       nav('/login')
@@ -42,7 +51,7 @@ export default function Review() {
           </div>
         </div>
         <div className='review-box'>
-          <div className='review-list'>
+          <div className='review-list review-list-title'>
             <span>No</span>
             <span>카테고리</span>
             <span>제목</span>
@@ -51,11 +60,13 @@ export default function Review() {
             <span>조회</span>
           </div>
           {postList.map((data,idx)=>(
-            <div key={idx} className="review-list">
+            <div key={idx} className="review-list review-post">
               <span>{data.idx}</span>
-              <span>{data.type}</span>
+              <span style={{border:data.type === '공지사항' ? 'none' : 'none'}}>{data.type}</span>
               <span style={{justifyContent:'flex-start',paddingLeft:10}}>
-              <Link to={`/review/${data.idx}`}>{data.title}</Link>
+                <Link to={`/review/${data.idx}`} onClick={()=>clickReviewTitle(data.idx)}>
+                  {data.title}
+                </Link>
               </span>
               <span>{data.writer}</span>
               <span>{data.date.slice(2,10)}</span>
@@ -63,7 +74,7 @@ export default function Review() {
             </div>
           ))}
         </div>
-        <Footer buttonLen={buttonLen} pageNum={pageNum} setPageNum={setPageNum}/>
+        <FooterReview buttonLen={buttonLen} pageNum={pageNum} setPageNum={setPageNum}/>
       </div>
   )
 }

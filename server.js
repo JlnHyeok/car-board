@@ -116,12 +116,44 @@ app.get('/review',(req,res) => {
     }
   })
 })
+app.get('/reviewClick/:idx',(req,res) => {
+  const sql = 'select count from review_info where idx = ?'
+  const {idx} = req.params
+  // console.log(idx)
+  // res.json({success:true})
+  if(!req.cookies[`clicked${idx}`]){
+    res.cookie(`clicked${idx}`,'clicked',{
+      maxAge:3600*1000
+    })
+    db.query(sql,[idx],(err,row) => {
+      if(!err){
+        const countAdd = `update review_info set count = ${row[0].count+1} where idx = ?`
+        db.query(countAdd,[idx],(err,row) => {
+          if(!err){
+            res.json({success:true, msg:'조회 추가 성공'})
+          }
+          else{
+            console.log(err)
+            res.json({success:false, msg:'서버에 문제가 발생하였습니다'})
+          }
+        })
+      }
+      else{
+        console.log(err)
+        res.json({success:false, msg:'서버에 문제가 발생하였습니다.'})
+      }
+    })
+  }
+  else{
+    res.json({success:success, msg:'아직 대기시간입니다.'})
+  }
+})
 app.get('/check-auth',(req,res) => {
   if(req.session.user){
     res.json({success:true})
   }
   else{
-    res.json({success:false, msg:'회원가입이 필요합니다.'})
+    res.json({success:false, msg:'회원 전용 입니다.'})
   }
 })
 app.get('/logout',(req,res) => {

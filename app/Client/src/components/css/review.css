@@ -2,27 +2,27 @@
   width:100%;
   min-width: 780px;
   height:80vh;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 .review-header{
   width:90%;
   /* min-width: 780px; */
   margin:0 auto;
   position: relative;
-  background-color: chartreuse;
+  /* background-color: chartreuse; */
   height:60px;
   display:flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 .total-review-count{
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   display:flex;
   align-items: center;
   height:40px;
 }
 .review-write-btn{
-  background-color: rgb(255, 166, 0);
+  /* background-color: rgb(255, 166, 0); */
   display:flex;
   align-items: center;
   height:40px;
@@ -31,15 +31,15 @@
 .review-box{
   width:100%;
   /* min-width: 780px; */
-  height:65vh;
-  background-color: bisque;
+  height:70vh;
+  /* background-color: bisque; */
   /* margin-top: 40px; */
 }
 .review-list{
   width:90%;
   height:30px;
-  background-color: blue;
-  margin:0 auto;
+  /* background-color: blue; */
+  margin:0 auto 2px;
   display:flex;
   justify-content: space-around;
 }
@@ -53,27 +53,28 @@
   border-bottom: 0.2px solid rgba(128, 128, 128, 0.26);
 }
 .review-list>span:first-child{
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
   width:5%;
   min-width: 40px;
 }
 .review-list>span:nth-child(2){
-  background-color: brown;
+  /* background-color: brown; */
+  border-radius: 9px;
   width: 80px;
 }
 .review-list>span:nth-child(3){
-  background-color: yellow;
+  /* background-color: yellow; */
   width:65%;
 }
 .review-list>span:nth-child(4){
-  background-color: violet;
+  /* background-color: violet; */
   width:120px;
 }
 .review-list>span:nth-child(5){
-  background-color: tomato;
+  /* background-color: tomato; */
   width:100px;
 }
 .review-list>span:nth-child(6){
-  background-color: teal;
+  /* background-color: teal; */
   width:50px;
 }
