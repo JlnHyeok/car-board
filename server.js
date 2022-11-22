@@ -102,6 +102,7 @@ app.post('/login',(req,res) => {
         if(bcrypt.compareSync(pw, row[0].pw)){
           res.cookie('userid',id,{
             maxAge:3600*1000,
+            sameSite:"Lax"
           })
           req.session.user = {id:id, pw:pw}
           return res.json({success:true})
@@ -118,6 +119,7 @@ app.post('/login',(req,res) => {
 })
 
 app.get('/logout',(req,res) => {
+  console.log(req.session)
   delete req.session.user
   res.clearCookie('userid')
   res.json({success:true})
@@ -210,9 +212,12 @@ app.put('/changePw',(req,res) => {
 app.post('/insertCar',upload.single('file'), (req,res) => {
   console.log(req.body)
   console.log(req.file)
+  console.log(req.session)
   const [maker,model,year,distance,price] = [...req.body.text]
+  // const writer = req.session.user.id
+  console.log(req.session)
   const imgUrl =  req.file.location
-  const sql = 'insert into cars (car_maker,car_name,car_model_year,distance,car_price,car_image) values (?,?,?,?,?,?)'
+  const sql = 'insert into cars (car_maker,car_name,car_model_year,distance,car_price,car_image,writer) values (?,?,?,?,?,?)'
   db.query(sql,[maker,model,year,distance,price,imgUrl], (err,data) => {
     if(!err){
       console.log('입력 완료')

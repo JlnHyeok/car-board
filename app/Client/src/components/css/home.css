@@ -41,7 +41,7 @@
   cursor:pointer;
 }
 .slide-btn-next:hover , .slide-btn-prev:hover{
-  color: #b70f28;
+  color: #e61332;
 }
 .slide-btn-next{
   position:absolute;
