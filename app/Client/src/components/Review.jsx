@@ -9,7 +9,7 @@ export default function Review() {
   const [reviewList, setReviewList] = useState(null)
   const [pageNum, setPageNum] = useState(1)
   useEffect(() => {
-    axios.get('/review').then((data)=>(setReviewList(data.data)))
+    axios.get('/reviewlist').then((data)=>(setReviewList(data.data)))
   },[])
   
   const clickReviewTitle = async(idx) => {

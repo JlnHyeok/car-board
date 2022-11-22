@@ -105,7 +105,7 @@ app.get('/selectWhere/:id',(req,res) => {
     }
   })
 })
-app.get('/review',(req,res) => {
+app.get('/reviewlist',(req,res) => {
   const sql = 'select * from review_info order by date desc'
   db.query(sql,(err,data) => {
     if(!err){
