@@ -4,7 +4,10 @@ const app = express()
 const path = require('path')
 const PORT = process.env.PORT || 5000;
 const cors = require('cors')
-app.use(cors())
+app.use(cors({
+  origin:['http://localhost:3000','http://localhost:5000','https://car-board-practice.herokuapp.com'],
+  credentials:true,
+}))
 const multer = require('multer')  
 const multerS3 = require('multer-s3')
 const aws = require('aws-sdk')
@@ -45,10 +48,23 @@ const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
 const session = require('express-session')
+const mySqlStore = require('express-mysql-session')(session)
+const options = {
+  host : process.env.HOST,
+  user : process.env.USER,
+  password : process.env.PW,
+  port : 3306,
+  database: process.env.DATABASE,
+}
 app.use(session({
   secret:'node-session',
   resave:false,
-  saveUninitialized:false
+  saveUninitialized:false,
+  rolling:true,
+  store:new mySqlStore(options),
+  cookie:{
+    maxAge:3600*1000
+  }
 }))
 
 // 암호화 모듈
@@ -89,41 +105,65 @@ app.get('/selectWhere/:id',(req,res) => {
     }
   })
 })
-app.post('/login',(req,res) => {
-  let {id, pw} = req.body
-  const sql = 'select id,pw from member where id = ?'
-  try{
-    db.query(sql , id , (err,row) => {
-      if(err) throw(err)
-      if(row.length === 0){
-        return res.json({success:false, msg:'등록되지 않은 아이디입니다.'})
-      }
-      else{
-        if(bcrypt.compareSync(pw, row[0].pw)){
-          res.cookie('userid',id,{
-            maxAge:3600*1000,
-            sameSite:"Lax"
-          })
-          req.session.user = {id:id, pw:pw}
-          return res.json({success:true})
-        }
-        else{
-          return res.json({success:false, msg:'비밀번호가 일치하지 않습니다.'})
-        }
-      }
-    })
-  }catch(err){
-    console.log(err)
-    res.json({success:false, msg: '올바른 정보를 입력해주세요.'})
+app.get('/review',(req,res) => {
+  const sql = 'select * from review_info order by date desc'
+  db.query(sql,(err,data) => {
+    if(!err){
+      res.send(data)
+    }
+    else{
+      console.log(err)
+    }
+  })
+})
+app.get('/check-auth',(req,res) => {
+  if(req.session.user){
+    res.json({success:true})
+  }
+  else{
+    res.json({success:false, msg:'회원가입이 필요합니다.'})
   }
 })
-
 app.get('/logout',(req,res) => {
-  console.log(req.session)
-  delete req.session.user
+  console.log(req.session.user.id)
+  req.session.destroy()
   res.clearCookie('userid')
   res.json({success:true})
 })
+
+app.post("/login", (req, res) => {
+  let { id, pw } = req.body;
+  const sql = "select id,pw from member where id = ?";
+  db.query(sql, id, (err, row) => {
+    if (!err) {
+      if (row.length === 0) {
+        return res.json({ success: false, msg: "등록되지 않은 아이디입니다." });
+      } else {
+        if (bcrypt.compareSync(pw, row[0].pw)) {
+          res.cookie("userid", id, {
+            maxAge: 3600 * 1000,
+            sameSite: 'None',
+            secure:true
+          });
+          req.session.user = { id: id, pw: pw };
+          req.session.save()
+          res.json({ success: true });
+        } else {
+          return res.json({
+            success: false,
+            msg: "비밀번호가 일치하지 않습니다.",
+          });
+        }
+      }
+    } else {
+      console.log(err);
+      res.json({ success: false, msg: "서버에 오류가 발생하였습니다." });
+    }
+  });
+  
+});
+
+
 
 app.post('/register', (req,res) => {
   let {id, pw, name} = req.body
@@ -210,15 +250,14 @@ app.put('/changePw',(req,res) => {
   })
 })
 app.post('/insertCar',upload.single('file'), (req,res) => {
+  const id = req.session.user.id
   console.log(req.body)
   console.log(req.file)
-  console.log(req.session)
   const [maker,model,year,distance,price] = [...req.body.text]
   // const writer = req.session.user.id
-  console.log(req.session)
   const imgUrl =  req.file.location
-  const sql = 'insert into cars (car_maker,car_name,car_model_year,distance,car_price,car_image,writer) values (?,?,?,?,?,?)'
-  db.query(sql,[maker,model,year,distance,price,imgUrl], (err,data) => {
+  const sql = 'insert into cars (car_maker,car_name,car_model_year,distance,car_price,car_image,writer) values (?,?,?,?,?,?,?)'
+  db.query(sql,[maker,model,year,distance,price,imgUrl,id], (err,data) => {
     if(!err){
       console.log('입력 완료')
       res.json({success:true})

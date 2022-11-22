@@ -30,7 +30,7 @@ a{
   position: relative;
 }
 .logo img{
-  left:63%;
+  margin:0 auto;
   transform: translateX(-50%);
   bottom:0;
   position: absolute;

@@ -11,6 +11,8 @@ import searchSort from './hooks&functions/searchSort';
 import DetailCar from './components/DetailCar';
 import Login from './components/Login';
 import Register from './components/Register';
+import ReviewDetail from './components/ReviewDetail';
+import ReviewWrite from './components/ReviewWrite';
 
 function App() {
 
@@ -115,6 +117,8 @@ function App() {
             <Route path='/review' element={<Review/>}/>
             <Route path='/login' element={<Login id={id} setId={setId} pw={pw} setPw={setPw} isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
             <Route path='/register' element={<Register isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
+            <Route path='/review/:id' element={<ReviewDetail/>}/>
+            <Route path='/review/write' element={<ReviewWrite/>}/>
         </Routes>
       </div>
     </BrowserRouter>
