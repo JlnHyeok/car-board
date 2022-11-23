@@ -13,17 +13,15 @@ export default function Header({
   // 슬라이드 바 이동
   const firstPageSlideBar = () => {
     if(location.pathname === '/') return handleSlideBar()
-    if(location.pathname === '/sell') return handleSlideBar(0)
-    if(location.pathname.includes('buy')) return handleSlideBar(1)
-    if(location.pathname.includes('review')) return handleSlideBar(2)
+    else if(location.pathname === '/sell') return handleSlideBar(0)
+    else if(location.pathname.includes('buy')) return handleSlideBar(1)
+    else if(location.pathname.includes('review')) return handleSlideBar(2)
+    handleSlideBar()
   }
    // 메뉴 언더바
   const handleSlideBar = (i) => {
     divBarRef.current.forEach((current,idx)=>{
-      // console.log(current)
-      // console.log(idx)
       if(i===idx){
-        // console.log(current)
         current.style.width = '100%'
       }
       else{
@@ -124,9 +122,9 @@ export default function Header({
         <div className="search">
           {
           sessionStorage.getItem('userId') ? 
-          <div className='loggedin-box'>
+          <div className='loggedin-box' ref={(el)=>divBarRef.current[3]=el}>
             <span className='welcome-span'>{sessionStorage.getItem('userId')}님</span>
-            <span className='mypage-span'>마이페이지</span>
+            <span className='mypage-span'><Link to='/mypage'>마이페이지</Link></span>
             <span className='logout-span'onClick={clickLogOut}>로그아웃</span>
           </div> : 
           <div className='login-box'>

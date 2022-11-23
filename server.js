@@ -1,5 +1,5 @@
 const express = require('express')
-
+const dayjs = require('dayjs')
 const app = express()
 const path = require('path')
 const PORT = process.env.PORT || 5000;
@@ -105,7 +105,8 @@ app.get('/selectWhere/:id',(req,res) => {
     }
   })
 })
-app.get('/reviewlist',(req,res) => {
+app.get('/reviewList',(req,res) => {
+  if(!req.cookies.visited) res.cookie('visited', [], {maxAge:3600*1000})
   const sql = 'select * from review_info order by date desc'
   db.query(sql,(err,data) => {
     if(!err){
@@ -116,13 +117,11 @@ app.get('/reviewlist',(req,res) => {
     }
   })
 })
-app.get('/reviewClick/:idx',(req,res) => {
+app.get('/reviewClick/:idx', (req,res) => {
   const sql = 'select count from review_info where idx = ?'
   const {idx} = req.params
-  // console.log(idx)
-  // res.json({success:true})
-  if(!req.cookies[`clicked${idx}`]){
-    res.cookie(`clicked${idx}`,'clicked',{
+  if(!req.cookies.visited.includes(idx)){
+    res.cookie(`visited`,[...req.cookies.visited,idx],{
       maxAge:3600*1000
     })
     db.query(sql,[idx],(err,row) => {
@@ -145,9 +144,10 @@ app.get('/reviewClick/:idx',(req,res) => {
     })
   }
   else{
-    res.json({success:success, msg:'아직 대기시간입니다.'})
+    res.json({success:true, msg:'아직 대기시간입니다.'})
   }
 })
+
 app.get('/check-auth',(req,res) => {
   if(req.session.user){
     res.json({success:true})
@@ -175,7 +175,7 @@ app.post("/login", (req, res) => {
           res.cookie("userid", id, {
             maxAge: 3600 * 1000,
             sameSite: 'None',
-            secure:true
+            secure:true,
           });
           req.session.user = { id: id, pw: pw };
           req.session.save()
@@ -202,7 +202,7 @@ app.post('/register', (req,res) => {
   pw = bcrypt.hashSync(pw,saltRounds)
   const selectSql = 'select * from member where id = ?'
   const registerSql = 'insert into member (id,pw,name,date) values (?,?,?,?)'
-  const today = new Date(new Date().setHours(new Date().getDate()+9)) // 현재시간
+  const today = dayjs().format('YYYY-MM-DD HH:mm:ss') // 현재시간
   const registerInfo = [id , pw , name, today]
   db.query(selectSql,id, (err,row) => {
     if(!err){
@@ -300,6 +300,23 @@ app.post('/insertCar',upload.single('file'), (req,res) => {
     }
   })
 })
+app.post('/reviewWrite', (req,res) => {
+  const writer = req.session.user.id
+  const date = dayjs().format('YYYY-MM-DD HH:mm:ss')
+  const {category,title,content} = req.body
+  const review_info = [writer,title,content,category,date]
+  const sql = 'insert into review_info (writer,title,content,category,date) values (?,?,?,?,?)'
+  db.query(sql,review_info,(err,data) => {
+    if(!err){
+      res.json({success:true, msg:'등록되었습니다.'})
+    }
+    else{
+      console.log(err)
+      res.json({success:false, msg:'에러가 발생했습니다.'})
+    }
+  })
+})
+
 
 app.delete('/delete',(req,res) => {
   console.log(req.body)

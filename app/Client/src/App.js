@@ -13,6 +13,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import ReviewDetail from './components/ReviewDetail';
 import ReviewWrite from './components/ReviewWrite';
+import Mypage from './components/Mypage';
 
 function App() {
 
@@ -33,6 +34,14 @@ function App() {
   // console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
+    if(sessionStorage.getItem('userId')){
+      axios.get('/check-auth').then((res)=>{
+        if(!res.data.success){
+          sessionStorage.clear()
+          alert('세션이 만료되었습니다.')
+        }
+      })
+    }
   },[])
 
   // 한 페이지에 띄울 인덱스 추출
@@ -82,8 +91,9 @@ function App() {
   // newPostList : 전체 정보중에서 선택한 조건들을 골라서 추출 후 postList 에 전달
   let [postList, newPostList] = searchSort(easySearchSort,carInfo,firstIndex,lastIndex,isSearch,searchValue)
   
+  console.log()
 
-  if(carInfo.length === 0){
+  if(!carInfo){
     return (
       <div style={{margin:'0 auto',fontSize:'1.3rem',width:'100%',textAlign:'center'}}>Loading..</div>
     )
@@ -119,6 +129,7 @@ function App() {
             <Route path='/register' element={<Register isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
             <Route path='/review/:id' element={<ReviewDetail/>}/>
             <Route path='/review/write' element={<ReviewWrite/>}/>
+            <Route path='/mypage' element={<Mypage/>}/>
         </Routes>
       </div>
     </BrowserRouter>

@@ -10,11 +10,16 @@
   margin:0 auto;
   position: relative;
   /* background-color: chartreuse; */
-  height:60px;
+  height:40px;
   display:flex;
   justify-content: space-between;
   align-items: flex-end;
 }
+.review-header div{
+  /* background-color: aquamarine; */
+  height:25px;
+  margin:0 10px;
+} 
 .total-review-count{
   /* background-color: aquamarine; */
   display:flex;
@@ -42,6 +47,10 @@
   margin:0 auto 2px;
   display:flex;
   justify-content: space-around;
+}
+.review-list-title{
+  font-weight: bold;
+  background-color: rgba(220, 220, 220, 0.445);
 }
 .review-list span{
   display:flex;
@@ -77,4 +86,7 @@
 .review-list>span:nth-child(6){
   /* background-color: teal; */
   width:50px;
+}
+.review-post a:hover{
+  font-weight: bold;
 }

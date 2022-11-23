@@ -18,7 +18,6 @@ export default function DetailCar() {
   
   useEffect(() => {
     axios.get(process.env.REACT_APP_API_URL+`/selectWhere/${id}`).then((result)=>(setDetailCar(result.data)))
-    console.log(1)
   },[id])
 
   if(!detailCar[0]){

@@ -1,0 +1,111 @@
+.review-write-wrap{
+  background-color: aquamarine;
+  width:100%;
+  min-width: 780px;
+  height:80vh;
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+.review-write-wrap .write{
+  /* background-color: salmon; */
+  margin:0 auto;
+  width:90%;
+  height:50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.315);
+}
+.review-write-form-box{
+  background-color: bisque;
+  width:100%;
+  min-width: 780px;
+  /* height:100%; */
+  margin: 0 auto;  
+}
+.review-write-form{
+  /* background-color: thistle; */
+  height:100%;
+}
+.review-write-title{
+  position:relative;
+  margin:0 auto;
+  height:40px;
+  background-color: cadetblue;
+  width:90%;
+  display: flex;
+  justify-content: center;
+}
+.review-write-category{
+  /* background-color: brown; */
+  width:80px;
+  position:absolute;
+  height:40px;
+  left:0;
+  font-size: 1rem;
+}
+.review-write-category>ul{
+  /* background-color: aqua; */
+  border:1px solid black;
+  width:80px;
+  min-height:40px;
+  transition:.2s;
+  cursor:pointer;
+  background-color: white;
+  box-sizing: border-box;
+}
+.category-clicked{
+  height:160px;
+}
+.category-selected{
+  height:40px;
+}
+.review-write-category>ul>li{
+  height:40px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.review-write-category>ul>li:hover{
+  background-color: antiquewhite;
+}
+.review-write-title input{
+  box-sizing: border-box;
+  padding:2px 10px 0;
+  display: block;
+  margin-left: 80px;
+  height:40px;
+  width:100%;
+  font-size: 1rem;
+  /* border: 1px solid black; */
+}
+.review-write-title input:focus{
+  outline:none;
+}
+.review-write-form button{
+  width:80px;
+  
+  border: none;
+  border-radius: 12px;
+  height:30px;
+  background-color: #b70f28;
+  color:white;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.review-write-content{
+  margin-top: 10px;
+  width:90%;
+  height:300px;
+  font-size: 1.1rem;
+  resize: none;
+  padding:20px 20px;
+  box-sizing: border-box;
+}
+.review-write-content:focus{
+  outline: none;
+}
