@@ -33,7 +33,7 @@ function App() {
   // 홈화면 추천 인덱스 생성
   // console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
-    axios.get(process.env.REACT_APP_API_URL+'/selectAll').then((result)=>{setCarInfo(result.data)})
+    axios.get('/selectAll').then((result)=>{setCarInfo(result.data)})
     if(sessionStorage.getItem('userId')){
       axios.get('/check-auth').then((res)=>{
         if(!res.data.success){

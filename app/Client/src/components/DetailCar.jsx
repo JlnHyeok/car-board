@@ -17,7 +17,7 @@ export default function DetailCar() {
   const [period, setPeriod] = useState(36)
   
   useEffect(() => {
-    axios.get(process.env.REACT_APP_API_URL+`/selectWhere/${id}`).then((result)=>(setDetailCar(result.data)))
+    axios.get(`/selectWhere/${id}`).then((result)=>(setDetailCar(result.data)))
   },[id])
 
   if(!detailCar[0]){
