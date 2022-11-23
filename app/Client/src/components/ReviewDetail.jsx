@@ -18,7 +18,7 @@ export default function ReviewDetail() {
         <div className='review-detail-writer-info'>
           <div className='review-detail-writer'>
             <span>{reviewInfo.writer}</span>
-            <span>{reviewInfo.date.slice(0,16)}</span>
+            <span>{reviewInfo.date.slice(0,19)}</span>
           </div>
           <div className='review-detail-time'>
             <span>조회 {reviewInfo.count}</span>
@@ -27,8 +27,23 @@ export default function ReviewDetail() {
       </header>
       <textarea className='review-detail-content' disabled={true} value={reviewInfo.content}></textarea>
       <footer className='comment-wrap'>
-        <div className='comment'>
-          댓글창
+            전체 댓글 박스
+        <div className='comment-box'>
+          <div className='comment'>
+            <span>댓글1</span>
+          </div>
+          <div className='comment'>
+            <span>댓글1</span>
+          </div>
+          <div className='comment'>
+            <span>댓글1</span>
+          </div>
+          <div className='comment'>
+            <span>댓글1</span>
+          </div>
+        </div>
+        <div className='make-comment'>
+          댓글 달기 창
         </div>
       </footer>
     </div>

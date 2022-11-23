@@ -40,14 +40,16 @@ export default function Review() {
   if(!reviewList){
     return <div>lodaing</div>
   }
+  const postPerPage = 15
   const notiList = reviewList.filter((data)=>(data.category==='공지사항'))
-  const newReviewList = reviewList.filter((data)=>(data.category!=='공지사항'))
   const notiLength = notiList.length
-
-  const postPerPage = 15 - notiLength
+  const normalReviewList = reviewList.filter((data)=>(data.category!=='공지사항'))
+  
   const totalPostLen = reviewList.length
-  const buttonLen = Math.ceil(totalPostLen / postPerPage) 
-  const postList = newReviewList.slice((pageNum-1)*postPerPage, pageNum * postPerPage)
+  const buttonLen = Math.ceil(totalPostLen / postPerPage)
+  const postListwithNoti = [...notiList,...normalReviewList.slice(0,postPerPage-notiLength)] 
+  const postList = normalReviewList.slice((postPerPage-notiLength)+(pageNum-2)* postPerPage, (postPerPage-notiLength)+(pageNum - 1)* postPerPage)
+  
 
   return (
     <div className='review-wrap'>
@@ -70,8 +72,8 @@ export default function Review() {
           <span>작성일</span>
           <span>조회</span>
         </div>
-        {pageNum === 1 &&
-        notiList.map((data,idx)=>(
+        {pageNum === 1 ?
+        postListwithNoti.map((data,idx)=>(
           <div key={idx} className="review-list review-post">
             <span>{totalPostLen-idx}</span>
             <span style={{color:data.category === '공지사항' ? 'red' : data.category === '후기' ? 'green' : 'black'}}>{data.category}</span>
@@ -84,12 +86,12 @@ export default function Review() {
             <span>{data.date.slice(2,10)}</span>
             <span>{data.count}</span>
           </div>
-        ))}
-        {postList.map((data,idx)=>(
+        )) :
+        postList.map((data,idx)=>(
           <div key={idx} className="review-list review-post">
-            <span>{totalPostLen - (pageNum-1)*postPerPage - idx - notiLength}</span>
-            <span style={{color:data.category === '공지사항' ? 'red' : data.category === '후기' ? 'green' : 'black'}}>{data.category}</span>
-            <span style={{justifyContent:'flex-start',paddingLeft:10}}>
+          <span>{totalPostLen - (pageNum-1)*postPerPage - idx}</span>
+          <span style={{color:data.category === '공지사항' ? 'red' : data.category === '후기' ? 'green' : 'black'}}>{data.category}</span>
+          <span style={{justifyContent:'flex-start',paddingLeft:10}}>
               <Link to={`/review/${data.idx}`} state={{reviewInfo : data}} onClick={()=>clickReviewTitle(data.idx)}>
                 {data.title}
               </Link>
@@ -97,8 +99,9 @@ export default function Review() {
             <span>{data.writer}</span>
             <span>{data.date.slice(2,10)}</span>
             <span>{data.count}</span>
-          </div>
-        ))}
+            </div>
+            ))
+          }
       </div>
       <FooterReview buttonLen={buttonLen} pageNum={pageNum} setPageNum={setPageNum}/>
     </div>

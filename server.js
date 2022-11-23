@@ -1,5 +1,10 @@
 const express = require('express')
 const dayjs = require('dayjs')
+const utc = require('dayjs/plugin/utc')
+const timezone = require('dayjs/plugin/timezone')
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
 const app = express()
 const path = require('path')
 const PORT = process.env.PORT || 5000;
@@ -202,7 +207,7 @@ app.post('/register', (req,res) => {
   pw = bcrypt.hashSync(pw,saltRounds)
   const selectSql = 'select * from member where id = ?'
   const registerSql = 'insert into member (id,pw,name,date) values (?,?,?,?)'
-  const today = dayjs().format('YYYY-MM-DD HH:mm:ss') // 현재시간
+  const today = dayjs().tz('Asia/seoul').format('YYYY-MM-DD HH:mm:ss') // 현재시간
   const registerInfo = [id , pw , name, today]
   db.query(selectSql,id, (err,row) => {
     if(!err){
@@ -302,7 +307,7 @@ app.post('/insertCar',upload.single('file'), (req,res) => {
 })
 app.post('/reviewWrite', (req,res) => {
   const writer = req.session.user.id
-  const date = dayjs().format('YYYY-MM-DD HH:mm:ss')
+  const date = dayjs().tz('Asia/seoul').format('YYYY-MM-DD HH:mm:ss')
   const {category,title,content} = req.body
   const review_info = [writer,title,content,category,date]
   const sql = 'insert into review_info (writer,title,content,category,date) values (?,?,?,?,?)'
