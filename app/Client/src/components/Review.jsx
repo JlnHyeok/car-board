@@ -73,7 +73,7 @@ export default function Review() {
         {pageNum === 1 &&
         notiList.map((data,idx)=>(
           <div key={idx} className="review-list review-post">
-            <span>{idx+1}</span>
+            <span>{totalPostLen-idx}</span>
             <span style={{color:data.category === '공지사항' ? 'red' : data.category === '후기' ? 'green' : 'black'}}>{data.category}</span>
             <span style={{justifyContent:'flex-start',paddingLeft:10}}>
               <Link to={`/review/${data.idx}`} state={{reviewInfo : data}} onClick={()=>clickReviewTitle(data.idx)}>
@@ -87,7 +87,7 @@ export default function Review() {
         ))}
         {postList.map((data,idx)=>(
           <div key={idx} className="review-list review-post">
-            <span>{idx+notiLength+1+postPerPage*(pageNum-1)}</span>
+            <span>{totalPostLen - (pageNum-1)*postPerPage - idx - notiLength}</span>
             <span style={{color:data.category === '공지사항' ? 'red' : data.category === '후기' ? 'green' : 'black'}}>{data.category}</span>
             <span style={{justifyContent:'flex-start',paddingLeft:10}}>
               <Link to={`/review/${data.idx}`} state={{reviewInfo : data}} onClick={()=>clickReviewTitle(data.idx)}>

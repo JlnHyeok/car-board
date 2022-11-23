@@ -2,11 +2,14 @@ import axios from 'axios'
 import React, { useRef, useState } from 'react'
 import './css/review-write.css'
 import { useNavigate } from 'react-router-dom';
+import Portal from './modal/Portal';
+import Modal from './modal/Modal';
 
 export default function ReviewWrite() {
   const category = useRef()
   const reviewContentRef = useRef()
   const categoryRef = useRef([])
+  const [isWriteLoading, setIsWriteLoading] = useState(false)
   const [selectCategory, setSelectCategory] = useState('카테고리')
   const [reviewTitle, setReviewTitle] = useState('')
   const [writeCount, setWriteCount] = useState('')
@@ -17,7 +20,6 @@ export default function ReviewWrite() {
   }
 
   const clickCategory = () => {
-    
     category.current.classList.contains('category-clicked') ? 
     category.current.className = 'category-selected' :
     category.current.className = 'category-clicked'
@@ -40,18 +42,25 @@ export default function ReviewWrite() {
     if(selectCategory === '카테고리') return alert('카테고리를 선택해주세요.')
     if(!reviewTitle) return alert('제목을 입력해주세요.')
     if(!reviewContentRef.current.value) return alert('내용을 입력해주세요.')
+    if(writeCount.length>1000) return alert('1000자를 초과했습니다.')
     const body = {category:selectCategory, title:reviewTitle, content:reviewContentRef.current.value}
+    setIsWriteLoading(true)
     const response = await axios.post('/reviewWrite',body)
     if(response.data.success){
       alert(response.data.msg)
-      nav('/review')
-      return 
+      nav('/review') 
     }
     else alert(response.data.msg)
+    setIsWriteLoading(true)
   }
 
   return (
     <div className='review-write-wrap'>
+      {isWriteLoading &&
+        <Portal>
+          <Modal isWriteLoading={isWriteLoading} />
+        </Portal>
+      }
       <div className='review-write-form-box'>
         <form className='review-write-form' onSubmit={submitReview}>
           <div className='write'>
@@ -70,10 +79,10 @@ export default function ReviewWrite() {
             <input type="text" placeholder='제목을 입력해주세요.' onChange={(e)=>setReviewTitle(e.target.value)}/>
           </div>
           <div className='write-count'>
-            1/1000
+            <span>{writeCount.length}/1000</span>
           </div>
           <div>
-            <textarea className='review-write-content' placeholder='내용을 입력해주세요.' cols="30" rows="10" ref={reviewContentRef}></textarea>
+            <textarea className='review-write-content' placeholder='내용을 입력해주세요.' cols="30" rows="10" ref={reviewContentRef} onChange={(e)=>setWriteCount(e.target.value)}></textarea>
           </div>
         </form>
       </div>
