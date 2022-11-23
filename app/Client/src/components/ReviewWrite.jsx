@@ -12,6 +12,9 @@ export default function ReviewWrite() {
   const [writeCount, setWriteCount] = useState('')
 
   const nav = useNavigate()
+  if(!sessionStorage.getItem('userId')){
+    nav('/login')
+  }
 
   const clickCategory = () => {
     

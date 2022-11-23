@@ -124,9 +124,9 @@ function App() {
             />
             <Route path='/buy/:id' element={<DetailCar/>}/>
             <Route path='/sell' element={<SellPage setCarInfo={setCarInfo}/>}/>
-            <Route path='/review' element={<Review/>}/>
             <Route path='/login' element={<Login id={id} setId={setId} pw={pw} setPw={setPw} isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
             <Route path='/register' element={<Register isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
+            <Route path='/review' element={<Review/>}/>
             <Route path='/review/:id' element={<ReviewDetail/>}/>
             <Route path='/review/write' element={<ReviewWrite/>}/>
             <Route path='/mypage' element={<Mypage/>}/>

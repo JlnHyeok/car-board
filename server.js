@@ -153,7 +153,7 @@ app.get('/check-auth',(req,res) => {
     res.json({success:true})
   }
   else{
-    res.json({success:false, msg:'회원 전용 입니다.'})
+    res.json({success:false, msg:'회원 전용 입니다. 로그인페이지로 이동하시겠습니까?'})
   }
 })
 app.get('/logout',(req,res) => {

@@ -11,6 +11,7 @@ export default function Review() {
   const [reviewList, setReviewList] = useState(null)
   const [pageNum, setPageNum] = useState(1)
   const [isReviewLoading, setIsReviewLoading] = useState(false)
+
   useEffect(() => {
     axios.get('/reviewList').then((data)=>(setReviewList(data.data)))
   },[])
@@ -30,10 +31,10 @@ export default function Review() {
       window.location.reload()
     }
     else{
-      alert(response.data.msg)
-      console.log(response)
+      const move = window.confirm(response.data.msg)
+      if(move) nav('/login')
     }
-    setIsReviewLoading(true)
+    setIsReviewLoading(false)
   }
   
   if(!reviewList){
@@ -69,9 +70,10 @@ export default function Review() {
           <span>작성일</span>
           <span>조회</span>
         </div>
-        {notiList.map((data,idx)=>(
+        {pageNum === 1 &&
+        notiList.map((data,idx)=>(
           <div key={idx} className="review-list review-post">
-            <span>{idx+1+postPerPage*(pageNum-1)}</span>
+            <span>{idx+1}</span>
             <span style={{color:data.category === '공지사항' ? 'red' : data.category === '후기' ? 'green' : 'black'}}>{data.category}</span>
             <span style={{justifyContent:'flex-start',paddingLeft:10}}>
               <Link to={`/review/${data.idx}`} state={{reviewInfo : data}} onClick={()=>clickReviewTitle(data.idx)}>
