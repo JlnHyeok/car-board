@@ -221,7 +221,7 @@ export default function DetailCar() {
             <span>{car.car_name}</span>
             <div className='right-info'>
               <span>{car.car_model_year.slice(2,4)}년 {car.car_model_year.slice(5,7)}월식</span><span>·</span>
-              <span>{car.distance}km</span>
+              <span>{car.distance.toLocaleString('ko-KR')}km</span>
             </div>
             <div className='right-expected-price'>
               <h5>고객님의 총 구매 예상 비용</h5>

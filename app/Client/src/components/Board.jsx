@@ -293,7 +293,7 @@ export default function Board({
                 <div className="car-info">
                   <span>{data.car_maker +' '}{data.car_name}</span>
                   <span style={{fontWeight:'bold'}}>{data.car_price.toLocaleString('ko-KR')}만원</span>
-                  <span style={{fontSize:13,color:'#54555a'}}>{data.car_model_year.slice(2,4)}년 {data.car_model_year.slice(5)}월식 · {data.distance.toLocaleString('ko-KR')}km</span>
+                  <span style={{fontSize:13,color:'#54555a'}}>{data.car_model_year.slice(2,4)}년 {data.car_model_year.slice(5,7)}월식 · {data.distance.toLocaleString('ko-KR')}km</span>
                 </div>
                 <div className='delete-btn' onClick={()=>clickDeleteBtn(data)}
                 style={{opacity:isAdmin?1:0, visibility:isAdmin?'visible':'hidden',}}>
