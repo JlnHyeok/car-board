@@ -191,7 +191,16 @@ app.get('/logout',(req,res) => {
   res.clearCookie('userid')
   res.json({success:true})
 })
-
+// app.get('/comment',(req,res) => {
+//   db.query('select * from review_comment',(err,data) => {
+//     if(!err){
+//       res.send(data)
+//     }
+//     else{
+//       console.log(err)
+//     }
+//   })
+// })
 app.get('/comment/:postIdx',(req,res) => {
   const {postIdx} = req.params
   const sql = 'select * from review_comment where post_idx = ?'
@@ -376,6 +385,7 @@ app.post('/reviewWrite', (req,res) => {
     }
   })
 })
+
 app.post('/reviewWriteComment',(req,res) => {
   const {writer,pw,comment,postIdx} = req.body
   const today = dayjs().tz('Asia/seoul').format('YYYY-MM-DD HH:MM:ss')
@@ -383,7 +393,7 @@ app.post('/reviewWriteComment',(req,res) => {
   const sql = 'insert into review_comment (writer,pw,comment,date,post_idx) values (?,?,?,?,?)'
   db.query(sql,commentInfo,(err,data) => {
     if(!err){
-      res.json({success:true, msg:'댓글이 등록되었습니다.'})
+      res.json({success:true, msg:'댓글이 등록되었습니다.', info:{writer:writer,pw:pw,comment:comment,date:today,post_idx:postIdx}})
     }
     else{
       res.json({success:false,msg:'서버에 오류가 생겼습니다.'})
@@ -391,6 +401,20 @@ app.post('/reviewWriteComment',(req,res) => {
   })
 })
 
+app.delete('/delComment',(req,res) => {
+  console.log(req.body)
+  const {date} = req.body
+  const sql = 'delete from review_comment where date = ?'
+  db.query(sql,date,(err,data) => {
+    if(!err){
+      res.json({success:true, msg:'삭제되었습니다.'})
+    }
+    else{
+      console.log(err)
+      res.json({success:false, msg:'서버에 오류가 발생했습니다.'})
+    }
+  })
+})
 
 app.delete('/delete',(req,res) => {
   console.log(req.body)

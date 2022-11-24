@@ -97,7 +97,6 @@ export default function Header({
         <div className="nav">
           <Link to='/sell'>
             <div className='nav-list' ref={navListRef}
-            // onClick={()=>handleSlideBar(0)}
             >
             판매 등록
               <div ref={(el)=>divBarRef.current[0]=el}></div>
@@ -112,7 +111,6 @@ export default function Header({
           </Link>
           <Link to='review'>
             <div className='nav-list'
-            // onClick={()=>handleSlideBar(2)}
             >
             게시판
             <div ref={(el)=>divBarRef.current[2]=el}></div>

@@ -68,7 +68,7 @@ export default function Home({randInt,carInfo}) {
     }
   },[nextSlide])
 
-  if(todayCarList === undefined){
+  if(!todayCarList){
     return (
     <div>Loading..</div>
     )
@@ -104,7 +104,7 @@ export default function Home({randInt,carInfo}) {
           오늘의 추천
         </div>
         <div className='home-car-list-wrap'>
-          {todayCarList === undefined ?<div>Loading</div> : todayCarList.map((cars)=>(
+          {!todayCarList ? <div>Loading</div> : todayCarList.map((cars)=>(
             <div key={cars.id} className='pick-car-list'>
               <div className='pick-car-img-box'>
                 <Link to={`/buy/${cars.id}`}><img src={cars.car_image} alt="car" onClick={()=>window.scrollTo({top:0,left:0,behavior:'smooth'})}/></Link>

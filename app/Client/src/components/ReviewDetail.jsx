@@ -16,8 +16,8 @@ export default function ReviewDetail() {
   const [reviewList,setReviewList] = useState(null)
   
   useEffect(() => {
-    axios.get(`/comment/${id}`).then((comment)=>setCommentList(comment.data))
     axios.get(`/reviewList/${id}`).then((data)=>(setReviewList(data.data)))
+    axios.get(`/comment/${id}`).then((comment)=>setCommentList(comment.data))
   },[id])
   
   if(!location.state && !reviewList){
@@ -26,9 +26,12 @@ export default function ReviewDetail() {
 
   const reviewInfo = location.state ? location.state.reviewInfo : reviewList[0]
   
+  console.log(reviewList, commentList)
+
   const clickEditBtn = async() => {
     nav(`/review/edit/${id}`, {state:{title:reviewInfo.title, content:reviewInfo.content}})
   }
+
   const clickDelBtn = async() => {
     const confirm = window.confirm('삭제하시겠습니까?')
     if(!confirm) return
@@ -42,7 +45,8 @@ export default function ReviewDetail() {
     else alert(response.data.msg)
     setIsCommentLoading(false)
   }
-
+  
+  // 글쓰기 누를떄
   const clickWriteBtn = async() => {
     setIsCommentLoading(true)
     const response = await axios.get('/check-auth')
@@ -59,6 +63,7 @@ export default function ReviewDetail() {
     setIsCommentLoading(false)
   }
   
+  // 댓글달 때
   const submitComment = async(e) => {
     e.preventDefault()
     const writer = commentInputRef.current[0].value
@@ -72,15 +77,32 @@ export default function ReviewDetail() {
     const body = {writer:writer, pw:pw, comment:comment, postIdx: postIdx}
     setIsCommentLoading(true)
     const response = await axios.post('/reviewWriteComment', body)
-    axios.get(`/comment/${reviewInfo.idx}`).then((comment)=>setCommentList(comment.data))
+    setIsCommentLoading(false)
     if(response.data.success){
-      alert(response.data.msg)
+      console.log(response.data.info)
+      setCommentList([...commentList,response.data.info])
+      commentInputRef.current[1].value = ''
+      commentInputRef.current[2].value = ''
     }
     else alert(response.data.msg)
-    setIsCommentLoading(false)
-    commentInputRef.current[1].value = ''
-    commentInputRef.current[2].value = ''
   }
+  
+  // 추가할때 넣어준 date의 값으로 받아와서 삭제 진행
+  const clickDelComment = async(comment) => {
+    const selComment = commentList.filter((data)=>(data.date === comment.date))
+    const checkPw = window.prompt('비밀번호를 입력하세요.')
+    if(!checkPw) return
+    if(checkPw !== selComment[0].pw) return alert('비밀번호가 다릅니다.')
+    setIsCommentLoading(true)
+    const body = {date : comment.date}
+    const response = await axios.delete(`/delComment`,{data:body})
+    setIsCommentLoading(false)
+    if(response.data.success){
+      setCommentList(commentList.filter((data)=>(data.date !== comment.date)))
+    }
+    else alert(response.data.msg)
+  }
+
   return (
     <div className='review-detail-wrap'>
       {isCommentLoading &&
@@ -125,19 +147,19 @@ export default function ReviewDetail() {
       <footer className='comment-wrap'>
         <div className='comment-header'>
           <span>전체 댓글</span>
-          <span>{reviewInfo.comment}</span>
+          <span>{commentList ? commentList.length : '??'}</span>
           <span>개</span>
         </div>
         <div className='comment-box'>
           {commentList ?
-            commentList.map((commentInfo,idx)=>(
+            commentList.map((commentInfo,idx)=>(              
               <div key={idx} className="comment-list">
                 <span>{commentInfo.writer}</span>
                 <span>{commentInfo.comment}</span>
                 <span>{commentInfo.date}</span>
-                <span>x</span>
-              </div>
-            ))
+                <span onClick={()=>clickDelComment(commentInfo)}>x</span>
+              </div>              
+            ))              
           :
           <div>Loading...</div>}
         </div>

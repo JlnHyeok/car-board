@@ -38,7 +38,7 @@ export default function Review() {
   }
   
   if(!reviewList){
-    return <div>lodaing</div>
+    return <div>Loading</div>
   }
   const postPerPage = 15
   const notiList = reviewList.filter((data)=>(data.category==='공지사항'))
