@@ -1,22 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './css/review-detail.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Portal from './modal/Portal';
 import Modal from './modal/Modal';
 
 export default function ReviewDetail() {
   const location = useLocation()
-  const {reviewInfo} = location.state
-
+  const {id} = useParams()
+  
   const commentInputRef = useRef([])
   const [isCommentLoading, setIsCommentLoading] = useState(false)
   const [commentList, setCommentList] = useState(null)
-
-  useEffect(() => {
-    axios.get(`/comment/${reviewInfo.idx}`).then((comment)=>setCommentList(comment.data))
-  },[reviewInfo.idx])
+  const [reviewList,setReviewList] = useState(null)
   
+  useEffect(() => {
+    axios.get(`/comment/${id}`).then((comment)=>setCommentList(comment.data))
+    axios.get(`/reviewList/${id}`).then((data)=>(setReviewList(data.data)))
+  },[id])
+  
+  if(!reviewList){
+    return <div>Loading....</div>
+  }
+  
+  const reviewInfo = location.state ? location.state.reviewInfo : reviewList[0]
 
   const submitComment = async(e) => {
     e.preventDefault()
@@ -77,6 +84,7 @@ export default function ReviewDetail() {
                 <span>{commentInfo.writer}</span>
                 <span>{commentInfo.comment}</span>
                 <span>{commentInfo.date}</span>
+                <span>x</span>
               </div>
             ))
           :

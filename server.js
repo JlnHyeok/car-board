@@ -112,10 +112,30 @@ app.get('/selectWhere/:id',(req,res) => {
 })
 app.get('/reviewList',(req,res) => {
   if(!req.cookies.visited) res.cookie('visited', [], {maxAge:3600*1000})
-  const sql = 'select re.idx as idx, re.writer as writer, title,content, re.date as date,count, category, count(co.idx) as comment from review_info as re left join review_comment as co on re.idx = co.post_idx group by(re.idx) order by date desc'
+  const sql = 
+  'select re.idx as idx, re.writer as writer, title,content, re.date as date,count, category, count(co.idx) as comment'+
+  ' from review_info as re left join review_comment as co'+
+  ' on re.idx = co.post_idx group by(re.idx)'+
+  ' order by date desc'
   db.query(sql,(err,data) => {
     if(!err){
-      console.log(data)
+      res.send(data)
+    }
+    else{
+      console.log(err)
+    }
+  })
+})
+app.get('/reviewList/:id',(req,res) => {
+  const {id} = req.params
+  const sql = 
+  'select re.idx as idx, re.writer as writer, title,content, re.date as date,count, category, count(co.idx) as comment'+
+  ' from review_info as re left join review_comment as co'+
+  ` on re.idx = co.post_idx where re.idx = ${id}`+
+  ' group by(re.idx)'+
+  ' order by date desc'
+  db.query(sql,(err,data) => {
+    if(!err){
       res.send(data)
     }
     else{

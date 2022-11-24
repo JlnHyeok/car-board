@@ -77,7 +77,7 @@ export default function Header({
           <span onClick={()=>setIsMenuHide(!isMenuHide)}>차 구매</span>
         </Link>
         <Link to='/review'>
-          <span onClick={()=>setIsMenuHide(!isMenuHide)}>후기</span>
+          <span onClick={()=>setIsMenuHide(!isMenuHide)}>게시판</span>
         </Link>
       </div>
       
@@ -114,7 +114,7 @@ export default function Header({
             <div className='nav-list'
             // onClick={()=>handleSlideBar(2)}
             >
-            후기
+            게시판
             <div ref={(el)=>divBarRef.current[2]=el}></div>
             </div>
           </Link>

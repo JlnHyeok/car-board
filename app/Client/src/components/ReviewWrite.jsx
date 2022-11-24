@@ -17,7 +17,7 @@ export default function ReviewWrite() {
 
   const nav = useNavigate()
   if(!sessionStorage.getItem('userId')){
-    nav('/login')
+    window.location.href = ('/login')
   }
 
   const clickCategory = () => {

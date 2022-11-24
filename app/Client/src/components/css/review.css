@@ -44,11 +44,10 @@
   transform: scale(1.05);
 }
 .review-box{
+  /* background-color: bisque; */
   width:100%;
   /* min-width: 780px; */
-  height:68vh;
-  /* background-color: bisque; */
-  /* margin-top: 40px; */
+  height:500px;
 }
 .review-list{
   width:90%;
@@ -62,7 +61,7 @@
   font-weight: bold;
   background-color: rgba(220, 220, 220, 0.445);
 }
-.review-list span{
+.review-list>span{
   display:flex;
   justify-content: center;
   overflow: hidden;
@@ -91,6 +90,7 @@
   margin-left: 10px;
   font-size: .9rem;
   opacity: .9;
+  margin-bottom: 2px;
 }
 .review-list>span:nth-child(3)>a{
   /* background-color: aquamarine; */

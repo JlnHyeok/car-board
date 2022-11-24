@@ -96,6 +96,7 @@ export default function Review() {
               <Link to={`/review/${data.idx}`} state={{reviewInfo : data}} onClick={()=>clickReviewTitle(data.idx)}>
                 {data.title}
               </Link>
+              <span className='review-list-comment-count'>[{data.comment}]</span>
             </span>
             <span>{data.writer}</span>
             <span>{data.date.slice(2,10)}</span>
