@@ -125,6 +125,7 @@ app.get('/reviewList',(req,res) => {
 app.get('/reviewClick/:idx', (req,res) => {
   const sql = 'select count from review_info where idx = ?'
   const {idx} = req.params
+  if(!req.cookies.visited) res.cookie('visited', [], {maxAge:3600*1000})
   if(!req.cookies.visited.includes(idx)){
     res.cookie(`visited`,[...req.cookies.visited,idx],{
       maxAge:3600*1000
@@ -167,6 +168,19 @@ app.get('/logout',(req,res) => {
   res.clearCookie('userid')
   res.json({success:true})
 })
+app.get('/comment/:postIdx',(req,res) => {
+  const {postIdx} = req.params
+  const sql = 'select * from review_comment where post_idx = ?'
+  db.query(sql,postIdx,(err,row) => {
+    if(!err){
+      res.send(row)
+    }
+    else{
+      console.log(err)
+    }
+  })
+})
+
 
 app.post("/login", (req, res) => {
   let { id, pw } = req.body;
@@ -318,6 +332,20 @@ app.post('/reviewWrite', (req,res) => {
     else{
       console.log(err)
       res.json({success:false, msg:'에러가 발생했습니다.'})
+    }
+  })
+})
+app.post('/reviewWriteComment',(req,res) => {
+  const {writer,pw,comment,postIdx} = req.body
+  const today = dayjs().tz('Asia/seoul').format('YYYY-MM-DD HH:MM:ss')
+  const commentInfo = [writer,pw,comment,today,postIdx]
+  const sql = 'insert into review_comment (writer,pw,comment,date,post_idx) values (?,?,?,?,?)'
+  db.query(sql,commentInfo,(err,data) => {
+    if(!err){
+      res.json({success:true, msg:'댓글이 등록되었습니다.'})
+    }
+    else{
+      res.json({success:false,msg:'서버에 오류가 생겼습니다.'})
     }
   })
 })
