@@ -122,6 +122,7 @@ app.get('/reviewList',(req,res) => {
     }
   })
 })
+
 app.get('/reviewClick/:idx', (req,res) => {
   const sql = 'select count from review_info where idx = ?'
   const {idx} = req.params
@@ -162,12 +163,14 @@ app.get('/check-auth',(req,res) => {
     res.json({success:false, msg:'회원 전용 입니다. 로그인페이지로 이동하시겠습니까?'})
   }
 })
+
 app.get('/logout',(req,res) => {
   console.log(req.session.user.id)
   req.session.destroy()
   res.clearCookie('userid')
   res.json({success:true})
 })
+
 app.get('/comment/:postIdx',(req,res) => {
   const {postIdx} = req.params
   const sql = 'select * from review_comment where post_idx = ?'
@@ -177,6 +180,7 @@ app.get('/comment/:postIdx',(req,res) => {
     }
     else{
       console.log(err)
+      res.end()
     }
   })
 })

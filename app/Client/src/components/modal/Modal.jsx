@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import '.././css/modal.css'
 
-export default function Modal({isShowModal,isSellModal,isShowFindId,isShowFindPw,setIsShowFindId,setIsShowFindPw,isReviewLoading,isWriteLoading}) {
+export default function Modal({isShowModal,isSellModal,isShowFindId,isShowFindPw,setIsShowFindId,setIsShowFindPw,isReviewLoading,isWriteLoading,isCommentLoading}) {
 
   const [isFindId, setIsFindId] = useState(false)
   const [isFindPw, setIsFindPw] = useState(false)
@@ -60,8 +60,8 @@ export default function Modal({isShowModal,isSellModal,isShowFindId,isShowFindPw
     }
   }
   return (
-    <div className='modal-wrap' style={{height:isSellModal ? 1175 : '100vh'}}>
-      {(isReviewLoading || isWriteLoading) &&
+    <div className='modal-wrap'>
+      {(isReviewLoading || isWriteLoading || isCommentLoading) &&
         <div className="register-loading">
           <span>로딩중..</span>
         </div>

@@ -2,11 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import './css/review-detail.css'
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Portal from './modal/Portal';
+import Modal from './modal/Modal';
 
 export default function ReviewDetail() {
   const location = useLocation()
   const {reviewInfo} = location.state
   const commentInputRef = useRef([])
+  const [isCommentLoading, setIsCommentLoading] = useState(false)
   const [commentList, setCommentList] = useState(null)
 
   useEffect(() => {
@@ -21,21 +24,27 @@ export default function ReviewDetail() {
     const comment = commentInputRef.current[2].value
     const postIdx = reviewInfo.idx
     if(!writer) return alert('닉네임을 입력해주세요.')
+    if(writer.length > 15) return alert('닉네임은 15자까지 가능합니다.')
     if(!pw) return alert('비밀번호를 입력해주세요.')
     if(!comment) return alert('내용을 입력해주세요.')
-    console.log(writer,pw,comment,postIdx)
     const body = {writer:writer, pw:pw, comment:comment, postIdx: postIdx}
+    setIsCommentLoading(true)
     const response = await axios.post('/reviewWriteComment', body)
+    axios.get(`/comment/${reviewInfo.idx}`).then((comment)=>setCommentList(comment.data))
     if(response.data.success){
       alert(response.data.msg)
     }
     else alert(response.data.msg)
+    setIsCommentLoading(false)
     commentInputRef.current[1].value = ''
     commentInputRef.current[2].value = ''
-    axios.get(`/comment/${reviewInfo.idx}`).then((comment)=>setCommentList(comment.data))
   }
   return (
     <div className='review-detail-wrap'>
+      {isCommentLoading &&
+        <Portal>
+          <Modal isCommentLoading={isCommentLoading}/>
+        </Portal>}
       <header className='review-detail-header'>
         <div className='review-detail-category'>
           <span>{reviewInfo.category}</span>
@@ -68,20 +77,7 @@ export default function ReviewDetail() {
               </div>
             ))
           :
-          <div>Loading...</div>
-          /* 
-          <div className='comment'>
-            <span>댓글1</span>
-          </div>
-          <div className='comment'>
-            <span>댓글1</span>
-          </div>
-          <div className='comment'>
-            <span>댓글1</span>
-          </div>
-          <div className='comment'>
-            <span>댓글1</span>
-          </div> */}
+          <div>Loading...</div>}
         </div>
         <form className='comment-submit-form' onSubmit={(e)=>(submitComment(e))}>
           <div className='make-comment'>
