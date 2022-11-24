@@ -84,6 +84,13 @@
   box-sizing: border-box;
   display: flex;
 }
+.comment-header>span:not(:nth-child(2)){
+  margin-right: 5px;
+}
+.comment-header>span:nth-child(2){
+  color: #b70f28;
+  font-weight: bold;
+}
 .comment-box{
   width:100%;
   box-sizing: border-box;  

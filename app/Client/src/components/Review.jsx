@@ -11,7 +11,7 @@ export default function Review() {
   const [reviewList, setReviewList] = useState(null)
   const [pageNum, setPageNum] = useState(1)
   const [isReviewLoading, setIsReviewLoading] = useState(false)
-
+  
   useEffect(() => {
     axios.get('/reviewList').then((data)=>(setReviewList(data.data)))
   },[])
@@ -81,6 +81,7 @@ export default function Review() {
               <Link to={`/review/${data.idx}`} state={{reviewInfo : data}} onClick={()=>clickReviewTitle(data.idx)}>
                 {data.title}
               </Link>
+              <span className='review-list-comment-count'>[{data.comment}]</span>
             </span>
             <span>{data.writer}</span>
             <span>{data.date.slice(2,10)}</span>

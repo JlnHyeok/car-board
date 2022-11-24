@@ -8,6 +8,7 @@ import Modal from './modal/Modal';
 export default function ReviewDetail() {
   const location = useLocation()
   const {reviewInfo} = location.state
+
   const commentInputRef = useRef([])
   const [isCommentLoading, setIsCommentLoading] = useState(false)
   const [commentList, setCommentList] = useState(null)
@@ -65,7 +66,9 @@ export default function ReviewDetail() {
       <textarea className='review-detail-content' disabled={true} value={reviewInfo.content}></textarea>
       <footer className='comment-wrap'>
         <div className='comment-header'>
-          전체 댓글 박스
+          <span>전체 댓글</span>
+          <span>{reviewInfo.comment}</span>
+          <span>개</span>
         </div>
         <div className='comment-box'>
           {commentList ?

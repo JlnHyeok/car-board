@@ -112,9 +112,10 @@ app.get('/selectWhere/:id',(req,res) => {
 })
 app.get('/reviewList',(req,res) => {
   if(!req.cookies.visited) res.cookie('visited', [], {maxAge:3600*1000})
-  const sql = 'select * from review_info order by date desc'
+  const sql = 'select re.idx as idx, re.writer as writer, title,content, re.date as date,count, category, count(co.idx) as comment from review_info as re left join review_comment as co on re.idx = co.post_idx group by(re.idx) order by date desc'
   db.query(sql,(err,data) => {
     if(!err){
+      console.log(data)
       res.send(data)
     }
     else{
@@ -184,7 +185,6 @@ app.get('/comment/:postIdx',(req,res) => {
     }
   })
 })
-
 
 app.post("/login", (req, res) => {
   let { id, pw } = req.body;
