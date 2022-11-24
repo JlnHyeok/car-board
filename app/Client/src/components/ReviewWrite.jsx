@@ -7,6 +7,7 @@ import Modal from './modal/Modal';
 
 export default function ReviewWrite() {
   const category = useRef()
+  const arrowRef = useRef()
   const reviewContentRef = useRef()
   const categoryRef = useRef([])
   const [isWriteLoading, setIsWriteLoading] = useState(false)
@@ -23,6 +24,9 @@ export default function ReviewWrite() {
     category.current.classList.contains('category-clicked') ? 
     category.current.className = 'category-selected' :
     category.current.className = 'category-clicked'
+    arrowRef.current.classList.contains('img-clicked') ?
+    arrowRef.current.className = 'img-selected' :
+    arrowRef.current.className = 'img-clicked'
   }
 
   const clickCategoryList = (e) => {
@@ -68,13 +72,14 @@ export default function ReviewWrite() {
           <button>작성</button>
           </div>
           <div className='review-write-title'>
-            <div className='review-write-category'>
-              <ul ref={category} onClick={clickCategory}>
+            <div className='review-write-category' onClick={clickCategory}>
+              <ul ref={category}>
                 <li ref={el=>categoryRef.current[0] = el} onClick={(e)=>clickCategoryList(e)}>카테고리</li>
                 <li ref={el=>categoryRef.current[1] = el} onClick={(e)=>clickCategoryList(e)}>공지사항</li>
                 <li ref={el=>categoryRef.current[2] = el} onClick={(e)=>clickCategoryList(e)}>일반</li>
                 <li ref={el=>categoryRef.current[3] = el} onClick={(e)=>clickCategoryList(e)}>후기</li>
               </ul>
+              <img className='img-selected' src="/img/arrow.svg" alt="화살표" ref={arrowRef} />
             </div>
             <input type="text" placeholder='제목을 입력해주세요.' onChange={(e)=>setReviewTitle(e.target.value)}/>
           </div>
