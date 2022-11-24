@@ -20,6 +20,34 @@
   font-weight: bold;
   text-align: left;
   height:50px;
+  display: flex;
+  justify-content: space-between;
+}
+.edit-review{
+  /* background-color: aquamarine; */
+  width:205px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.edit-review>span{
+  font-size: .9rem;
+  background-color: #b70f28;
+  color:white;
+  width:60px;
+  height:30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor:pointer;
+  transition: .2s;
+}
+.edit-review>span:hover{
+  transform:scale(1.03);
+}
+.edit-review>span:not(:last-child){
+  background-color: #54555ab2;
 }
 .review-detail-title{
   /* background-color: rgba(187, 8, 8, 0.464); */
@@ -103,9 +131,13 @@
   margin-top: 5px;
   align-items: center;
   border-bottom: 0.2px solid rgba(128, 128, 128, 0.233);
+  padding-bottom: 5px;
+  box-sizing: border-box;
 }
 .comment-list:first-child{
   border-top: 2px solid #b70f28;
+  padding-bottom: 0;
+  box-sizing: content-box;
 }
 .comment-list:last-child{
   margin-bottom: 5px;
@@ -221,4 +253,9 @@
   font-size: 0.9rem;
   border:none;
   color:white;
+  transition:.2s;
+  border-radius: 8px;
+}
+.comment-submit-button>button:hover{
+  transform:scale(1.03);
 }

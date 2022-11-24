@@ -128,7 +128,8 @@ function App() {
             <Route path='/register' element={<Register isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
             <Route path='/review' element={<Review/>}/>
             <Route path='/review/:id' element={<ReviewDetail/>}/>
-            <Route path='/review/write' element={<ReviewWrite/>}/>
+            <Route path='/review/write/' element={<ReviewWrite/>}/>
+            <Route path='/review/edit/:idx' element={<ReviewWrite/>}/>
             <Route path='/mypage' element={<Mypage/>}/>
         </Routes>
       </div>

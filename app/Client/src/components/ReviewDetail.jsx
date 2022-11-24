@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './css/review-detail.css'
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Portal from './modal/Portal';
 import Modal from './modal/Modal';
 
 export default function ReviewDetail() {
   const location = useLocation()
+  const nav = useNavigate()
   const {id} = useParams()
   
   const commentInputRef = useRef([])
@@ -19,12 +20,45 @@ export default function ReviewDetail() {
     axios.get(`/reviewList/${id}`).then((data)=>(setReviewList(data.data)))
   },[id])
   
-  if(!reviewList){
+  if(!location.state && !reviewList){
     return <div>Loading....</div>
   }
-  
-  const reviewInfo = location.state ? location.state.reviewInfo : reviewList[0]
 
+  const reviewInfo = location.state ? location.state.reviewInfo : reviewList[0]
+  
+  const clickEditBtn = async() => {
+    nav(`/review/edit/${id}`, {state:{title:reviewInfo.title, content:reviewInfo.content}})
+  }
+  const clickDelBtn = async() => {
+    const confirm = window.confirm('삭제하시겠습니까?')
+    if(!confirm) return
+    const body = {idx : id}
+    setIsCommentLoading(true)
+    const response = await axios.delete('/reviewList',{data:body})
+    if(response.data.success){
+      alert(response.data.msg)
+      nav('/review')
+    }
+    else alert(response.data.msg)
+    setIsCommentLoading(false)
+  }
+
+  const clickWriteBtn = async() => {
+    setIsCommentLoading(true)
+    const response = await axios.get('/check-auth')
+    if(response.data.success) nav('/review/write')
+    else if(sessionStorage.getItem('userId') && !response.data.success){
+      sessionStorage.clear()
+      alert('세션이 만료되었습니다.')
+      window.location.reload()
+    }
+    else{
+      const move = window.confirm(response.data.msg)
+      if(move) nav('/login')
+    }
+    setIsCommentLoading(false)
+  }
+  
   const submitComment = async(e) => {
     e.preventDefault()
     const writer = commentInputRef.current[0].value
@@ -55,10 +89,27 @@ export default function ReviewDetail() {
         </Portal>}
       <header className='review-detail-header'>
         <div className='review-detail-category'>
-          <span>{reviewInfo.category}</span>
+          <div className="header-category">
+            <span>{reviewInfo.category}</span>
+          </div>
+          <div className="edit-review">
+            <span onClick={clickEditBtn}
+              style={{
+                visibility:(sessionStorage.getItem('userId') === reviewInfo.writer) ? 'visible' : 'hidden'
+            }}>
+              수정
+            </span>
+            <span onClick={clickDelBtn} 
+              style={{
+                visibility:(sessionStorage.getItem('userId') === reviewInfo.writer) ? 'visible' : 'hidden'
+            }}>
+              삭제
+            </span>
+            <span onClick={clickWriteBtn}>글쓰기</span>
+          </div>
         </div>
         <div className='review-detail-title'>
-          <span>{reviewInfo.title}</span>  
+          <span>{reviewInfo.title}</span>
         </div>
         <div className='review-detail-writer-info'>
           <div className='review-detail-writer'>

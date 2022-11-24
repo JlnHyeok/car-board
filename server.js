@@ -324,6 +324,23 @@ app.put('/changePw',(req,res) => {
     })
   })
 })
+app.put('/reviewEdit',(req,res) => {
+  console.log(req.body)
+  const date = dayjs().tz('Asia/seoul').format('YYYY-MM-DD HH:mm:ss')
+  const {category,title,content,idx} = req.body
+  const review_info = [category,title,content,date,parseInt(idx)]
+  const sql = 'update review_info set category = ?, title = ?, content = ?, date = ? where idx = ?'
+  db.query(sql,review_info,(err,data) => {
+    if(!err){
+      res.json({success:true, msg:'수정이 완료되었습니다.'})
+    }
+    else{
+      console.log(err)
+      res.json({success:false, msg:'서버 오류가 발생했습니다.'})
+    }
+  })
+})
+
 app.post('/insertCar',upload.single('file'), (req,res) => {
   const id = req.session.user.id
   console.log(req.body)
@@ -387,6 +404,20 @@ app.delete('/delete',(req,res) => {
     }
   })
 })
+app.delete('/reviewList', (req,res) => {
+  const {idx} = req.body
+  const sql = `delete from review_info where idx = ?`
+  db.query(sql,idx,(err,data) => {
+    if(!err){
+      res.json({success:true, msg:'삭제되었습니다.'})
+    }
+    else{
+      console.log(err)
+      res.json({success:false, msg:'서버에 문제가 생겼습니다.'})
+    }
+  })
+})
+
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname,"app/Client/build","index.html"));

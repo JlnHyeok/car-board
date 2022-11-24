@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useRef, useState } from 'react'
 import './css/review-write.css'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Portal from './modal/Portal';
 import Modal from './modal/Modal';
 
@@ -14,12 +14,16 @@ export default function ReviewWrite() {
   const [selectCategory, setSelectCategory] = useState('카테고리')
   const [reviewTitle, setReviewTitle] = useState('')
   const [writeCount, setWriteCount] = useState('')
+  
+  const params = useParams()
+  console.log(useLocation())
 
   const nav = useNavigate()
   if(!sessionStorage.getItem('userId')){
     window.location.href = ('/login')
   }
 
+  // 카테고리 클릭시 반응
   const clickCategory = () => {
     category.current.classList.contains('category-clicked') ? 
     category.current.className = 'category-selected' :
@@ -28,7 +32,6 @@ export default function ReviewWrite() {
     arrowRef.current.className = 'img-selected' :
     arrowRef.current.className = 'img-clicked'
   }
-
   const clickCategoryList = (e) => {
     if(e.target.textContent === '공지사항'){
       if(sessionStorage.getItem('userId') !== 'admin'){
@@ -47,9 +50,11 @@ export default function ReviewWrite() {
     if(!reviewTitle) return alert('제목을 입력해주세요.')
     if(!reviewContentRef.current.value) return alert('내용을 입력해주세요.')
     if(writeCount.length>1000) return alert('1000자를 초과했습니다.')
-    const body = {category:selectCategory, title:reviewTitle, content:reviewContentRef.current.value}
+    const body = {category:selectCategory, title:reviewTitle, content:reviewContentRef.current.value,idx:0}
     setIsWriteLoading(true)
-    const response = await axios.post('/reviewWrite',body)
+    const response = !params.idx ? 
+      await axios.post('/reviewWrite',body) : 
+      await axios.put('/reviewEdit',{...body, idx:params.idx})
     if(response.data.success){
       alert(response.data.msg)
       nav('/review') 
@@ -68,8 +73,8 @@ export default function ReviewWrite() {
       <div className='review-write-form-box'>
         <form className='review-write-form' onSubmit={submitReview}>
           <div className='write'>
-            <span>글 쓰기</span>
-          <button>작성</button>
+            <span>{params.idx ? '글 수정' : '글 쓰기'}</span>
+          <button>{params.idx ? '수정' : '작성'}</button>
           </div>
           <div className='review-write-title'>
             <div className='review-write-category' onClick={clickCategory}>
@@ -87,7 +92,11 @@ export default function ReviewWrite() {
             <span>{writeCount.length}/1000</span>
           </div>
           <div>
-            <textarea className='review-write-content' placeholder='내용을 입력해주세요.' cols="30" rows="10" ref={reviewContentRef} onChange={(e)=>setWriteCount(e.target.value)}></textarea>
+            <textarea className='review-write-content' 
+              placeholder='내용을 입력해주세요.' 
+              maxLength={1000} cols="30" rows="10" ref={reviewContentRef} 
+              onChange={(e)=>setWriteCount(e.target.value)}>              
+            </textarea>
           </div>
         </form>
       </div>
