@@ -80,8 +80,8 @@ export default function Review() {
             <span style={{justifyContent:'flex-start',paddingLeft:10}}>
               <Link to={`/review/${data.idx}`} state={{reviewInfo : data}} onClick={()=>clickReviewTitle(data.idx)}>
                 {data.title}
+                <span className='review-list-comment-count'>[{data.comment}]</span>
               </Link>
-              <span className='review-list-comment-count'>[{data.comment}]</span>
             </span>
             <span>{data.writer}</span>
             <span>{window.innerWidth <540 ? data.date.slice(5,10) : data.date.slice(2,10)}</span>
