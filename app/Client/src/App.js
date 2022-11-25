@@ -28,8 +28,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false)  
   const [id, setId] = useState('')
   const [pw, setPw] = useState('')
-  // 모달 보여주기
-  const [isShowModal, setIsShowModal] = useState(false)
+  
   // 홈화면 추천 인덱스 생성
   // console.log(process.env.REACT_APP_API_URL)
   useEffect(() => {
@@ -47,6 +46,20 @@ function App() {
   // 한 페이지에 띄울 인덱스 추출
   const firstIndex = (pageNum-1)*postPerPage
   const lastIndex = firstIndex + postPerPage
+
+  useEffect(() => {
+    setPageNum(1)
+  },[easySearchSort])
+  
+  if(!carInfo){
+    return (
+      <div style={{margin:'0 auto',fontSize:'1.3rem',width:'100%',textAlign:'center'}}>Loading..</div>
+      )
+    }
+  // postList : 한 페이지에 나타낼 정보들 추출
+  // newPostList : 전체 정보중에서 선택한 조건들을 골라서 추출 후 postList 에 전달
+  let [postList, newPostList] = searchSort(easySearchSort,carInfo,firstIndex,lastIndex,isSearch,searchValue)
+
   let random = Math.floor(Math.random()*carInfo.length)
   let randInt = []
   if(random>0 && random < carInfo.length-1){
@@ -84,21 +97,7 @@ function App() {
   let disList = carMinMaxInfo('distance',10000)
   let priceList = carMinMaxInfo('car_price', 1000)
   
-  useEffect(() => {
-    setPageNum(1)
-  },[easySearchSort])
-  // postList : 한 페이지에 나타낼 정보들 추출
-  // newPostList : 전체 정보중에서 선택한 조건들을 골라서 추출 후 postList 에 전달
-  let [postList, newPostList] = searchSort(easySearchSort,carInfo,firstIndex,lastIndex,isSearch,searchValue)
-  
-  console.log()
 
-  if(!carInfo){
-    return (
-      <div style={{margin:'0 auto',fontSize:'1.3rem',width:'100%',textAlign:'center'}}>Loading..</div>
-    )
-  }
-  
   return ( 
     <BrowserRouter>
       <div className="App">
@@ -124,8 +123,8 @@ function App() {
             />
             <Route path='/buy/:id' element={<DetailCar/>}/>
             <Route path='/sell' element={<SellPage setCarInfo={setCarInfo}/>}/>
-            <Route path='/login' element={<Login id={id} setId={setId} pw={pw} setPw={setPw} isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
-            <Route path='/register' element={<Register isShowModal={isShowModal} setIsShowModal={setIsShowModal} />}/>
+            <Route path='/login' element={<Login id={id} setId={setId} pw={pw} setPw={setPw}/>}/>
+            <Route path='/register' element={<Register/>}/>
             <Route path='/review' element={<Review/>}/>
             <Route path='/review/:id' element={<ReviewDetail/>}/>
             <Route path='/review/write/' element={<ReviewWrite/>}/>

@@ -1,7 +1,8 @@
 .review-wrap{
   width:100%;
   min-width: 780px;
-  height:80vh;
+  height:78vh;
+  padding-top: 20px;
   /* background-color: aqua; */
 }
 .review-header{
@@ -47,7 +48,7 @@
   /* background-color: bisque; */
   width:100%;
   /* min-width: 780px; */
-  height:500px;
+  height:525px;
 }
 .review-list{
   width:90%;

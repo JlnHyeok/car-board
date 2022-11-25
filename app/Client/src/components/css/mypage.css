@@ -1,0 +1,38 @@
+
+.mypage-wrap{
+  /* background-color: aqua; */
+  /* min-width: 780px; */
+  width:90%;
+  margin:0 auto;
+  height:100vh;
+  display:grid;
+  grid-template-columns: 1fr 4fr;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+.mypage-left{
+  background-color: antiquewhite;
+  min-width: 200px;
+}
+.activity-box{
+  height:auto;
+  background-color: yellow;
+  text-align: left;
+}
+.activity-box>li{
+  font-size: 1.2rem;
+  background-color: aqua;
+  height:40px;
+}
+
+.mypage-left-user-info{
+  text-align: left;
+}
+
+
+
+
+.mypage-right{
+  background-color: blue;
+  min-width: 515px;
+}

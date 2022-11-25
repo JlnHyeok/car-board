@@ -1,6 +1,9 @@
 // postList : 한 페이지당 나타날 목록
 // newPostList : 전체 목록에서 조건에 맞게 고른것
 export default function searchSort(easySearchMaker,carInfo,firstIndex,lastIndex,isSearch,searchValue) {
+  if(!carInfo){
+    return
+  }
   let postList = carInfo.slice(firstIndex , lastIndex) 
   let newPostList = [...carInfo]
 

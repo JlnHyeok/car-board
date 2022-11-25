@@ -156,7 +156,15 @@ export default function ReviewDetail() {
           {commentList ?
             commentList.map((commentInfo,idx)=>(              
               <div key={idx} className="comment-list">
-                <span>{commentInfo.writer}</span>
+                <span>
+                  {commentInfo.writer.includes('익명') ?
+                  <>
+                    <span>{commentInfo.writer.slice(0,2)}</span><span style={{fontSize:'.6rem',marginBottom:'-8px',color:'gray'}}>{commentInfo.writer.slice(2)}</span>
+                  </>
+                      :
+                    <span>{commentInfo.writer}</span>
+                  }
+                </span>
                 <span>{commentInfo.comment}</span>
                 <span>{window.innerWidth < 540 ?commentInfo.date.slice(11) : commentInfo.date}</span>
                 <span onClick={()=>clickDelComment(commentInfo)}>x</span>
@@ -180,7 +188,7 @@ export default function ReviewDetail() {
             <>
               <div className='make-comment-userinfo'>
                 <div className='userinfo-input'>
-                  <input type="text" placeholder='닉네임' ref={el=>commentInputRef.current[0] = el}/>
+                  <input type="text" placeholder='닉네임' value={'익명'} disabled={true} ref={el=>commentInputRef.current[0] = el}/>
                   <input type="password" placeholder='비밀번호' ref={el=>commentInputRef.current[1] = el}/>
                 </div>
               </div>

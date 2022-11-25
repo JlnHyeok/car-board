@@ -1,9 +1,13 @@
 const express = require('express')
+
+// 시간
 const dayjs = require('dayjs')
 const utc = require('dayjs/plugin/utc')
 const timezone = require('dayjs/plugin/timezone')
 dayjs.extend(utc)
 dayjs.extend(timezone)
+
+const requestIp = require('request-ip')
 
 const app = express()
 const path = require('path')
@@ -74,6 +78,7 @@ app.use(session({
 
 // 암호화 모듈
 const bcrypt = require('bcrypt')
+const { request } = require('http')
 const saltRounds = 10
 
 // 배포상태면~
@@ -387,7 +392,10 @@ app.post('/reviewWrite', (req,res) => {
 })
 
 app.post('/reviewWriteComment',(req,res) => {
-  const {writer,pw,comment,postIdx} = req.body
+  let {writer,pw,comment,postIdx} = req.body
+  if(!req.session.user){
+    writer = writer+`${requestIp.getClientIp(req)}`
+  }
   const today = dayjs().tz('Asia/seoul').format('YYYY-MM-DD HH:MM:ss')
   const commentInfo = [writer,pw,comment,today,postIdx]
   const sql = 'insert into review_comment (writer,pw,comment,date,post_idx) values (?,?,?,?,?)'
