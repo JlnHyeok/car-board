@@ -44,7 +44,7 @@ export default function Footer({buttonLen,pageNum,setPageNum}) {
       <div className='page-info'>
         <span>{pageNum} page / {buttonLen} page</span>
       </div>
-      <div className='btn-total-box'>
+      <div className='btn-total-box' style={{width: window.innerWidth < 540 ? 330 : 450}}>
         <button className='btn-list' onClick={handleMorePrev} disabled={pageNum === 1} 
         style={{
           cursor: pageNum === 1 ? 'default' : undefined 

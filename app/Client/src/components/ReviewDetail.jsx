@@ -25,8 +25,6 @@ export default function ReviewDetail() {
   }
 
   const reviewInfo = location.state ? location.state.reviewInfo : reviewList[0]
-  
-  console.log(reviewList, commentList)
 
   const clickEditBtn = async() => {
     nav(`/review/edit/${id}`, {state:{title:reviewInfo.title, content:reviewInfo.content}})
@@ -79,7 +77,6 @@ export default function ReviewDetail() {
     const response = await axios.post('/reviewWriteComment', body)
     setIsCommentLoading(false)
     if(response.data.success){
-      console.log(response.data.info)
       setCommentList([...commentList,response.data.info])
       commentInputRef.current[1].value = ''
       commentInputRef.current[2].value = ''
@@ -87,18 +84,23 @@ export default function ReviewDetail() {
     else alert(response.data.msg)
   }
   
-  // 추가할때 넣어준 date의 값으로 받아와서 삭제 진행
+  // 데이터 fetch 속도를 줄이기 위해 프론트 단은 filter로 구현, 백엔드쪽은 따로 삭제,추가 진행
+  // 추가할때 넣어준 date,writer,comment의 값으로 받아와서 삭제 진행
   const clickDelComment = async(comment) => {
     const selComment = commentList.filter((data)=>(data.date === comment.date))
     const checkPw = window.prompt('비밀번호를 입력하세요.')
     if(!checkPw) return
     if(checkPw !== selComment[0].pw) return alert('비밀번호가 다릅니다.')
     setIsCommentLoading(true)
-    const body = {date : comment.date}
+    const body = {date : comment.date, writer : comment.writer, comment: comment.comment}
     const response = await axios.delete(`/delComment`,{data:body})
     setIsCommentLoading(false)
     if(response.data.success){
-      setCommentList(commentList.filter((data)=>(data.date !== comment.date)))
+      setCommentList(commentList.filter((data)=>(
+        !((data.date === comment.date) && 
+        (data.writer === comment.writer) && 
+        (data.comment === comment.comment))
+        )))
     }
     else alert(response.data.msg)
   }

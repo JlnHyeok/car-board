@@ -118,3 +118,29 @@
 .review-post:hover{
   background-color: rgba(247, 137, 137, 0.219);
 }
+
+
+
+@media screen and (max-width:540px){
+  .review-wrap{
+    min-width: 330px;
+    height:500px;
+  }  
+  .review-header{
+    width:100%
+  }
+  .review-box{
+    /* background-color: #7c8ad3; */
+  }
+  .review-list{
+    width:100%;
+  }
+  .review-list>span:nth-child(2),.review-list>span:first-child{
+    display: none;
+  }
+  .review-list>span:nth-child(3){
+    /* background-color: bisque; */
+    padding-top: 8px;
+    box-sizing: border-box;
+  }
+}

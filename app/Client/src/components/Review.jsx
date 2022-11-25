@@ -84,7 +84,7 @@ export default function Review() {
               <span className='review-list-comment-count'>[{data.comment}]</span>
             </span>
             <span>{data.writer}</span>
-            <span>{data.date.slice(2,10)}</span>
+            <span>{window.innerWidth <540 ? data.date.slice(5,10) : data.date.slice(2,10)}</span>
             <span>{data.count}</span>
           </div>
         )) :

@@ -44,7 +44,7 @@ export default function FooterReview({buttonLen,pageNum,setPageNum}) {
       <div className='page-info-review'>
         <span>{pageNum} page / {buttonLen} page</span>
       </div>
-      <div className='btn-total-box-review'>
+      <div className='btn-total-box-review' style={{width: window.innerWidth < 540 ? 330 : 450}}>
         <button className='btn-list' onClick={handleMorePrev} disabled={pageNum === 1} 
         style={{
           cursor: pageNum === 1 ? 'default' : undefined 

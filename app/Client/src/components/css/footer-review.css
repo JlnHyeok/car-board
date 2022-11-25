@@ -48,17 +48,20 @@
   height:30px;
   background-color: #ffffff;
   position: relative;
+  margin:0 auto;
   /* margin-top: 15px; */
 }
 
 @media screen and (max-width:1000px){
   .footer-review{
-    
+    /* background-color: aqua; */
+    width:100%;
+    flex-direction: column;
   }
 }
 @media screen and (max-width:540px){
   .footer-review{
-    height:30px;
+    height:60px;
     min-width: 330px;
   }
   .page-info-review{
@@ -66,5 +69,10 @@
   }
   .btn-list-box-review{
     width:90px;
+  }
+  .search-review{
+    position: absolute;
+    right:20px;
+    border:1px solid black;
   }
 }

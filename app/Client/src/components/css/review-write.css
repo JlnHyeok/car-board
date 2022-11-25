@@ -143,3 +143,17 @@
 .review-write-content:focus{
   outline: none;
 }
+
+
+@media screen and (max-width:540px){
+  .review-write-wrap{
+    min-width: 330px;
+    padding-top: 5px;
+  }
+  .review-write-form-box{
+    min-width:330px;
+  }
+  .review-write-content{
+    height:300px;
+  }
+}

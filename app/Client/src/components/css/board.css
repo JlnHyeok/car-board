@@ -398,12 +398,22 @@ li:hover{
 }
 
 @media screen and (max-width:540px){
+  .board{
+    padding:0;
+  }
+  h1{
+    width:90%;  
+    /* background-color: #2f3542; */
+  }
   .right{
     min-width:330px;
+    /* background-color: #16171d; */
   }
   .right-up{
+    /* background-color: antiquewhite; */
     width:90%;
-    min-width:330px;
+    min-width:300px;
+    margin-top: 10px;
   }
   
   .right-down{
@@ -411,7 +421,7 @@ li:hover{
     grid-template-rows: repeat(12, 1fr);
     height: calc(90vh - 120px);
     min-height: 450px;
-    min-width: 350px;
+    min-width: 330px;
   }
   
   .post{

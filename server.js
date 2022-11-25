@@ -402,10 +402,9 @@ app.post('/reviewWriteComment',(req,res) => {
 })
 
 app.delete('/delComment',(req,res) => {
-  console.log(req.body)
-  const {date} = req.body
-  const sql = 'delete from review_comment where date = ?'
-  db.query(sql,date,(err,data) => {
+  const {date,writer,comment} = req.body
+  const sql = 'delete from review_comment where date = ? and writer = ? and comment = ?'
+  db.query(sql,[date,writer,comment],(err,data) => {
     if(!err){
       res.json({success:true, msg:'삭제되었습니다.'})
     }
