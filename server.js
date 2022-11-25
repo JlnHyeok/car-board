@@ -396,9 +396,7 @@ app.put('/changePw',(req,res) => {
     })
   })
 })
-app.post('/checkPw',(req,res) => {
-  const {id} = req.cookies.user-info
-})
+
 
 app.post('/insertCar',upload.single('file'), (req,res) => {
   const id = req.session.user.id

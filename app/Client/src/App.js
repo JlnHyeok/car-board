@@ -129,7 +129,7 @@ function App() {
             <Route path='/review/:id' element={<ReviewDetail/>}/>
             <Route path='/review/write/' element={<ReviewWrite/>}/>
             <Route path='/review/edit/:idx' element={<ReviewWrite/>}/>
-            <Route path='/mypage' element={<Mypage/>}/>
+            <Route path='/mypage' element={<Mypage buttonLen={Math.ceil(newPostList.length/postPerPage)} pageNum={pageNum} setPageNum={setPageNum}/>}/>
         </Routes>
       </div>
     </BrowserRouter>

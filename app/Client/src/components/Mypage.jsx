@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './css/mypage.css'
 
 export default function Mypage() {
@@ -12,7 +13,7 @@ export default function Mypage() {
   const [isUserInfo, setIsUserInfo] = useState(true)
   
 
-  const [whichShow, setWhichShow] = useState([false,false,false,false])
+  const [whichShow, setWhichShow] = useState([false,false,false,false,false])
   const [checkPw, setCheckPw] = useState('')
   const [isShow,setIsShow] = useState(false)
 
@@ -35,6 +36,7 @@ export default function Mypage() {
 
   console.log(whichShow)
   const clickShow = (e) => {
+    if(!isShow) return alert('비밀번호를 입력해주세요.')
     console.log(e.target.value)
     setWhichShow((whichShow).map((data,idx)=>(data = (idx===e.target.value) ? true : false)))
     if(e.target.value < 3){
@@ -68,38 +70,60 @@ export default function Mypage() {
       </div>
       <div className='mypage-right'>
         {(isShow && whichShow[0]) &&
-          <div className="mypage-right-posted-car">
-            {postedCar.map((car,idx)=>(
-              <div key={idx} className="posted-car-list">
-                <div>{car.car_name}</div>
-                <div>{car.car_maker}</div>
-                <div>{car.car_model_year}</div>
-                <div>{car.car_price}</div>
-                <div>{car.car_distance}</div>
+          <>
+          <h1>등록한 차량</h1>
+          <div className='right-up'>
+            <h1>총 <span className='num-of-car'>{postedCar.length.toLocaleString('ko-KR')}</span>대</h1>
+          </div>
+          <div className='mypage-right-car-list'>
+            {postedCar.map((data)=>(
+              <div className='post' key={data.id}>
+                <div className='img'>
+                  <Link to={`/buy/${data.id}`} onClick={()=>window.scrollTo({top:0,left:0,behavior:'smooth'})}><img src={data.car_image} alt="차량" /></Link>
+                </div>
+                <div className="car-info">
+                  <span>{data.car_maker +' '}{data.car_name}</span>
+                  <span style={{fontWeight:'bold'}}>{data.car_price.toLocaleString('ko-KR')}만원</span>
+                  <span style={{fontSize:13,color:'#54555a'}}>{data.car_model_year.slice(2,4)}년 {data.car_model_year.slice(5,7)}월식 · {data.distance.toLocaleString('ko-KR')}km</span>
+                </div>
               </div>
             ))}
-        </div>}
+          </div>
+          </>
+        }
+        {(isShow && whichShow[1]) &&
+          <>
+            <h1>구매한 차량</h1>
+            <div className='mypage-right-buy-cars'>
+            </div>
+          </>
+        }
+          
         {(isShow && whichShow[2]) &&
-          <div className='mypage-right-posts'>
-            <div>
-              {myPost.map((post,idx)=>(
-                <div key={idx}>
-                  <span>{post.category}</span>
-                  <span>{post.title}</span>
-                  <span>{post.date}</span>
-                </div>
-              ))}
-            </div>
-            <div>
-              {myComment.map((comments,idx)=>(
-                <div key={idx}>
-                  <span>{comments.writer}</span>
-                  <span>{comments.comment}</span>
-                  <span>{comments.date}</span>
-                </div>
-              ))}
-            </div>
-          </div>}
+        <>
+        <h1>작성한 글</h1>
+        <div className='mypage-right-posts'>
+          <div>
+            {myPost.map((post,idx)=>(
+              <div key={idx}>
+                <span>{post.category}</span>
+                <span>{post.title}</span>
+                <span>{post.date}</span>
+              </div>
+            ))}
+          </div>
+          <div>
+            {myComment.map((comments,idx)=>(
+              <div key={idx}>
+                <span>{comments.writer}</span>
+                <span>{comments.comment}</span>
+                <span>{comments.date}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        </>
+          }
           {isUserInfo &&
           <div className="mypage-right-user-info">
             <div className='user-info-list'>
@@ -115,10 +139,17 @@ export default function Mypage() {
               <span>{userInfo.date}</span>
             </div>
             {!isShow && 
-            <form className='user-pw-form' onSubmit={(e)=>submitPw(e)}>
-              <input type="password" placeholder='비밀번호 확인' onChange={(e)=>(setCheckPw(e.target.value))}/>
-              <button>확인</button>
-            </form>}
+              <form className='user-pw-form' onSubmit={(e)=>submitPw(e)}>
+                <input type="password" placeholder='비밀번호 확인' onChange={(e)=>(setCheckPw(e.target.value))}/>
+                <button>확인</button>
+              </form>}
+            {(isShow && whichShow[4]) &&
+              <form className='user-pw-change-form'>
+                <input type="text" placeholder='변경할 비밀번호를 입력해주세요.'/>
+                <input type="text" placeholder='비밀번호 확인'/>
+                <button></button>
+              </form>
+            }
           </div>}
       </div>
     </div>
