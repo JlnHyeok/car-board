@@ -79,7 +79,7 @@
 }
 .review-list>span:nth-child(2){
   /* background-color: brown; */
-  border-radius: 9px;
+  /* border-radius: 9px; */
   width: 80px;
 }
 .review-list>span:nth-child(3){
