@@ -158,7 +158,7 @@ export default function ReviewDetail() {
               <div key={idx} className="comment-list">
                 <span>{commentInfo.writer}</span>
                 <span>{commentInfo.comment}</span>
-                <span>{commentInfo.date}</span>
+                <span>{window.innerWidth < 540 ?commentInfo.date.slice(11) : commentInfo.date}</span>
                 <span onClick={()=>clickDelComment(commentInfo)}>x</span>
               </div>              
             ))              
@@ -177,21 +177,21 @@ export default function ReviewDetail() {
               </div>
             </>
               :
-              <>
-                <div className='make-comment-userinfo'>
-                  <div className='userinfo-input'>
-                    <input type="text" placeholder='닉네임' ref={el=>commentInputRef.current[0] = el}/>
-                    <input type="password" placeholder='비밀번호' ref={el=>commentInputRef.current[1] = el}/>
-                  </div>
+            <>
+              <div className='make-comment-userinfo'>
+                <div className='userinfo-input'>
+                  <input type="text" placeholder='닉네임' ref={el=>commentInputRef.current[0] = el}/>
+                  <input type="password" placeholder='비밀번호' ref={el=>commentInputRef.current[1] = el}/>
                 </div>
-              </>
+              </div>
+            </>
             }
             <div className='make-comment-input'>
-                <textarea className='comment-input' maxLength={100}
-                placeholder=
-                '타인의 권리를 침해하거나 명예를 훼손하는 댓글은 운영원칙 및 관련 법률에 제제를 받을 수 있습니다.'
-                cols="30" rows="10" ref={el=>commentInputRef.current[2] = el}>
-                </textarea>
+              <textarea className='comment-input' maxLength={100}
+              placeholder=
+              '타인의 권리를 침해하거나 명예를 훼손하는 댓글은 운영원칙 및 관련 법률에 제제를 받을 수 있습니다.'
+              cols="30" rows="10" ref={el=>commentInputRef.current[2] = el}>
+              </textarea>
             </div>
           </div>
           <div className='comment-submit-button'>

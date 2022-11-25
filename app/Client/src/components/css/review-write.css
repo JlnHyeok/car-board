@@ -153,6 +153,15 @@
   .review-write-form-box{
     min-width:330px;
   }
+  .review-write-category{
+    border-radius: 5px;
+  }
+  .review-write-category>ul{
+    border-radius: 5px;
+  }
+  .review-write-category>ul>li{
+    border-radius: 5px;
+  }
   .review-write-content{
     height:300px;
   }
