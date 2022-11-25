@@ -1,4 +1,6 @@
-
+ul{
+  height:auto;
+}
 .mypage-wrap{
   /* background-color: aqua; */
   /* min-width: 780px; */
@@ -15,7 +17,6 @@
   min-width: 200px;
 }
 .activity-box{
-  height:auto;
   background-color: yellow;
   text-align: left;
 }
@@ -23,6 +24,11 @@
   font-size: 1.2rem;
   background-color: aqua;
   height:40px;
+  cursor:pointer;
+}
+.activity-box>li:hover{
+  background-color: #b70f28;
+  color:white;
 }
 
 .mypage-left-user-info{
@@ -33,6 +39,66 @@
 
 
 .mypage-right{
-  background-color: blue;
+  /* background-color: blue; */
   min-width: 515px;
+  position:relative;
+}
+.mypage-right-user-info{
+  position:absolute;
+  /* background-color: violet; */
+  background-color: #fafafa;
+  border-radius: 10px;
+  left:50%;
+  top:50px;
+  transform:translate(-50%,0);
+  width:70%;
+  height:auto;
+}
+.user-info-list{
+  text-align: left;
+  /* background-color: wheat; */
+  width:100%;
+  font-size: 1.3rem;
+  margin:10px auto 0;
+  display: flex;
+  justify-content: center;
+}
+.user-info-list>span:first-child{
+  /* background-color: brown; */
+  width:110px;
+  border-right: 1px solid gray;
+}
+.user-info-list>span:nth-child(2){
+  width:40%;
+  min-width: 240px;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+.user-pw-form{
+  /* background-color: aqua; */
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+.user-pw-form>input{
+  box-sizing: border-box;
+  display: block;
+  border:1px solid rgba(128, 128, 128, 0.425);
+  width: 240px;
+  height:35px;
+}
+.user-pw-form>input:focus{
+  outline:none
+}
+
+.user-pw-form>button{
+  cursor:pointer;
+  box-sizing: border-box;
+  display: block;
+  border:none;
+  width: 50px;
+  height:35px;
+  color:white;
+  background-color: #b70f28;
+  margin-bottom: 20px;
 }

@@ -220,6 +220,63 @@ app.get('/comment/:postIdx',(req,res) => {
   })
 })
 
+app.get('/mypageUser',(req,res) => {
+  const id = req.session.user.id
+  const sql = 'select * from member where id = ?'
+  db.query(sql,id,(err,data) => {
+    if(!err){
+      console.log('회원정보 요청 완료')
+      res.send(data[0])
+    }
+    else{
+      console.log(err)
+      res.end()
+    }
+  })
+})
+app.get('/mypagePostCar',(req,res) => {
+  const id = req.session.user.id
+  const sql = 'select * from cars where writer = ?'
+  db.query(sql,id,(err,data) => {
+    if(!err){
+      console.log('마이페이지 등록 차량 요청 완료')
+      res.send(data)
+    }
+    else{
+      console.log(err)
+      res.end()
+    }
+  })
+})
+app.get('/mypageMypost',(req,res) => {
+  const id = req.session.user.id
+  const sql = 'select * from review_info where writer = ?'
+  db.query(sql,id,(err,data) => {
+    if(!err){
+      console.log('작성 글 목록 요청 완료')
+      res.send(data)
+    }
+    else{
+      console.log(err)
+      res.end()
+    }
+  })
+})
+app.get('/mypageMycomment', (req,res) => {
+  const id = req.session.user.id
+  const sql = 'select * from review_comment where writer = ?'
+  db.query(sql,id,(err,data) => {
+    if(!err){
+      console.log('댓글 작성 목록 요청 완료!')
+      res.send(data)
+    }
+    else{
+      console.log(err)
+      res.end()
+    }
+  })
+})
+
 app.post("/login", (req, res) => {
   let { id, pw } = req.body;
   const sql = "select id,pw from member where id = ?";
@@ -321,6 +378,7 @@ app.post('/findPw', (req,res) => {
     }
   })
 })
+
 app.put('/changePw',(req,res) => {
   const {pw} = req.body
   const {name,id} = req.cookies['user-info']
@@ -338,21 +396,8 @@ app.put('/changePw',(req,res) => {
     })
   })
 })
-app.put('/reviewEdit',(req,res) => {
-  console.log(req.body)
-  const date = dayjs().tz('Asia/seoul').format('YYYY-MM-DD HH:mm:ss')
-  const {category,title,content,idx} = req.body
-  const review_info = [category,title,content,date,parseInt(idx)]
-  const sql = 'update review_info set category = ?, title = ?, content = ?, date = ? where idx = ?'
-  db.query(sql,review_info,(err,data) => {
-    if(!err){
-      res.json({success:true, msg:'수정이 완료되었습니다.'})
-    }
-    else{
-      console.log(err)
-      res.json({success:false, msg:'서버 오류가 발생했습니다.'})
-    }
-  })
+app.post('/checkPw',(req,res) => {
+  const {id} = req.cookies.user-info
 })
 
 app.post('/insertCar',upload.single('file'), (req,res) => {
@@ -405,6 +450,23 @@ app.post('/reviewWriteComment',(req,res) => {
     }
     else{
       res.json({success:false,msg:'서버에 오류가 생겼습니다.'})
+    }
+  })
+})
+
+app.put('/reviewEdit',(req,res) => {
+  console.log(req.body)
+  const date = dayjs().tz('Asia/seoul').format('YYYY-MM-DD HH:mm:ss')
+  const {category,title,content,idx} = req.body
+  const review_info = [category,title,content,date,parseInt(idx)]
+  const sql = 'update review_info set category = ?, title = ?, content = ?, date = ? where idx = ?'
+  db.query(sql,review_info,(err,data) => {
+    if(!err){
+      res.json({success:true, msg:'수정이 완료되었습니다.'})
+    }
+    else{
+      console.log(err)
+      res.json({success:false, msg:'서버 오류가 발생했습니다.'})
     }
   })
 })

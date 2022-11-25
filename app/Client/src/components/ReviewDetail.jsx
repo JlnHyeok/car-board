@@ -159,7 +159,7 @@ export default function ReviewDetail() {
                 <span>
                   {commentInfo.writer.includes('익명') ?
                   <>
-                    <span>{commentInfo.writer.slice(0,2)}</span><span style={{fontSize:'.6rem',marginBottom:'-8px',color:'gray'}}>{commentInfo.writer.slice(2)}</span>
+                    <span>{commentInfo.writer.slice(0,2)}</span><span style={{fontSize:'.6rem',marginBottom:'-8px',color:'gray'}}>{commentInfo.writer.slice(2,9)}.**</span>
                   </>
                       :
                     <span>{commentInfo.writer}</span>

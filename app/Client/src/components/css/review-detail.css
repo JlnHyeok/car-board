@@ -150,7 +150,7 @@
 }
 .comment-list>span:first-child{
   /* background-color: #54555a; */
-  width: 80px;
+  width: 88px;
   text-align: left;
 }
 .comment-list>span:nth-child(2){
@@ -281,11 +281,11 @@
   }
   .comment-list>span:first-child{
     /* background-color: blanchedalmond; */
-    width:70px;
+    width:88px;
   }
   .comment-list>span:nth-child(2){
     /* background-color: aqua; */
-    width:calc(100% - 142px);
+    width:calc(100% - 160px);
     margin-left: 0px;
     max-width: 100%;
   }
