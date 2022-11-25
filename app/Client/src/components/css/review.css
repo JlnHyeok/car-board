@@ -51,7 +51,8 @@
 }
 .review-list{
   width:90%;
-  height:30px;
+  height:auto;
+  min-height: 30px;
   /* background-color: blue; */
   margin:0 auto 2px;
   display:flex;
@@ -83,7 +84,9 @@
 }
 .review-list>span:nth-child(3){
   /* background-color: yellow; */
+  text-align: left;
   width:65%;
+  word-break: break-all;
 }
 .review-list-comment-count{
   color : #54555a;
@@ -91,14 +94,6 @@
   font-size: .9rem;
   opacity: .9;
   margin-bottom: 2px;
-}
-.review-list>span:nth-child(3)>a{
-  /* background-color: aquamarine; */
-  display:flex;
-  text-align: left;
-  max-width: 80;
-  height:20px;
-  justify-content: flex-start;
 }
 .review-list>span:nth-child(4){
   /* background-color: violet; */
