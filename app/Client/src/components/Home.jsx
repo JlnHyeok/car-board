@@ -9,7 +9,7 @@ export default function Home({randInt,carInfo}) {
   // const [isAutoPlay, setIsAutoPlay] = useState(true)
   const slideRef = useRef(1)
   let slidePre = '/img/banner'
-  let slideSuf = '.png'
+  let slideSuf = '.avif'
   let slideArr = [1,2,3,4,5]
   let realSlide = [slideArr[slideArr.length-1],...slideArr,slideArr[0]]
   let slideLen = realSlide.length
