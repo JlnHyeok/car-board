@@ -20,6 +20,8 @@ export default function Mypage() {
     false,
   ]);
   const [checkPw, setCheckPw] = useState("");
+  const [changePw, setChangePw] = useState("");
+  const [changePwConfirm, setChangePwConfirm] = useState("");
   const [isShow, setIsShow] = useState(false);
 
   useEffect(() => {
@@ -40,6 +42,9 @@ export default function Mypage() {
   };
   const submitChangePw = async (e) => {
     e.preventDefault();
+    if (!changePw) return alert("비밀번호를 입력해주세요.");
+    if (changePw !== changePwConfirm) return alert("비밀번호가 일치하지 않습니다.");
+    
   };
 
   const clickShow = (e) => {
@@ -130,7 +135,11 @@ export default function Mypage() {
                       <Link
                         to={`/buy/${data.id}`}
                         onClick={() =>
-                          window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+                          window.scrollTo({
+                            top: 0,
+                            left: 0,
+                            behavior: "smooth",
+                          })
                         }
                       >
                         <img src={data.car_image} alt="차량" />
@@ -165,8 +174,8 @@ export default function Mypage() {
           {isShow && whichShow[2] && (
             <>
               <div className="mypage-right-posts">
+                <h1>작성한 글</h1>
                 <div className="posts-post">
-                  <h1>작성한 글</h1>
                   {myPost.map((post, idx) => (
                     <div className="posts-postlist" key={idx}>
                       <span>{post.category}</span>
@@ -177,8 +186,8 @@ export default function Mypage() {
                     </div>
                   ))}
                 </div>
+                <h1>작성한 댓글</h1>
                 <div className="posts-comment">
-                  <h1>작성한 댓글</h1>
                   {myComment.map((comments, idx) => (
                     <div className="posts-commentlist" key={idx}>
                       <span>{comments.writer}</span>
@@ -229,10 +238,15 @@ export default function Mypage() {
                   onSubmit={(e) => submitChangePw(e)}
                 >
                   <input
-                    type="text"
+                    onChange={(e) => setChangePw(e.target.value)}
+                    type="password"
                     placeholder="변경할 비밀번호를 입력해주세요."
                   />
-                  <input type="text" placeholder="비밀번호 확인" />
+                  <input
+                    onChange={(e) => setChangePwConfirm(e.target.value)}
+                    type="password"
+                    placeholder="비밀번호 확인"
+                  />
                   <button>확인</button>
                 </form>
               )}

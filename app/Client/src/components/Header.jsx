@@ -64,7 +64,11 @@ export default function Header({
   const clickLogOut = async() => {
     sessionStorage.clear()
     const response = await axios.get('/logout')
-    if(response.data.success) return window.location.reload()
+    if(response.data.success){
+      nav('/')
+      window.location.reload()
+      return
+    }
   }
 
   const checkAuth = async() => {
