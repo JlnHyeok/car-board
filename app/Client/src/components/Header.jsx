@@ -73,7 +73,6 @@ export default function Header({
 
   const checkAuth = async() => {
     const response = await axios.get('/check-auth')
-    console.log(response)
     if(response.data.success && !sessionStorage.getItem('userId')){
       sessionStorage.setItem('userId',response.data.userId)
       console.log('성공')
