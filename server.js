@@ -381,16 +381,17 @@ app.post('/findPw', (req,res) => {
 
 app.put('/changePw',(req,res) => {
   const {pw} = req.body
-  const {name,id} = req.cookies['user-info']
-  const sql = 'update member set pw = ? where name = ? and id = ?'
+  const {id} = req.cookies['user-info'] || req.body
+  const sql = 'update member set pw = ? where id = ?'
   bcrypt.hash(pw,saltRounds,(err,hashedPw) => {
-    db.query(sql,[hashedPw,name,id],(err,data) => {
+    db.query(sql,[hashedPw,id],(err,data) => {
       if(!err){
         res.clearCookie('user-info')
         res.json({success:true,msg:'비밀번호가 성공적으로 변경되었습니다.'})
       }
       else{
         res.clearCookie('user-info')
+        console.log(err)
         res.json({success:false, msg:'오류가 발생했습니다.'})
       }
     })

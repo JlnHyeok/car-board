@@ -87,6 +87,12 @@ h1{
   display: flex;
   justify-content: center;
 }
+.user-info-list:first-child{
+  margin-top: 30px;
+}
+.user-info-list:last-child{
+  margin-bottom: 30px;
+}
 .user-info-list>span:first-child{
   /* background-color: brown; */
   width:95px;
@@ -148,6 +154,15 @@ h1{
 }
 .user-pw-change-form>input:focus{
   outline:none
+}
+.check-pw{
+  /* background-color: aquamarine; */
+  width:270px;
+  font-size: .9rem;
+  height:30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .user-pw-change-form>button{
@@ -247,18 +262,20 @@ h1{
 .mypage-right-posts{
   /* background-color: cornflowerblue; */
   width:100%;
+  padding-left: 20px;
   margin-top: 50px;
 }
 .mypage-right-posts h1{
+  /* background-color: aqua; */
   text-align: left;
   margin-bottom: 20px;
   font-size: 1.2rem;
-  /* background-color: aqua; */
+  width:90%;
+  /* border-bottom: 1px solid black; */
 }
 .posts-post{
   /* background-color: bisque; */
   width:100%;
-  margin:0 auto;
   height:200px;
 }
 .posts-postlist{

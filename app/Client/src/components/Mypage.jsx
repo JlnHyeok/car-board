@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./css/mypage.css";
+import Portal from './modal/Portal';
+import Modal from './modal/Modal';
 
 export default function Mypage() {
   const [userInfo, setUserInfo] = useState(null);
@@ -9,9 +11,8 @@ export default function Mypage() {
   const [buyCar, setBuyCar] = useState(null);
   const [myPost, setMyPost] = useState(null);
   const [myComment, setMyComment] = useState(null);
-
+  const [isMypageLoading, setIsMypageLoading] = useState(false)
   const [isUserInfo, setIsUserInfo] = useState(true);
-
   const [whichShow, setWhichShow] = useState([
     false,
     false,
@@ -23,6 +24,8 @@ export default function Mypage() {
   const [changePw, setChangePw] = useState("");
   const [changePwConfirm, setChangePwConfirm] = useState("");
   const [isShow, setIsShow] = useState(false);
+
+  const chkPw = Boolean(changePw === changePwConfirm)
 
   useEffect(() => {
     axios.get("/mypageUser").then((result) => setUserInfo(result.data));
@@ -36,15 +39,26 @@ export default function Mypage() {
   const submitPw = async (e) => {
     e.preventDefault();
     const body = { id: sessionStorage.getItem("userId"), pw: checkPw };
+    setIsMypageLoading(true)
     const response = await axios.post("/login", body);
     if (response.data.success) setIsShow(true);
     else alert(response.data.msg);
+    setWhichShow([false,false,false,true,false])
+    setIsMypageLoading(false)
   };
   const submitChangePw = async (e) => {
     e.preventDefault();
     if (!changePw) return alert("비밀번호를 입력해주세요.");
     if (changePw !== changePwConfirm) return alert("비밀번호가 일치하지 않습니다.");
-    
+    const id = sessionStorage.getItem('userId')
+    setIsMypageLoading(true)
+    const response = await axios.put('/changePw',{id : id , pw : changePw})
+    if(response.data.success) alert('비밀번호가 변경되었습니다.')
+    else alert('서버에 오류가 발생하였습니다.')
+    setWhichShow([false,false,false,true,false])
+    setChangePw('')
+    setChangePwConfirm('')
+    setIsMypageLoading(false)
   };
 
   const clickShow = (e) => {
@@ -65,6 +79,10 @@ export default function Mypage() {
 
   return (
     <div className="mypage-wrap">
+      {isMypageLoading &&
+      <Portal>
+        <Modal isMypageLoading={isMypageLoading}/>
+      </Portal>}
       <div className="left-right-box">
         <div className="mypage-left">
           <div className="mypage-left-box">
@@ -247,6 +265,10 @@ export default function Mypage() {
                     type="password"
                     placeholder="비밀번호 확인"
                   />
+                  {changePw && changePwConfirm &&
+                  <div className="check-pw" style={{color:chkPw ? 'green' : 'red'}}>
+                    {changePw && chkPw ? '*비밀번호가 일치합니다.' : '*비밀번호가 틀렸습니다' }
+                  </div>}
                   <button>확인</button>
                 </form>
               )}
