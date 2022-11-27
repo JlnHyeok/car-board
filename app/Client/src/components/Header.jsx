@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate} from 'react-router-dom'
 import './css/header.css'
 
 export default function Header({
-  setSearchValue,setIsSearch,setPageNum,setEasySearchSort,setCarInfo,setIsAdmin,isAdmin,id}) {
+  setSearchValue,setIsSearch,setPageNum,setEasySearchSort,setIsAdmin,isAdmin,id}) {
   const divBarRef = useRef([])
   const navListRef = useRef()
   let nav = useNavigate()
@@ -18,6 +18,10 @@ export default function Header({
     else if(location.pathname.includes('review')) return handleSlideBar(2)
     handleSlideBar()
   }
+  useEffect(() => {
+    firstPageSlideBar()
+  })
+
    // 메뉴 언더바
   const handleSlideBar = (i) => {
     divBarRef.current.forEach((current,idx)=>{
@@ -63,9 +67,16 @@ export default function Header({
     if(response.data.success) return window.location.reload()
   }
 
-  useEffect(() => {
-    firstPageSlideBar()
-  })
+  const checkAuth = async() => {
+    const response = await axios.get('/check-auth')
+    console.log(response)
+    if(response.data.success && !sessionStorage.getItem('userId')){
+      sessionStorage.setItem('userId',response.data.userId)
+      console.log('성공')
+    }
+  }
+  checkAuth()
+
 
   return (
     <>

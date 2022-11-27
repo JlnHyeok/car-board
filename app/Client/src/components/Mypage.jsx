@@ -23,7 +23,7 @@ export default function Mypage() {
     axios.get('/mypageMypost').then((result)=>setMyPost(result.data))
     axios.get('/mypageMycomment').then((result)=>setMyComment(result.data))
   },[])
-  if(!userInfo || !postedCar || !myPost || !myComment){
+  if(!userInfo){
     return <div>Loading</div>
   }
   const submitPw = async(e) => {
@@ -32,6 +32,9 @@ export default function Mypage() {
     const response = await axios.post('/login', body)
     if(response.data.success) setIsShow(true)
     else alert(response.data.msg)
+  }
+  const submitChangePw = async(e) => {
+    e.preventDefault()
   }
 
   console.log(whichShow)
@@ -52,20 +55,22 @@ export default function Mypage() {
   return (
     <div className='mypage-wrap'>
       <div className='mypage-left'>
-        <div className='mypage-left-user-activity'>
-          <ul className='activity-box'>
-            <h1>활동내역</h1>
-            <li value={0} onClick={(e)=>clickShow(e)}>등록한 차량</li>
-            <li value={1} onClick={(e)=>clickShow(e)}>구매한 차량</li>
-            <li value={2} onClick={(e)=>clickShow(e)}>작성한 글</li>
-          </ul>
-        </div>
-        <div className='mypage-left-user-info'>
-          <ul className='activity-box'>
-            <h1>회원정보</h1>
-            <li value={3} onClick={(e)=>clickShow(e)}>기본정보</li>
-            <li value={4} onClick={(e)=>clickShow(e)}>비밀번호 변경</li>
-          </ul>
+        <div className='mypage-left-box'>
+          <div className='mypage-left-user-activity'>
+            <ul className='activity-box'>
+              <h1>활동내역</h1>
+              <li value={0} onClick={(e)=>clickShow(e)} style={{color:whichShow[0] && 'red'}}>등록한 차량</li>
+              <li value={1} onClick={(e)=>clickShow(e)} style={{color:whichShow[1] && 'red'}}>구매한 차량</li>
+              <li value={2} onClick={(e)=>clickShow(e)} style={{color:whichShow[2] && 'red'}}>작성한 글</li>
+            </ul>
+          </div>
+          <div className='mypage-left-user-info'>
+            <ul className='activity-box'>
+              <h1>회원정보</h1>
+              <li value={3} onClick={(e)=>clickShow(e)} style={{color:whichShow[3] && 'red'}}>기본정보</li>
+              <li value={4} onClick={(e)=>clickShow(e)} style={{color:whichShow[4] && 'red'}}>비밀번호 변경</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className='mypage-right'>
@@ -101,22 +106,31 @@ export default function Mypage() {
           
         {(isShow && whichShow[2]) &&
         <>
-        <h1>작성한 글</h1>
         <div className='mypage-right-posts'>
-          <div>
+          <div className='posts-post'>
+            <h1>작성한 글</h1>
             {myPost.map((post,idx)=>(
-              <div key={idx}>
+              <div className='posts-postlist' key={idx}>
                 <span>{post.category}</span>
-                <span>{post.title}</span>
+                <span>
+                  <Link to = {`/review/${post.idx}`}>
+                    {post.title}
+                  </Link>
+                </span>
                 <span>{post.date}</span>
               </div>
             ))}
           </div>
-          <div>
+          <div className='posts-comment'>
+            <h1>작성한 댓글</h1>
             {myComment.map((comments,idx)=>(
-              <div key={idx}>
+              <div className='posts-commentlist' key={idx}>
                 <span>{comments.writer}</span>
-                <span>{comments.comment}</span>
+                <span>
+                  <Link to={`/review/${comments.post_idx}`}>
+                    {comments.comment}
+                  </Link>
+                </span>
                 <span>{comments.date}</span>
               </div>
             ))}
@@ -130,6 +144,8 @@ export default function Mypage() {
               <span>아이디</span>
               <span>{userInfo.id}</span>
             </div>
+            {isShow && 
+            <>
             <div className='user-info-list'>
               <span>이름</span> 
               <span>{userInfo.name}</span>
@@ -138,16 +154,18 @@ export default function Mypage() {
               <span>가입날짜</span> 
               <span>{userInfo.date}</span>
             </div>
+            </>
+            }
             {!isShow && 
               <form className='user-pw-form' onSubmit={(e)=>submitPw(e)}>
                 <input type="password" placeholder='비밀번호 확인' onChange={(e)=>(setCheckPw(e.target.value))}/>
                 <button>확인</button>
               </form>}
             {(isShow && whichShow[4]) &&
-              <form className='user-pw-change-form'>
+              <form className='user-pw-change-form' onSubmit={(e)=>submitChangePw(e)}>
                 <input type="text" placeholder='변경할 비밀번호를 입력해주세요.'/>
                 <input type="text" placeholder='비밀번호 확인'/>
-                <button></button>
+                <button>확인</button>
               </form>
             }
           </div>}

@@ -13,18 +13,27 @@ ul{
   box-sizing: border-box;
 }
 .mypage-left{
-  background-color: antiquewhite;
-  min-width: 200px;
+  /* background-color: antiquewhite; */
+  width: 150px;
+}
+.mypage-left-box{
+  margin-top: 40px;
+  border-right: 1px solid gray;
 }
 .activity-box{
-  background-color: yellow;
+  /* background-color: yellow; */
   text-align: left;
 }
+h1{
+  margin:0;
+}
 .activity-box>li{
+  /* background-color: aqua; */
   font-size: 1.2rem;
-  background-color: aqua;
   height:40px;
   cursor:pointer;
+  padding-top: 5px;
+  box-sizing: border-box;
 }
 .activity-box>li:hover{
   background-color: #b70f28;
@@ -32,7 +41,9 @@ ul{
 }
 
 .mypage-left-user-info{
+  /* background-color: seagreen; */
   text-align: left;
+  margin-top: 20px;
 }
 
 
@@ -46,18 +57,20 @@ ul{
 
 .mypage-right-user-info{
   position:absolute;
-  /* background-color: violet; */
-  background-color: #fafafa;
+  background-color: violet;
+  /* background-color: #fafafa; */
   border-radius: 10px;
   left:50%;
   top:50px;
   transform:translate(-50%,0);
-  width:70%;
+  width:500px;
   height:auto;
+  display: flex;
+  flex-direction: column;
 }
 .user-info-list{
   text-align: left;
-  /* background-color: wheat; */
+  background-color: wheat;
   width:100%;
   font-size: 1.3rem;
   margin:10px auto 0;
@@ -65,21 +78,23 @@ ul{
   justify-content: center;
 }
 .user-info-list>span:first-child{
-  /* background-color: brown; */
+  background-color: brown;
   width:110px;
   border-right: 1px solid gray;
 }
 .user-info-list>span:nth-child(2){
+  background-color: chartreuse;
   width:40%;
   min-width: 240px;
   padding-left: 10px;
   box-sizing: border-box;
 }
 .user-pw-form{
-  /* background-color: aqua; */
+  background-color: aqua;
   margin-top: 40px;
   display: flex;
   justify-content: center;
+  width:100%;
 }
 .user-pw-form>input{
   box-sizing: border-box;
@@ -93,6 +108,37 @@ ul{
 }
 
 .user-pw-form>button{
+  cursor:pointer;
+  box-sizing: border-box;
+  display: block;
+  border:none;
+  width: 50px;
+  height:35px;
+  color:white;
+  background-color: #b70f28;
+  margin-bottom: 20px;
+}
+.user-pw-change-form{
+  background-color: coral;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+}
+.user-pw-change-form>input{
+  box-sizing: border-box;
+  display: block;
+  border:1px solid rgba(128, 128, 128, 0.425);
+  width: 350px;
+  height:35px;
+}
+.user-pw-change-form>input:focus{
+  outline:none
+}
+
+.user-pw-change-form>button{
   cursor:pointer;
   box-sizing: border-box;
   display: block;
@@ -119,11 +165,13 @@ ul{
   position: relative;
 }
 .mypage-right-car-list::-webkit-scrollbar{
-  width:3px;
+  width:6px;
   height:0;
+  cursor:pointer;
   /* 전체 두께 */
   /* background-color: black; */
 }
+
 .mypage-right-car-list::-webkit-scrollbar-thumb{
   /* 현재 부분 색 */
   background-color: #2f3542;
@@ -182,4 +230,78 @@ ul{
 
 .car-info span:nth-child(3){
   margin-top: -4px;
+}
+
+.mypage-right-posts{
+  /* background-color: cornflowerblue; */
+  width:100%;
+}
+.posts-post{
+  /* background-color: bisque; */
+  width:90%;
+  margin:0 auto;
+  height:200px;
+}
+.posts-postlist{
+  /* background-color: darkgreen; */
+  display:flex;
+}
+.posts-postlist>span{
+  margin-right: 10px;
+  display: block;
+  text-align: left;
+}
+.posts-postlist>span:first-child{
+  /* background-color: turquoise; */
+  width:70px;
+  border-right: 1px solid gray;
+}
+.posts-postlist>span:nth-child(2){
+  /* background-color: pink; */
+  max-width: calc(100% - 250px);
+}
+.posts-postlist>span:nth-child(2)>a{
+  /* background-color: darkgoldenrod; */
+  padding-right: 5px;
+  border-right: 1px solid gray;
+}
+.posts-postlist>span:nth-child(3){
+  /* background-color: orange; */
+  width:150px;
+}
+
+
+.posts-comment{
+  /* background-color: violet; */
+  width:90%;
+  height:200px;
+  margin:0 auto;
+}
+.posts-commentlist{
+  /* background-color: rgb(247, 68, 68); */
+  display:flex;
+}
+.posts-commentlist>span{
+  margin-right: 10px;
+  display: block;
+  text-align: left;
+}
+.posts-commentlist>span:first-child{
+  /* background-color: turquoise; */
+  width:70px;
+  border-right: 1px solid gray;
+}
+.posts-commentlist>span:nth-child(2){
+  /* background-color: pink; */
+  max-width: calc(100% - 255px);
+  word-break: break-all;
+}
+.posts-commentlist>span:nth-child(2)>a{
+  /* background-color: darkgoldenrod; */
+  padding-right: 5px;
+  border-right: 1px solid gray;
+}
+.posts-commentlist>span:nth-child(3){
+  /* background-color: orange; */
+  width:150px;
 }

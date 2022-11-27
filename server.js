@@ -183,7 +183,7 @@ app.get('/reviewClick/:idx', (req,res) => {
 
 app.get('/check-auth',(req,res) => {
   if(req.session.user){
-    res.json({success:true})
+    res.json({success:true , userId:req.session.user.id})
   }
   else{
     res.json({success:false, msg:'회원 전용 입니다. 로그인페이지로 이동하시겠습니까?'})
@@ -264,7 +264,7 @@ app.get('/mypageMypost',(req,res) => {
 })
 app.get('/mypageMycomment', (req,res) => {
   const id = req.session.user.id
-  const sql = 'select * from review_comment where writer = ?'
+  const sql = 'select * from review_comment where writer = ? order by idx desc'
   db.query(sql,id,(err,data) => {
     if(!err){
       console.log('댓글 작성 목록 요청 완료!')
