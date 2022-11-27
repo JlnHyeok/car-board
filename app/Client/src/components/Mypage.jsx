@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/mypage.css";
 import Portal from './modal/Portal';
 import Modal from './modal/Modal';
 
 export default function Mypage() {
+  const nav = useNavigate()
   const [userInfo, setUserInfo] = useState(null);
   const [postedCar, setPostedCar] = useState(null);
   const [buyCar, setBuyCar] = useState(null);
@@ -35,6 +36,12 @@ export default function Mypage() {
   }, []);
   if (!userInfo) {
     return <div>Loading</div>;
+  }
+  const response = axios.get('/check-auto')
+  if(!response.data.userId){
+    nav('/')
+    alert('세션이 만료되었습니다.')
+    return
   }
   const submitPw = async (e) => {
     e.preventDefault();
@@ -74,7 +81,7 @@ export default function Mypage() {
       setIsUserInfo(true);
     }
   };
-
+  
   // console.log(userInfo, postedCar, myPost, myComment)
 
   return (
