@@ -14,7 +14,7 @@ const path = require('path')
 const PORT = process.env.PORT || 5000;
 const cors = require('cors')
 app.use(cors({
-  origin:['http://localhost:3000','http://localhost:5000','https://car-board-practice.herokuapp.com'],
+  origin:['http://localhost:3000','http://localhost:5000','https://car-board-practice.herokuapp.com','https://car-board.fly.dev'],
   credentials:true,
 }))
 const multer = require('multer')  

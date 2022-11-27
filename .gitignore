@@ -9,3 +9,9 @@ node_modules/
 /config/s3.json
 
 awsconfig.json
+
+Dockerfile
+
+fly.toml
+
+.dockerignore
