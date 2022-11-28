@@ -1,11 +1,15 @@
+import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import "./css/footer-review.css";
 
-export default function FooterReview({ buttonLen, pageNum, setPageNum }) {
+export default function FooterReview({ buttonLen, pageNum, setPageNum, setReviewList}) {
   const btnArr = [];
   const searchCategory = useRef();
   const searchArrow = useRef();
   const [pageNumLength, setPageNumLength] = useState(10);
+  const [reviewSearchCategory , setReviewSearchCategory] = useState('all')
+  const [reviewSearchValue , setReviewSearchValue] = useState('')
+
   let i = 1;
   while (i <= buttonLen) {
     btnArr.push(i);
@@ -55,8 +59,22 @@ export default function FooterReview({ buttonLen, pageNum, setPageNum }) {
       : searchArrow.current.className = 'search-img-clicked'
   };
 
-  const submitSearchReview = (e) => {
+  
+  const submitSearchReview = async(e) => {
     e.preventDefault();
+    if(reviewSearchCategory === 'all'){
+      if(!reviewSearchValue){
+        const response = await axios.get('/reviewList')
+        console.log(response.data)
+        setReviewList(response.data)
+        return
+      }
+      const response = await axios.get(`/review/search/${reviewSearchValue}`)
+      console.log(response)
+      if(response.data.success){
+        setReviewList(response.data.data)
+      }
+    }
   };
 
   useEffect(() => {
@@ -76,7 +94,7 @@ export default function FooterReview({ buttonLen, pageNum, setPageNum }) {
               <li>내용</li>
             </ul>
             <img className="search-img-clicked" onClick={clickSearchCategory} src="/img/arrow.svg" alt="화살표" ref={searchArrow}/>
-            <input type="text" placeholder="검색어를 입력하세요." />
+            <input type="text" onChange={(e)=>(setReviewSearchValue(e.target.value))} placeholder="검색어를 입력하세요." />
             <button>검색</button>
           </form>
         </div>

@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.b89f94c8.chunk.css",
-    "main.js": "/static/js/main.92897ebe.chunk.js",
-    "main.js.map": "/static/js/main.92897ebe.chunk.js.map",
+    "main.css": "/static/css/main.fb1d04bb.chunk.css",
+    "main.js": "/static/js/main.fabe4129.chunk.js",
+    "main.js.map": "/static/js/main.fabe4129.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.76fe5d06.js",
     "runtime-main.js.map": "/static/js/runtime-main.76fe5d06.js.map",
     "static/js/2.7e22ed6a.chunk.js": "/static/js/2.7e22ed6a.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.6d6622dc.chunk.js": "/static/js/3.6d6622dc.chunk.js",
     "static/js/3.6d6622dc.chunk.js.map": "/static/js/3.6d6622dc.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.b89f94c8.chunk.css.map": "/static/css/main.b89f94c8.chunk.css.map",
+    "static/css/main.fb1d04bb.chunk.css.map": "/static/css/main.fb1d04bb.chunk.css.map",
     "static/js/2.7e22ed6a.chunk.js.LICENSE.txt": "/static/js/2.7e22ed6a.chunk.js.LICENSE.txt",
     "static/media/detailcar.css": "/static/media/checkbox-single-default.24c873c3.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.76fe5d06.js",
     "static/js/2.7e22ed6a.chunk.js",
-    "static/css/main.b89f94c8.chunk.css",
-    "static/js/main.92897ebe.chunk.js"
+    "static/css/main.fb1d04bb.chunk.css",
+    "static/js/main.fabe4129.chunk.js"
   ]
 }

@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate} from 'react-router-dom'
 import './css/header.css'
 
 export default function Header({
-  setSearchValue,setIsSearch,setPageNum,setEasySearchSort,setIsAdmin,isAdmin,id}) {
+  setSearchValue,setIsSearch,setPageNum,setEasySearchSort,setIsAdmin,isAdmin}) {
   const divBarRef = useRef([])
   const navListRef = useRef()
   let nav = useNavigate()

@@ -11,7 +11,7 @@ export default function Review() {
   const [reviewList, setReviewList] = useState(null)
   const [pageNum, setPageNum] = useState(1)
   const [isReviewLoading, setIsReviewLoading] = useState(false)
-  
+
   useEffect(() => {
     axios.get('/reviewList').then((data)=>(setReviewList(data.data)))
   },[])
@@ -49,7 +49,6 @@ export default function Review() {
   const buttonLen = Math.ceil(totalPostLen / postPerPage)
   const postListwithNoti = [...notiList,...normalReviewList.slice(0,postPerPage-notiLength)] 
   const postList = normalReviewList.slice((postPerPage-notiLength)+(pageNum-2)* postPerPage, (postPerPage-notiLength)+(pageNum - 1)* postPerPage)
-  
 
   return (
     <div className='review-wrap'>
@@ -105,7 +104,7 @@ export default function Review() {
             ))
           }
       </div>
-      <FooterReview buttonLen={buttonLen} pageNum={pageNum} setPageNum={setPageNum}/>
+      <FooterReview buttonLen={buttonLen} pageNum={pageNum} setPageNum={setPageNum} setReviewList={setReviewList} reviewList={reviewList}/>
     </div>
   )
 }

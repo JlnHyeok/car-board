@@ -180,6 +180,26 @@ app.get('/reviewClick/:idx', (req,res) => {
     res.json({success:true, msg:'아직 대기시간입니다.'})
   }
 })
+app.get('/review/search/:search',(req,res) => {
+  const {search} = req.params
+  const sql = 
+  'select re.idx as idx, re.writer as writer, title,content, re.date as date,count, category, count(co.idx) as comment'+
+  ' from review_info as re left join review_comment as co'+
+  ` on re.idx = co.post_idx where re.title like '%${search}%' or re.content like '%${search}%'`+
+  ' group by(re.idx)'+
+  ' order by date desc'
+  db.query(sql,(err,data) => {
+    if(!err){
+      res.json({success:true, data: data})
+    }
+    else{
+      console.log(err)
+      res.end()
+    }
+  })
+})
+
+
 
 app.get('/check-auth',(req,res) => {
   if(req.session.user){
