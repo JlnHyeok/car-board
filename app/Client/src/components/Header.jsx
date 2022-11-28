@@ -73,12 +73,13 @@ export default function Header({
 
   const checkAuth = async() => {
     const response = await axios.get('/check-auth')
+    console.log('권한 체크 '+response.data)
     if(response.data.success && !sessionStorage.getItem('userId')){
       sessionStorage.setItem('userId',response.data.userId)
       console.log('성공')
     }
   }
-  checkAuth()
+  
 
 
   return (
@@ -136,7 +137,7 @@ export default function Header({
           sessionStorage.getItem('userId') ? 
           <div className='loggedin-box' ref={(el)=>divBarRef.current[3]=el}>
             <span className='welcome-span'>{sessionStorage.getItem('userId')}님</span>
-            <span className='mypage-span'><Link to='/mypage'>마이페이지</Link></span>
+            <span className='mypage-span'><Link to='/mypage' onClick={checkAuth}>마이페이지</Link></span>
             <span className='logout-span'onClick={clickLogOut}>로그아웃</span>
           </div> : 
           <div className='login-box'>

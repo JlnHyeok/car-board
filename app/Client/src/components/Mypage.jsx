@@ -37,12 +37,19 @@ export default function Mypage() {
   if (!userInfo) {
     return <div>Loading</div>;
   }
-  const response = axios.get('/check-auto')
-  if(!response.data.userId){
-    nav('/')
-    alert('세션이 만료되었습니다.')
-    return
-  }
+  const response = axios.get('/check-auth').then((res)=>{
+    if(!res.data.userId){
+      nav('/')
+      alert('세션이 만료되었습니다.')
+      return
+    }
+  })
+  // console.log(response)
+  // if(!response.data.userId){
+  //   nav('/')
+  //   alert('세션이 만료되었습니다.')
+  //   return
+  // }
   const submitPw = async (e) => {
     e.preventDefault();
     const body = { id: sessionStorage.getItem("userId"), pw: checkPw };
