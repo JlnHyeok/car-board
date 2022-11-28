@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './css/login.css'
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from './modal/Modal';
@@ -10,8 +10,14 @@ export default function Login({id,setId,pw,setPw}) {
   const [isShowPw , setIsShowPw] = useState(false)
   const [isShowFindId, setIsShowFindId] = useState(false)
   const [isShowFindPw, setIsShowFindPw] = useState(false)
+  const pwInputRef = useRef()
 
   const nav = useNavigate()
+
+  const clickVisible = () => {
+    setIsShowPw(!isShowPw)
+    pwInputRef.current.focus()
+  }
 
   const handleLoginSubmit = async(e) => {
     e.preventDefault()
@@ -23,7 +29,6 @@ export default function Login({id,setId,pw,setPw}) {
       sessionStorage.setItem("userId",id)
       return nav('/')
     }
-    
   }
 
 
@@ -37,8 +42,8 @@ export default function Login({id,setId,pw,setPw}) {
         <form className='login-info' onSubmit={handleLoginSubmit}>
           <input type="text" placeholder='아이디를 입력해주세요.' onChange={e=>setId(e.target.value)}/><br />
           <span className='pw-input-box'>
-            <input type={isShowPw? "text" : "password"} placeholder='비밀번호 입력해주세요.' onChange={e=>setPw(e.target.value)}/>
-            <span className='pw-isvisible'><img src={isShowPw ? "./img/visible.png" :"./img/unvisible.png"} alt="visible" onClick={()=>setIsShowPw(!isShowPw)}/></span>
+            <input type={isShowPw? "text" : "password"} placeholder='비밀번호 입력해주세요.' onChange={e=>setPw(e.target.value)} ref={pwInputRef}/>
+            <span className='pw-isvisible'><img src={isShowPw ? "./img/visible.png" :"./img/unvisible.png"} alt="visible" onClick={clickVisible}/></span>
             <br />
           </span>
           <button>SIGN IN</button>
