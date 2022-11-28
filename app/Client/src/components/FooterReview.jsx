@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./css/footer-review.css";
 
 export default function FooterReview({ buttonLen, pageNum, setPageNum }) {
   const btnArr = [];
+  const searchCategory = useRef();
+  const searchArrow = useRef();
   const [pageNumLength, setPageNumLength] = useState(10);
   let i = 1;
   while (i <= buttonLen) {
@@ -44,6 +46,19 @@ export default function FooterReview({ buttonLen, pageNum, setPageNum }) {
     );
   };
 
+  const clickSearchCategory = (e) => {
+    searchCategory.current.classList.contains("search-clicked")
+      ? (searchCategory.current.className = "search-selected")
+      : (searchCategory.current.className = "search-clicked");
+    searchArrow.current.classList.contains('search-img-clicked')
+      ? searchArrow.current.className = 'search-img-selected'
+      : searchArrow.current.className = 'search-img-clicked'
+  };
+
+  const submitSearchReview = (e) => {
+    e.preventDefault();
+  };
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     // window 의 너비값 변경 감지
@@ -52,9 +67,26 @@ export default function FooterReview({ buttonLen, pageNum, setPageNum }) {
 
   return (
     <div className="footer-review">
-      <div className="search-review">
-        <input type="text" />
+      <div className="footer-upper">
+        <div className="search-review">
+          <form className="search-review-form" onSubmit={submitSearchReview}>
+            <ul ref = {searchCategory} onClick={clickSearchCategory}>
+              <li>전체</li>
+              <li>제목</li>
+              <li>내용</li>
+            </ul>
+            <img className="search-img-clicked" onClick={clickSearchCategory} src="/img/arrow.svg" alt="화살표" ref={searchArrow}/>
+            <input type="text" placeholder="검색어를 입력하세요." />
+            <button>검색</button>
+          </form>
+        </div>
+        <div className="page-info-review">
+          <span>
+            {pageNum} page / {buttonLen} page
+          </span>
+        </div>
       </div>
+
       <div
         className="btn-total-box-review"
         style={{ width: window.innerWidth < 540 ? 330 : 450 }}
@@ -120,11 +152,6 @@ export default function FooterReview({ buttonLen, pageNum, setPageNum }) {
         >
           {">>"}
         </button>
-      </div>
-      <div className="page-info-review">
-        <span>
-          {pageNum} page / {buttonLen} page
-        </span>
       </div>
     </div>
   );

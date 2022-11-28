@@ -1,9 +1,9 @@
 .review-wrap{
   width:100%;
   min-width: 780px;
-  height:78vh;
+  /* height:74vh; */
   padding-top: 20px;
-  /* background-color: aqua; */
+  /* background-color: rgb(166, 212, 212); */
 }
 .review-header{
   width:90%;
@@ -48,7 +48,8 @@
   /* background-color: bisque; */
   width:100%;
   /* min-width: 780px; */
-  height:525px;
+  /* height:525px; */
+  min-height: 400px;
 }
 .review-list{
   width:90%;
@@ -126,7 +127,7 @@
 @media screen and (max-width:540px){
   .review-wrap{
     min-width: 330px;
-    height:500px;
+    /* height:500px; */
   }  
   .review-header{
     width:100%;

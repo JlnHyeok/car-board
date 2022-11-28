@@ -70,7 +70,7 @@
   display: block;
   width:20px;
   top:12px;
-  right:2px;
+  right:4px;
   transition: .2s;
   opacity: .5;
   /* background-color: #b70f28; */
@@ -86,7 +86,8 @@
   height:40px;
   display:flex;
   box-sizing: border-box;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 12px;
   align-items: center;
   font-size: .9rem;
   /* background-color: aliceblue; */

@@ -1,13 +1,90 @@
 
 .footer-review{
-  height:30px;
+  /* background-color: slateblue; */
+  min-height:30px;
   width:90%;
-  margin:0 auto;
+  margin:20px auto 0;
   padding:0 10px;
   box-sizing: border-box;
-  /* background-color: slateblue; */
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.footer-upper{
+  /* background-color: aqua; */
   display:flex;
   justify-content: space-between;
+}
+.search-review{
+  /* background-color: blue; */
+  width:300px;
+}
+.search-review-form{
+  /* background-color: tomato; */
+  display:flex;
+  position: relative;
+}
+.search-review-form>ul{
+  background-color: white;
+  width: 80px;
+  min-height: 30px;
+  text-align: left;
+  font-size: .9rem;
+  overflow:hidden;
+  cursor:pointer;
+  position: absolute;
+  border:1px solid black;
+  box-sizing: border-box;
+  transition:.2s;
+}
+.search-review-form>ul>li{
+  height: 30px;
+  width:100%;
+  padding-left: 15px;
+  padding-top: 4px;
+  box-sizing: border-box;
+}
+.search-review-form>ul>li:hover{
+  background-color: rgba(247, 137, 137, 0.219);
+  font-weight: bold;
+}
+.search-clicked{
+  height:90px;
+}
+.search-selected{
+  height:30px;
+}
+.search-review-form>img{
+  /* background-color: #b70f28; */
+  position: absolute;
+  height:15px;
+  left:55px;
+  top:8px;
+  cursor:pointer;
+  transition:.2s;
+}
+.search-review-form>input{
+  /* border:none; */
+  height:30px;
+  box-sizing: border-box;
+  padding:0 5px;
+  margin-left: 80px;
+}
+.search-img-clicked{
+  transform:rotate(180deg);
+}
+.search-img-selected{
+  transform:rotate(0deg);
+}
+.search-review-form>input:focus{
+  outline:none;
+}
+.search-review-form>button{
+  background-color: #b70f28;
+  color:white;
+  border:none;
+  cursor:pointer;
+  width:40px;
 }
 .page-info-review{
   /* background-color: blueviolet; */
@@ -16,7 +93,6 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  /* margin: 0 auto; */
   font-size: 0.8rem;
   color:gray;
   margin-left: 4px;
@@ -57,7 +133,7 @@
 @media screen and (max-width:1000px){
   .footer-review{
     /* background-color: aqua; */
-    width:100%;
+    width:90%;
     flex-direction: column;
   }
 }
@@ -72,9 +148,5 @@
   .btn-list-box-review{
     width:90px;
   }
-  .search-review{
-    position: absolute;
-    right:20px;
-    border:1px solid black;
-  }
+  
 }
