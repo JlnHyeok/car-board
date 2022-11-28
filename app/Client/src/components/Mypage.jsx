@@ -151,7 +151,7 @@ export default function Mypage() {
           {isShow && whichShow[0] && (
             <>
               <h1>등록한 차량</h1>
-              <div className="right-up">
+              <div className="mypage-right-up">
                 <h1>
                   총{" "}
                   <span className="num-of-car">
