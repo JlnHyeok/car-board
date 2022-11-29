@@ -1,14 +1,19 @@
 # 중고차 거래 사이트
 * k-car, 엔카 등을 참고하여 만든 React기반의 중고차 거래 사이트입니다.
-### 배포Link  
+### ✨배포Link  
 * https://car-board-practice.herokuapp.com/  
-### 제작 기간 & 인원  
+### 🕗제작 기간 & 인원  
 * 2022.11.01 ~ 2022.11.24 (조금씩 업데이트 중)  
 * 1명  
-### 개요  
+### 🗒️개요  
 * Front-end 공부를 하다가 각종 스타일링, 상태관리 Library들을 사용하기 전에 내가 React와 Dom의 동작원리등을 잘 이해하고 있는게 맞는지, 맞다면 ReactJs, 바닐라Js 로 스스로 얼만큼 구현할 수 있을까? 라는 생각이 들어서 하나하나 만들어보고 배포까지 진행해보았습니다.
+### ⚙️개발 환경
+* Front : React.js , JavaScript, html, css
+* Back : node.js , express
+* DB : Mysql
+* Deploy : heroku
 
-## 주요 기능
+## ❗주요 기능
 #### 회원가입
 * ID 중복 체크
 * PW 암호화 (bcrypt 사용)
