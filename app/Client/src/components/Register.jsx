@@ -33,7 +33,7 @@ export default function Register() {
       return nav('/login')
     } 
   }
-  const warningPw = Boolean(registerPwConfirm && registerPw !== registerPwConfirm)
+  const warningPw = Boolean(registerPw !== registerPwConfirm)
 
   return (
     <div className='register-wrap'>
@@ -52,8 +52,10 @@ export default function Register() {
           </span>
           <input type={regPwVisible ? "text" : "password"} placeholder='비밀번호 확인.' onChange={e=>setRegisterPwConfirm(e.target.value)}/>
           <br />
-          <div className='register-warn-pw' style={{display: warningPw ? 'block' : 'none'}}>
-            <span style={{margin:'0 auto',display:'block'}}>*비밀번호가 일치하지 않습니다.</span>
+          <div className='register-warn-pw' style={{display: 'block'}}>
+            <span style={{margin:'0 auto', display:'block', color:warningPw ? 'red' : 'green'}}>
+              {!registerPwConfirm ? '' : warningPw? '*비밀번호가 일치하지 않습니다.' : '*비밀번호가 일치합니다.'}
+            </span>
           </div>
           <button>SIGN UP</button>
         </form>

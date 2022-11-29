@@ -180,15 +180,24 @@ app.get('/reviewClick/:idx', (req,res) => {
     res.json({success:true, msg:'아직 대기시간입니다.'})
   }
 })
-app.get('/review/search/:search',(req,res) => {
-  const {search} = req.params
+app.get('/review/search/:category&:search',(req,res) => {
+  const {category, search} = req.params
   const sql = 
   'select re.idx as idx, re.writer as writer, title,content, re.date as date,count, category, count(co.idx) as comment'+
   ' from review_info as re left join review_comment as co'+
-  ` on re.idx = co.post_idx where re.title like '%${search}%' or re.content like '%${search}%'`+
+  ` on re.idx = co.post_idx`
+  let sqlWhere = 
+  ` where re.title like '%${search}%' or re.content like '%${search}%'`
+  const sqlSuffix = 
   ' group by(re.idx)'+
   ' order by date desc'
-  db.query(sql,(err,data) => {
+  if(category === 'title'){
+    sqlWhere = ` where re.title like '%${search}%'`
+  }
+  if(category === 'content'){
+    sqlWhere = ` where re.content like '%${search}%'`
+  }
+  db.query(sql+sqlWhere+sqlSuffix,(err,data) => {
     if(!err){
       res.json({success:true, data: data})
     }
@@ -216,16 +225,7 @@ app.get('/logout',(req,res) => {
   res.clearCookie('userid')
   res.json({success:true})
 })
-// app.get('/comment',(req,res) => {
-//   db.query('select * from review_comment',(err,data) => {
-//     if(!err){
-//       res.send(data)
-//     }
-//     else{
-//       console.log(err)
-//     }
-//   })
-// })
+
 app.get('/comment/:postIdx',(req,res) => {
   const {postIdx} = req.params
   const sql = 'select * from review_comment where post_idx = ?'

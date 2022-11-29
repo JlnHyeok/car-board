@@ -37,7 +37,7 @@ export default function Mypage() {
   if (!userInfo) {
     return <div>Loading</div>;
   }
-  const response = axios.get('/check-auth').then((res)=>{
+  axios.get('/check-auth').then((res)=>{
     if(!res.data.userId){
       nav('/')
       alert('세션이 만료되었습니다.')
@@ -150,49 +150,50 @@ export default function Mypage() {
         <div className="mypage-right">
           {isShow && whichShow[0] && (
             <>
-              <h1>등록한 차량</h1>
-              <div className="mypage-right-up">
-                <h1>
-                  총{" "}
-                  <span className="num-of-car">
-                    {postedCar.length.toLocaleString("ko-KR")}
-                  </span>
-                  대
-                </h1>
-              </div>
-              <div className="mypage-right-car-list">
-                {postedCar.map((data) => (
-                  <div className="post" key={data.id}>
-                    <div className="img">
-                      <Link
-                        to={`/buy/${data.id}`}
-                        onClick={() =>
-                          window.scrollTo({
-                            top: 0,
-                            left: 0,
-                            behavior: "smooth",
-                          })
-                        }
-                      >
-                        <img src={data.car_image} alt="차량" />
-                      </Link>
+              <div className='mypage-right-car'>
+                <div className="mypage-right-up">
+                  <h1>
+                    총{" "}
+                    <span className="num-of-car">
+                      {postedCar.length.toLocaleString("ko-KR")}
+                    </span>
+                    대
+                  </h1>
+                </div>
+                <div className="mypage-right-car-list">
+                  {postedCar.map((data) => (
+                    <div className="post" key={data.id}>
+                      <div className="img">
+                        <Link
+                          to={`/buy/${data.id}`}
+                          onClick={() =>
+                            window.scrollTo({
+                              top: 0,
+                              left: 0,
+                              behavior: "smooth",
+                            })
+                          }
+                        >
+                          <img src={data.car_image} alt="차량" />
+                        </Link>
+                      </div>
+                      <div className="car-info">
+                        <span>
+                          {data.car_maker + " "}
+                          {data.car_name}
+                        </span>
+                        <span style={{ fontWeight: "bold" }}>
+                          {data.car_price.toLocaleString("ko-KR")}만원
+                        </span>
+                        <span style={{ fontSize: 13, color: "#54555a" }}>
+                          {data.car_model_year.slice(2, 4)}년{" "}
+                          {data.car_model_year.slice(5, 7)}월식 ·{" "}
+                          {data.distance.toLocaleString("ko-KR")}km
+                        </span>
+                      </div>
                     </div>
-                    <div className="car-info">
-                      <span>
-                        {data.car_maker + " "}
-                        {data.car_name}
-                      </span>
-                      <span style={{ fontWeight: "bold" }}>
-                        {data.car_price.toLocaleString("ko-KR")}만원
-                      </span>
-                      <span style={{ fontSize: 13, color: "#54555a" }}>
-                        {data.car_model_year.slice(2, 4)}년{" "}
-                        {data.car_model_year.slice(5, 7)}월식 ·{" "}
-                        {data.distance.toLocaleString("ko-KR")}km
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </>
           )}

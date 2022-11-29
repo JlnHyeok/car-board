@@ -29,7 +29,7 @@
   /* background-color: yellow; */
   text-align: left;
 }
-h1{
+.mypage-wrap h1{
   margin:0;
 }
 .activity-box>li{
@@ -56,11 +56,12 @@ h1{
 
 .mypage-right{
   /* background-color: blue; */
-  width:100%;
   /* min-width: 515px; */
-  position:relative;
   /* margin:0 auto; */
+  width:100%;
+  position:relative;
 }
+
 
 .mypage-right-user-info{
   position:absolute;
@@ -176,15 +177,26 @@ h1{
   background-color: #b70f28;
   margin-bottom: 30px;
 }
-
+.mypage-right-car{
+  /* background-color: aquamarine; */
+  width:100%;
+  margin:50px auto 0;
+}
 .mypage-right-up{
+  /* background-color: aquamarine; */
   min-width: 660px;
+  width:100%;
+}
+.mypage-right-up>h1{
+  /* background-color: #b70f28; */
   width:95%;
+  margin:0 auto;
+  text-align: left;
 }
 .mypage-right-car-list{
   /* background-color: crimson; */
   display:grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 0px;
   max-height : 600px;
   overflow: scroll;
@@ -224,10 +236,10 @@ h1{
 }
 
 .post>.img{
+  /* background-color: beige; */
   margin:5px auto 10px;
   width:90%;
   height:60%;
-  /* background-color: beige; */
   border-radius: 8%;
   overflow: hidden;
   transition:0.4s;
@@ -348,5 +360,33 @@ h1{
 @media screen and (max-width:1200px){
   .mypage-right-user-info{
     left:54%;
+  }
+}
+
+@media screen and (max-width:1000px){
+  .mypage-right-up{
+    min-width: 100%;
+  }
+  .mypage-right-up>h1{
+    width:90%;
+  }
+
+  .mypage-right-car-list{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width:540px){
+  .mypage-wrap{
+    /* background-color: blueviolet; */
+    min-width: 330px;
+    padding:0;
+  }
+  .left-right-box{
+    width:100%;
+  }
+
+  .mypage-right-car-list{
+    grid-template-columns: repeat(1, 1fr);
   }
 }

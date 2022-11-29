@@ -104,7 +104,7 @@ export default function Review() {
             ))
           }
       </div>
-      <FooterReview buttonLen={buttonLen} pageNum={pageNum} setPageNum={setPageNum} setReviewList={setReviewList} reviewList={reviewList}/>
+      <FooterReview buttonLen={buttonLen} pageNum={pageNum} setPageNum={setPageNum} setReviewList={setReviewList}/>
     </div>
   )
 }

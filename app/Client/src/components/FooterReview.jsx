@@ -1,14 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import "./css/footer-review.css";
+import Portal from "./modal/Portal";
+import Modal from './modal/Modal';
 
 export default function FooterReview({ buttonLen, pageNum, setPageNum, setReviewList}) {
   const btnArr = [];
   const searchCategory = useRef();
+  const searchCategoryList = useRef([]);
   const searchArrow = useRef();
   const [pageNumLength, setPageNumLength] = useState(10);
   const [reviewSearchCategory , setReviewSearchCategory] = useState('all')
   const [reviewSearchValue , setReviewSearchValue] = useState('')
+  const [isReviewLoading, setIsReviewLoading] = useState(false)
 
   let i = 1;
   while (i <= buttonLen) {
@@ -58,23 +62,31 @@ export default function FooterReview({ buttonLen, pageNum, setPageNum, setReview
       ? searchArrow.current.className = 'search-img-selected'
       : searchArrow.current.className = 'search-img-clicked'
   };
+  
+  const clickCategoryList = (e) => {
+    searchCategoryList.current[0].textContent = e.target.textContent
+    if(e.target.textContent === '전체') setReviewSearchCategory('all')
+    else if(e.target.textContent === '제목') setReviewSearchCategory('title')
+    else if(e.target.textContent === '내용') setReviewSearchCategory('content')
+  }
 
   
   const submitSearchReview = async(e) => {
     e.preventDefault();
-    if(reviewSearchCategory === 'all'){
-      if(!reviewSearchValue){
-        const response = await axios.get('/reviewList')
-        console.log(response.data)
-        setReviewList(response.data)
-        return
-      }
-      const response = await axios.get(`/review/search/${reviewSearchValue}`)
+    setIsReviewLoading(true)
+    if(!reviewSearchValue){
+      const response = await axios.get('/reviewList')
+      console.log(response.data)
+      setReviewList(response.data)
+    }
+    else{
+      const response = await axios.get(`/review/search/${reviewSearchCategory}&${reviewSearchValue}`)
       console.log(response)
       if(response.data.success){
         setReviewList(response.data.data)
       }
     }
+    setIsReviewLoading(false)
   };
 
   useEffect(() => {
@@ -85,13 +97,18 @@ export default function FooterReview({ buttonLen, pageNum, setPageNum, setReview
 
   return (
     <div className="footer-review">
+      {isReviewLoading &&
+      <Portal>
+        <Modal isReviewLoading={isReviewLoading}/>
+      </Portal>}
       <div className="footer-upper">
         <div className="search-review">
           <form className="search-review-form" onSubmit={submitSearchReview}>
             <ul ref = {searchCategory} onClick={clickSearchCategory}>
-              <li>전체</li>
-              <li>제목</li>
-              <li>내용</li>
+              <li onClick={(e)=>clickCategoryList(e)} ref={el=>searchCategoryList.current[0]=el}>전체</li>
+              <li onClick={(e)=>clickCategoryList(e)} ref={el=>searchCategoryList.current[1]=el}>전체</li>
+              <li onClick={(e)=>clickCategoryList(e)} ref={el=>searchCategoryList.current[2]=el}>제목</li>
+              <li onClick={(e)=>clickCategoryList(e)} ref={el=>searchCategoryList.current[3]=el}>내용</li>
             </ul>
             <img className="search-img-clicked" onClick={clickSearchCategory} src="/img/arrow.svg" alt="화살표" ref={searchArrow}/>
             <input type="text" onChange={(e)=>(setReviewSearchValue(e.target.value))} placeholder="검색어를 입력하세요." />
