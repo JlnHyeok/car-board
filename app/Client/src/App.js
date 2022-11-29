@@ -37,6 +37,7 @@ function App() {
       axios.get('/check-auth').then((res)=>{
         if(!res.data.success){
           sessionStorage.clear()
+          window.location.reload()
           alert('세션이 만료되었습니다.')
         }
       })
