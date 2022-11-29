@@ -36,13 +36,14 @@
   /* background-color: aqua; */
   font-size: 1.2rem;
   height:40px;
+  width:130px;
   cursor:pointer;
   padding-top: 5px;
   box-sizing: border-box;
 }
 .activity-box>li:hover{
-  background-color: #b70f28;
-  color:white;
+  color: #b70f28;
+  
 }
 
 .mypage-left-user-info{

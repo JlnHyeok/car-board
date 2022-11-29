@@ -34,6 +34,7 @@ export default function Mypage() {
     axios.get("/mypageMypost").then((result) => setMyPost(result.data));
     axios.get("/mypageMycomment").then((result) => setMyComment(result.data));
   }, []);
+
   if (!userInfo) {
     return <div>Loading</div>;
   }
@@ -44,12 +45,7 @@ export default function Mypage() {
       return
     }
   })
-  // console.log(response)
-  // if(!response.data.userId){
-  //   nav('/')
-  //   alert('세션이 만료되었습니다.')
-  //   return
-  // }
+  
   const submitPw = async (e) => {
     e.preventDefault();
     const body = { id: sessionStorage.getItem("userId"), pw: checkPw };
@@ -106,21 +102,21 @@ export default function Mypage() {
                 <li
                   value={0}
                   onClick={(e) => clickShow(e)}
-                  style={{ color: whichShow[0] && "red" }}
+                  style={{ color: whichShow[0] && "#b70f28" }}
                 >
                   등록한 차량
                 </li>
                 <li
                   value={1}
                   onClick={(e) => clickShow(e)}
-                  style={{ color: whichShow[1] && "red" }}
+                  style={{ color: whichShow[1] && "#b70f28" }}
                 >
                   구매한 차량
                 </li>
                 <li
                   value={2}
                   onClick={(e) => clickShow(e)}
-                  style={{ color: whichShow[2] && "red" }}
+                  style={{ color: whichShow[2] && "#b70f28" }}
                 >
                   작성한 글
                 </li>
@@ -132,14 +128,14 @@ export default function Mypage() {
                 <li
                   value={3}
                   onClick={(e) => clickShow(e)}
-                  style={{ color: whichShow[3] && "red" }}
+                  style={{ color: whichShow[3] && "#b70f28" }}
                 >
                   기본정보
                 </li>
                 <li
                   value={4}
                   onClick={(e) => clickShow(e)}
-                  style={{ color: whichShow[4] && "red" }}
+                  style={{ color: whichShow[4] && "#b70f28" }}
                 >
                   비밀번호 변경
                 </li>
