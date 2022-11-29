@@ -6,9 +6,9 @@
 * 2022.11.01 ~ 2022.11.24 (조금씩 업데이트 중)  
 * 1명  
 ### 🗒️개요  
-* Front-end 공부를 하다가 각종 스타일링, 상태관리 Library들을 사용하기 전에 내가 React와 Dom의 동작원리등을 잘 이해하고 있는게 맞는지, 맞다면 ReactJs, 바닐라Js 로 스스로 얼만큼 구현할 수 있을까? 라는 생각이 들어서 하나하나 만들어보고 배포까지 진행해보았습니다.
+* Front-end 공부를 하다가 각종 스타일링, 상태관리 Library들을 사용하기 전에 내가 React와 Dom의 동작원리등을 잘 이해하고 있는게 맞는지, 맞다면 ReactJs, 바닐라Js 로 스스로 얼만큼 구현할 수 있을까? 라는 생각이 들어서 하나하나 직접 만들어보고 배포까지 진행해보았습니다.
 ### ⚙️개발 환경
-* Front : React.js , JavaScript, html, css
+* Front : React.js(React Hook), JavaScript, html, css
 * Back : node.js , express.js
 * DB : Mysql
 * Deploy : heroku
