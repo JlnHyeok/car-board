@@ -201,11 +201,11 @@ export default function DetailCar() {
               <div className="cal-final-left">
                 <div>
                   <span className='final-left-text'>총 할부 신청금액</span>
-                  <span className='final-left-price'>{firstPay ? ((carPrice-firstPay)*10000).toLocaleString('ko-KR') :((carPrice-carFirstPay)*10000).toLocaleString('ko-KR')} 원 </span>
+                  <span className='final-left-price'>{firstPay ? ((carPrice+carTax-firstPay)*10000).toLocaleString('ko-KR') :((carPrice+carTax-carFirstPay)*10000).toLocaleString('ko-KR')} 원 </span>
                 </div>
                 <div>
                   <span className='final-left-text'>월 납부금 (예상)</span>
-                  <span className='final-left-price'>{firstPay ? (Math.round((carPrice-firstPay)/period)*10000).toLocaleString('ko-KR') :(Math.round((carPrice-carFirstPay)/period)*10000).toLocaleString('ko-KR')} 원</span>
+                  <span className='final-left-price'>{firstPay ? (Math.round((carPrice+carTax-firstPay)/period)*10000).toLocaleString('ko-KR') :(Math.round((carPrice+carTax-carFirstPay)/period)*10000).toLocaleString('ko-KR')} 원</span>
                 </div>
               </div>
               <div className="cal-final-right">
