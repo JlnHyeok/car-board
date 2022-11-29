@@ -50,7 +50,7 @@ export default function DetailCar() {
     if(e.target.value === ''){
       e.target.value = 0
     }
-    if(e.target.value.length>0 && e.target.value[0] ==='0'){
+    if(e.target.value.length>1 && e.target.value[0] ==='0'){
       e.target.value = e.target.value.slice(1)
     }
     let payment = e.target.value
