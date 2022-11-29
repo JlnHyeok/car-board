@@ -53,7 +53,7 @@ function App() {
   
   if(!carInfo){
     return (
-      <div style={{margin:'0 auto',fontSize:'1.3rem',width:'100%',textAlign:'center'}}>Loading..</div>
+      <div style={{margin:'0 auto',fontSize:'1.1rem',width:'100%',textAlign:'center'}}>Loading</div>
       )
     }
   // postList : 한 페이지에 나타낼 정보들 추출

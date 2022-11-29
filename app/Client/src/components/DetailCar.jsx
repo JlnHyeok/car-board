@@ -21,8 +21,9 @@ export default function DetailCar() {
   },[id])
 
   if(!detailCar[0]){
-    console.log('로딩중')
-    return <div style={{fontWeight:'bold',fontSize:50,margin:'0 auto',width:'100%',height:'100vh',backgroundColor:'#f2f2f345'}}>Loading..</div>
+    return (
+    <div style={{margin:'0 auto',width:'100%',height:'100vh',backgroundColor:'#f2f2f345'}}>Loading</div>
+    )
   }
   const car = detailCar[0]
   const carPrice = car.car_price
