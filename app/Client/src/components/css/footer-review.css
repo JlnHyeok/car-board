@@ -23,6 +23,7 @@
   /* background-color: tomato; */
   display:flex;
   position: relative;
+  z-index: 9999;
 }
 .search-review-form>ul{
   background-color: white;
@@ -151,5 +152,8 @@
   .footer-upper{
     flex-direction: column;
     align-items: center;
+  }
+  .search-review-form>button{
+    font-size: .8rem;
   }
 }

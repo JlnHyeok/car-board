@@ -83,6 +83,14 @@
   /* background-color: #b70f28; */
   justify-content: space-between;
 }
+.home-car-list-wrap::-webkit-scrollbar{
+  width:2px;
+  height:0px;
+  background-color: #2f3542;
+}
+.home-car-list-wrap::-webkit-scrollbar-thumb{
+  background-color: #b70f28;
+}
 .pick-car-list{
   /* margin:0 auto; */
   width:30%;
