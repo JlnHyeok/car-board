@@ -148,5 +148,8 @@
   .btn-list-box-review{
     width:90px;
   }
-  
+  .footer-upper{
+    flex-direction: column;
+    align-items: center;
+  }
 }
