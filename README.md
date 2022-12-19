@@ -1,5 +1,5 @@
 # 중고차 거래 사이트
-* k-car, 엔카 등을 참고하여 만든 React기반의 중고차 거래 사이트입니다.
+* React기반으로 만든 중고차 거래 컨셉의 사이트입니다.
 ### ✨배포Link  
 * https://car-board-practice.herokuapp.com/  
 ### 🕗제작 기간 & 인원  
