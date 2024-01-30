@@ -1,7 +1,8 @@
 # 중고차 거래 사이트
 * React기반으로 만든 중고차 거래 컨셉의 사이트입니다.
 ### ✨배포Link  
-* https://car-board-practice.herokuapp.com/  
+* https://car-board-practice.herokuapp.com/
+* 무료기간 만료로 인해 정비중입니다.
 ### 🕗제작 기간 & 인원  
 * 2022.11.01 ~ 2022.11.24 (조금씩 업데이트 중)  
 * 1명  
